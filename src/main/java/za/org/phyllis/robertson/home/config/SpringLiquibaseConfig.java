@@ -85,5 +85,4 @@ public class SpringLiquibaseConfig extends SpringLiquibase {
             publisher.publishEvent(true);
         }
     }
-
 }
