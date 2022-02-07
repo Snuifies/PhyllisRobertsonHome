@@ -1,0 +1,82 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    
+    <changeSet author="MARIUS" id="1" >
+        <createTable tableName="USERS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ROLES">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ROLE" type="VARCHAR(20)" defaultValue="USER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="USER_ROLES">
+            <column name="USER_ID" type="BIGINT"/>
+            <column name="ROLE_ID" type="BIGINT"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="USER_ROLES"/>
+            <dropTable tableName="ROLES" />
+            <dropTable tableName="USERS"/>
+        </rollback>
+    </changeSet>
+    <changeSet author="MARIUS" id="2">
+        <insert tableName="USERS">
+            <column name="USERNAME" value="snuifies"/>
+            <column name="EMAIL" value="snuifies@gmail.com"/>
+            <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
+        </insert>
+        <insert tableName="ROLES">
+            <column name="USER_ROLE" value="ADMINISTRATOR"/>
+        </insert>
+        <insert tableName="USER_ROLES">
+            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='snuifies' AND EMAIL='snuifies@gmail.com')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'ADMINISTRATOR')"/>
+        </insert>
+    </changeSet>
+    <changeSet author="MARIUS" id="3">
+        <insert tableName="USERS" >
+            <column name="USERNAME" value="user1"/>
+            <column name="EMAIL" value="user1@gmail.com"/>
+            <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
+        </insert>
+        <insert tableName="ROLES">
+            <column name="USER_ROLE" value="MODERATOR"/>
+        </insert>
+        <insert tableName="USER_ROLES">
+            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='user1' AND EMAIL='user1@gmail.com')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'MODERATOR')"/>
+        </insert>
+        <insert tableName="USERS" >
+            <column name="USERNAME" value="user2"/>
+            <column name="EMAIL" value="user2@gmail.com"/>
+            <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
+        </insert>
+        <insert tableName="ROLES">
+            <column name="USER_ROLE" value="USER"/>
+        </insert>
+        <insert tableName="USER_ROLES">
+            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='user2' AND EMAIL='user2@gmail.com')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'USER')"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
