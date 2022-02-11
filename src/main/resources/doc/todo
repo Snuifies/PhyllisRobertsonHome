@@ -5,3 +5,12 @@ todo - create the sql scripts for liquibase for the entities
 todo - create sub entities for things that contain multiple entries
 -- for example - perscriptions may have4 multiple items
 -- so other field also allow for multiple values - check excel
+
+
+DONE - Room, Condition
+TODO - DailyCare, 
+TODO - FoodServices, 
+TODO - Housekeeping,
+TODO - Medical,
+TODO - Prescription,
+TODO - Resident

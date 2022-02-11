@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import za.org.phyllis.robertson.home.model.UserRole;
 
 @Configuration
 @EnableWebSecurity
@@ -35,9 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/home").hasAuthority("USER")
-                .antMatchers("/admin").hasAuthority("ADMINISTRATOR")
-                .antMatchers("/moderator").hasAuthority("MODERATOR")
+                .antMatchers("/staff").hasAuthority(UserRole.STAFF.name())
+                .antMatchers("/manager").hasAuthority(UserRole.MANAGER.name())
+                .antMatchers("/admin").hasAuthority(UserRole.ADMINISTRATOR.name())
                 .anyRequest()
                 .authenticated()
                 .and()

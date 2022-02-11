@@ -11,18 +11,18 @@ public class HomeResource {
         return "<h1>Welcome Y'all</h1>";
     }
 
-    @GetMapping("/home")
-    public String user() {
-        return "<h1>Welcome Homeys</h1>";
+    @GetMapping("/staff")
+    public String staff() {
+        return "<h1>Welcome Staff Member</h1>";
     }
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "<h1>Welcome Admin</h1>";
-    }
-
-    @GetMapping("/moderator")
-    public String moderator() {
+    @GetMapping("/manager")
+    public String manager() {
         return "<h1>Welcome Moderator</h1>";
     }
+    @GetMapping("/admin")
+    public String administator() {
+        return "<h1>Welcome Administator</h1>";
+    }
+
 }

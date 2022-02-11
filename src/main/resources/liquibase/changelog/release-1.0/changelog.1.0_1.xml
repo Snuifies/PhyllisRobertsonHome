@@ -5,7 +5,8 @@
     xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     
-    <changeSet author="MARIUS" id="1" >
+    <changeSet author="Marius" id="Create User and Role Models" >
+        <!-- Create USERS Table -->
         <createTable tableName="USERS">
             <column name="ID" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -19,63 +20,70 @@
             <column name="PASSWORD" type="VARCHAR(120)">
                 <constraints nullable="false"/>
             </column>
+            <column name="CREATE_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>               
+            <column name="MODIFY_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
+        <!-- Create ROLES Table -->
         <createTable tableName="ROLES">
-            <column name="ID" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false"/>
-            </column>
-            <column name="USER_ROLE" type="VARCHAR(20)" defaultValue="USER">
-                <constraints nullable="false"/>
-            </column>
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="USER_ROLE" type="VARCHAR(20)" defaultValue="USER"/>
+            <column name="CREATE_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>  
+            <column name="MODIFY_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
+        <!-- Create USER_ROLES Table -->
         <createTable tableName="USER_ROLES">
             <column name="USER_ID" type="BIGINT"/>
             <column name="ROLE_ID" type="BIGINT"/>
+            <column name="CREATE_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>               
+            <column name="MODIFY_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
-        <rollback>
-            <dropTable tableName="USER_ROLES"/>
-            <dropTable tableName="ROLES" />
-            <dropTable tableName="USERS"/>
-        </rollback>
-    </changeSet>
-    <changeSet author="MARIUS" id="2">
-        <insert tableName="USERS">
-            <column name="USERNAME" value="snuifies"/>
-            <column name="EMAIL" value="snuifies@gmail.com"/>
-            <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
-        </insert>
+        <!-- Add Default ADMINISTRATOR Role -->
         <insert tableName="ROLES">
             <column name="USER_ROLE" value="ADMINISTRATOR"/>
         </insert>
-        <insert tableName="USER_ROLES">
-            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='snuifies' AND EMAIL='snuifies@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'ADMINISTRATOR')"/>
+        <!-- Add Default MANAGER Role -->
+        <insert tableName="ROLES">
+            <column name="USER_ROLE" value="MANAGER"/>
+        </insert>
+        <!-- Add Default STAFF Role -->
+        <insert tableName="ROLES">
+            <column name="USER_ROLE" value="STAFF"/>
         </insert>
     </changeSet>
-    <changeSet author="MARIUS" id="3">
-        <insert tableName="USERS" >
-            <column name="USERNAME" value="user1"/>
-            <column name="EMAIL" value="user1@gmail.com"/>
+    
+    <changeSet author="MARIUS" id="Map Initial Users and Roles">
+        <!-- Admin -->
+        <insert tableName="USERS">
+            <column name="USERNAME" value="admin"/>
+            <column name="EMAIL" value="admin@gmail.com"/>
             <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
         </insert>
-        <insert tableName="ROLES">
-            <column name="USER_ROLE" value="MODERATOR"/>
-        </insert>
-        <insert tableName="USER_ROLES">
-            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='user1' AND EMAIL='user1@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'MODERATOR')"/>
-        </insert>
+        <!-- Manager -->
         <insert tableName="USERS" >
-            <column name="USERNAME" value="user2"/>
-            <column name="EMAIL" value="user2@gmail.com"/>
+            <column name="USERNAME" value="manager"/>
+            <column name="EMAIL" value="manager@gmail.com"/>
             <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
         </insert>
-        <insert tableName="ROLES">
-            <column name="USER_ROLE" value="USER"/>
+        <!-- staff -->
+        <insert tableName="USERS" >
+            <column name="USERNAME" value="staff"/>
+            <column name="EMAIL" value="staff@gmail.com"/>
+            <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
         </insert>
+        <!-- Admin Role Link-->
         <insert tableName="USER_ROLES">
-            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='user2' AND EMAIL='user2@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'USER')"/>
+            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='admin' AND EMAIL='admin@gmail.com')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'ADMINISTRATOR')"/>
+        </insert>
+        <!-- Manager Role Link -->
+        <insert tableName="USER_ROLES">
+            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='manager' AND EMAIL='manager@gmail.com')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'MANAGER')"/>
+        </insert>
+        <!-- Staff Role Link -->
+        <insert tableName="USER_ROLES">
+            <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='staff' AND EMAIL='staff@gmail.com')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'STAFF')"/>
         </insert>
     </changeSet>
 

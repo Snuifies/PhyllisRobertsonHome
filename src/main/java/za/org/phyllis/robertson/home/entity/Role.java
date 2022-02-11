@@ -1,9 +1,15 @@
 package za.org.phyllis.robertson.home.entity;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import za.org.phyllis.robertson.home.model.UserRole;
 
 import javax.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+@Data
 @Entity
 @Table(name = "ROLES")
 public class Role {
@@ -16,27 +22,14 @@ public class Role {
     @Column(length = 20, name = "USER_ROLE")
     private UserRole name;
 
-    public Role() {
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE")
+    private Date createDate;
 
-    }
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "MODIFY_DATE")
+    private Date modifyDate;
 
-    public Role(UserRole name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public UserRole getName() {
-        return name;
-    }
-
-    public void setName(UserRole name) {
-        this.name = name;
-    }
 }
