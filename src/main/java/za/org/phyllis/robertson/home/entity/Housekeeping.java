@@ -4,42 +4,29 @@
  */
 package za.org.phyllis.robertson.home.entity;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Data;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
- *
  * @author snuif
  */
 @Data
 @Entity
-@Table(name = "RESIDENT")
+@Table(name = "HOUSEKEEPING")
 public class Housekeeping implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-Date
-Washing removed
-Washing removed
-Washing returned
-Washing returned
-Washing issue
-Washing issue
-Room cleaned
-Room cleaned
-Cleaning issues
-Monthly deep clean
-Monthly deep clean
-Fault complaint
-Fault complaint
-Fault resolved
-Fault resolved
 
+    private String Date;
+    private String WashingRemoved;
+    private String WashingReturned;
+    private String WashingIssue;
+    private String RoomCleaned;
+    private String CleaningIssues;
+    private String MonthlyDeepClean;
+    private String FaultComplaint;
+    private String FaultResolved;
 }

@@ -4,47 +4,42 @@
  */
 package za.org.phyllis.robertson.home.entity;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Data;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
- *
  * @author snuif
  */
 @Data
 @Entity
-@Table(name = "RESIDENT")
+@Table(name = "DAILY_CARE")
 public class DailyCare implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-Date
-Care worker assigned
-Bath/shower/bedbath
-Shaved
-Nails cut
-Heels treated
-Bed made
-Clean linnen
-Washning removed
-Cupboard packed
-Wheelchair cleaned
-Medication morning
-Medication breakfast
-Medication lunch
-Medication supper
-Medication evening
-Medication acute time
-Medication acute item
-Complaint 
-Actions advised
+    private String Date;
+    private String CareWorkerAssigned;
+    private String Bath; ///shower/bedbath
+    private String Shaved;
+    private String NailsCut;
+    private String HeelsTreated;
+    private String BedMade;
+    private String CleanLinnen;
+    private String WashningRemoved;
+    private String CupboardPacked;
+    private String WheelchairCleaned;
+    private String MedicationMorning;
+    private String MedicationBreakfast;
+    private String MedicationLunch;
+    private String MedicationSupper;
+    private String MedicationEvening;
+    private String MedicationAcuteTime;
+    private String MedicationAacuteItem;
+    private String Complaint;
+    private String ActionsAdvised;
 
 }

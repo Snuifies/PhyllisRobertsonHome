@@ -4,41 +4,37 @@
  */
 package za.org.phyllis.robertson.home.entity;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Data;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
 /**
- *
  * @author snuif
  */
 @Data
 @Entity
-@Table(name = "RESIDENT")
+@Table(name = "MEDICAL")
 public class Medical implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-private Date DoctorVisitDate;
-private String DoctorAttended;
-private String AccompaniedBy;
-private String Treatment;
-private String Prescription (15 items);
-private String Dosis (15 items);
-private Image CopyOfPrescription;
-private DAte NextAppointment;
-private Date MedicationToPharmacy;
-private String ItemSent (15 items);
-private int QuantitySent (15 items);
-private Date BlistersReceivedDate;
-private int BlistersReceived;
-private Boolean MedicineDueForRenewal;
+    private Date DoctorVisitDate;
+    private String DoctorAttended;
+    private String AccompaniedBy;
+    private String Treatment;
+    private String Prescription;
+    private String Dose;
+    private Byte[] CopyOfPrescription;
+    private Date NextAppointment;
+    private Date MedicationToPharmacy;
+    private String ItemSent;
+    private int QuantitySent;
+    private Date BlistersReceivedDate;
+    private int BlistersReceived;
+    private Boolean MedicineDueForRenewal;
 
-    
+
 }
