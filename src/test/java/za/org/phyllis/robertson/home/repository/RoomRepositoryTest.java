@@ -25,13 +25,13 @@ public class RoomRepositoryTest {
 	Room model = Room.builder().roomNumber("Room 12").build();
 	roomRepository.save(model);
 
-	Resident resident = Resident.builder().idNumber("621220502704")
-		.name("Marius").nickName("Snuifies").room(model).build();
+	Resident resident = Resident.builder().idNumber("IDOFRESIDENT")
+		.name("PETER").nickName("PAN").room(model).build();
 	residentRepository.save(resident);
 
 	List<Room> entities = roomRepository.findAll();
 	assertNotNull(entities);
-	assertEquals("Marius", entities.get(0).getResident().getName());
+	assertEquals("PETER", entities.get(0).getResident().getName());
     }
 
 }
