@@ -20,22 +20,28 @@
             <column name="PASSWORD" type="VARCHAR(120)">
                 <constraints nullable="false"/>
             </column>
-            <column name="CREATE_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>               
-            <column name="MODIFY_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>  
+            <column name = "CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
         </createTable>
         <!-- Create ROLES Table -->
         <createTable tableName="ROLES">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="USER_ROLE" type="VARCHAR(20)" defaultValue="USER"/>
-            <column name="CREATE_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>  
-            <column name="MODIFY_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="USER_ROLE" type="VARCHAR(20)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>  
+            <column name = "CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
         </createTable>
         <!-- Create USER_ROLES Table -->
         <createTable tableName="USER_ROLES">
             <column name="USER_ID" type="BIGINT"/>
             <column name="ROLE_ID" type="BIGINT"/>
-            <column name="CREATE_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>               
-            <column name="MODIFY_DATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>  
+            <column name = "CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
         </createTable>
         <!-- Add Default ADMINISTRATOR Role -->
         <insert tableName="ROLES">

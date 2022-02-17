@@ -1,14 +1,14 @@
-
 package za.org.phyllis.robertson.home.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import za.org.phyllis.robertson.home.entity.Condition;
-import za.org.phyllis.robertson.home.entity.DailyCare;
+import org.springframework.stereotype.Repository;
+import za.org.phyllis.robertson.home.entity.Conditions;
 
 /**
  *
  * @author snuif
  */
-public interface ConditionRepository extends JpaRepository<Condition, Long>{
-    
+@Repository
+public interface ConditionRepository extends JpaRepository<Conditions, Long> {
+
 }

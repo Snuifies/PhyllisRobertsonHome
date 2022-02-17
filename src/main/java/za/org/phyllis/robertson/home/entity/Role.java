@@ -1,18 +1,25 @@
 package za.org.phyllis.robertson.home.entity;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import za.org.phyllis.robertson.home.model.UserRole;
 
 import javax.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ROLES")
-public class Role {
+public class Role  extends Auditable<Long> implements Serializable {
+    private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +29,5 @@ public class Role {
     @Column(length = 20, name = "USER_ROLE")
     private UserRole name;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE")
-    private Date createDate;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "MODIFY_DATE")
-    private Date modifyDate;
 
 }

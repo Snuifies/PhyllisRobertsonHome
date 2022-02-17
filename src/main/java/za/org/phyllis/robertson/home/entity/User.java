@@ -1,24 +1,27 @@
 package za.org.phyllis.robertson.home.entity;
 
-import java.util.Date;
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "USERS",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "USERNAME"),
-                @UniqueConstraint(columnNames = "EMAIL")
+            @UniqueConstraint(columnNames = "USERNAME"),
+            @UniqueConstraint(columnNames = "EMAIL")
         })
-public class User {
+public class User  extends Auditable<Long> implements Serializable {
+    private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,14 +44,5 @@ public class User {
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE")
-    private Date createDate;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "MODIFY_DATE")
-    private Date modifyDate;
 
 }
