@@ -1,6 +1,7 @@
 package za.org.phyllis.robertson.home.repository;
 
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,17 +22,22 @@ public class RoomRepositoryTest {
     ResidentRepository residentRepository;
 
     @Test
-    public void givenCondition_whenSave_thenGetOk() {
-	Room model = Room.builder().roomNumber("Room 12").build();
+    public void givenRoomNumberWhenSaveThenGetRoom() {
+	String roomNumber = "Room 12";
+	Room model = Room.builder().roomNumber(roomNumber).build();
 	roomRepository.save(model);
-
-	Resident resident = Resident.builder().idNumber("IDOFRESIDENT")
-		.name("PETER").nickName("PAN").room(model).build();
-	residentRepository.save(resident);
-
-	List<Room> entities = roomRepository.findAll();
-	assertNotNull(entities);
-	assertEquals("PETER", entities.get(0).getResident().getName());
+	Optional<Room> entity = roomRepository.findByRoomNumber(roomNumber);
+	assertNotNull(entity.get());
+	assertEquals(roomNumber, entity.get().getRoomNumber());
     }
 
+    @Test
+    public void givenIdWhenSaveThenGetRoom() {
+	String roomNumber = "Room 12";
+	Room model = Room.builder().roomNumber(roomNumber).build();
+	roomRepository.save(model);
+	Optional<Room> entity = roomRepository.findById(1L);
+	assertNotNull(entity.get());
+	assertEquals(roomNumber, entity.get().getRoomNumber());
+    }
 }

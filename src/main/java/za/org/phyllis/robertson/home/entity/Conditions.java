@@ -15,13 +15,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import lombok.experimental.FieldNameConstants;
 
 /**
  *
  * @author snuif
  */
+@FieldNameConstants
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,8 +45,6 @@ public class Conditions extends Auditable<Long> implements Serializable {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RESIDENT_ID", referencedColumnName = "ID", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Resident resident;
 
 }

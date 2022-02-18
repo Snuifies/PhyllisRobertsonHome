@@ -4,13 +4,19 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 /**
  * @author snuif
  */
+@FieldNameConstants
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +24,11 @@ import lombok.NoArgsConstructor;
 @Entity(name = "Resident")
 @Table(name = "RESIDENT")
 public class Resident extends Auditable<Long> implements Serializable {
+
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -34,6 +41,16 @@ public class Resident extends Auditable<Long> implements Serializable {
     @Column(name = "NICK_NAME")
     private String nickName;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ROOM_ID")
+    private Room room;
+
+    @OneToMany(
+	    mappedBy = "resident",
+	    cascade = CascadeType.ALL,
+	    orphanRemoval = true
+    )
+    private List<Conditions> conditions;
 //
 //    @Column(name = "DATE_OF_BIRTH")
 //    @Temporal(TemporalType.DATE)
@@ -74,11 +91,18 @@ public class Resident extends Auditable<Long> implements Serializable {
 //    @Column(name = "PARENT_GUARDIAN_EMAIL")
 //    private String parentGuardianEmail;
 
+    public void addCondition(Conditions condition) {
+	if (Objects.isNull(conditions)) {
+	    conditions = new ArrayList<>();
+	}
+	conditions.add(condition);
+	condition.setResident(this);
+    }
 
- 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "ID")
-    private Room room;
-
+    public void removeCondition(Conditions condition) {
+	if (!Objects.isNull(conditions) && conditions.contains(condition)) {
+	    conditions.remove(condition);
+	    condition.setResident(null);
+	}
+    }
 }

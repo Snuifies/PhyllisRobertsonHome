@@ -10,7 +10,9 @@ import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
+@FieldNameConstants
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
