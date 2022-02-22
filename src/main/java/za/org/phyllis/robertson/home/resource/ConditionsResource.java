@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import za.org.phyllis.robertson.home.entity.Conditions;
+import za.org.phyllis.robertson.home.entity.Condition;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.repository.ConditionRepository;
 
@@ -23,20 +23,20 @@ public class ConditionsResource {
     ConditionRepository repository;
 
     @GetMapping("/conditions")
-    public ResponseEntity<List<Conditions>> getAllConditions() {
-        List<Conditions> conditions = repository.findAll();
+    public ResponseEntity<List<Condition>> getAllConditions() {
+        List<Condition> conditions = repository.findAll();
         return new ResponseEntity<>(conditions, HttpStatus.OK);
     }
 
     @PostMapping("/conditions/")
-    public ResponseEntity<Conditions> createCondition(@RequestBody Conditions conditions) {
-        Conditions result = repository.save(Conditions.builder().build());
+    public ResponseEntity<Condition> createCondition(@RequestBody Condition conditions) {
+        Condition result = repository.save(Condition.builder().build());
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping("/conditions/{id}")
-    public ResponseEntity<Conditions> getCondition(@PathVariable("id") long id) {
-        Conditions conditions = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Conditions not Found"));
+    public ResponseEntity<Condition> getCondition(@PathVariable("id") long id) {
+        Condition conditions = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Conditions not Found"));
         return new ResponseEntity<>(conditions, HttpStatus.OK);
     }
 

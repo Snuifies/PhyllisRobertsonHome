@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import za.org.phyllis.robertson.home.entity.Conditions;
+import za.org.phyllis.robertson.home.entity.Condition;
 import za.org.phyllis.robertson.home.entity.Resident;
 import za.org.phyllis.robertson.home.entity.Room;
 
@@ -35,12 +35,12 @@ public class ConditionsRepositoryTest {
 		.room(room)
 		.build();
 
-	Conditions condition = Conditions.builder().condition("Fartiner").build();
+	Condition condition = Condition.builder().condition("Fartiner").build();
 	resident.addCondition(condition);
 	residentRepository.save(resident);
 
 	List<Resident> residents = residentRepository.findAll();
-	Conditions entity = residents.get(0).getConditions().get(0);
+	Condition entity = residents.get(0).getConditions().get(0);
 	assertNotNull(entity);
 	assertEquals("Fartiner", entity.getCondition());
     }

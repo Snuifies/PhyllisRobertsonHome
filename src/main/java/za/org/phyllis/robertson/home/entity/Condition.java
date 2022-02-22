@@ -29,9 +29,9 @@ import lombok.experimental.FieldNameConstants;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "Conditions")
-@Table(name = "CONDITIONS")
-public class Conditions extends Auditable<Long> implements Serializable {
+@Entity(name = "Condition")
+@Table(name = "CONDITION")
+public class Condition extends Auditable<Long> implements Serializable {
 
     private static final long serialVersionUID = -5172178857306870614L;
 

@@ -1,4 +1,3 @@
-
 package za.org.phyllis.robertson.home.entity;
 
 import lombok.Data;
@@ -6,7 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,27 +25,40 @@ import lombok.experimental.FieldNameConstants;
 @Entity
 @Table(name = "MEDICAL")
 public class Medical extends Auditable<Long> implements Serializable {
+
     private static final long serialVersionUID = -5172178857306870614L;
+
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    private Date DoctorVisitDate;
-//    private String DoctorAttended;
-//    private String AccompaniedBy;
-//    private String Treatment;
-//    private String Prescription;
-//    private String Dose;
-//    private Byte[] CopyOfPrescription;
-//    private Date NextAppointment;
-//    private Date MedicationToPharmacy;
-//    private String ItemSent;
-//    private int QuantitySent;
-//    private Date BlistersReceivedDate;
-//    private int BlistersReceived;
-//    private Boolean MedicineDueForRenewal;
+    @Column(name = "DOCTOR_VISIT_DATE")
+    private Date DoctorVisitDate;
+
+    @Column(name = "DOCTOR_ATTENDED")
+    private String DoctorAttended;
+
+    @Column(name = "ACCOMPANIED_BY")
+    private String AccompaniedBy;
+
+    @Column(name = "TREATMENT")
+    private String Treatment;
+
+    @Column(name = "COPY_OF_PRESCRIPTION")
+    private Byte[] CopyOfPrescription;
+
+    @Column(name = "NEXT_APPOINTMENT")
+    private Date NextAppointment;
+
+    @Column(name = "MEDICATION_TO_PHARMACY_DATE")
+    private Date MedicationToPharmacyDate;
+
+    @Column(name = "BLISTERS_RECEIVED_DATE")
+    private Date BlistersReceivedDate;
+
+    @Column(name = "BLISTERS_RECEIVED")
+    private int BlistersReceived;
 
 
-
-
-}
+ }

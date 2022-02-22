@@ -24,8 +24,9 @@ public class Role  extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20, name = "USER_ROLE")

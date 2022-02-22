@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
+import za.org.phyllis.robertson.home.model.ResidenceType;
 
 /**
  * @author snuif
@@ -41,57 +43,72 @@ public class Resident extends Auditable<Long> implements Serializable {
     @Column(name = "NICK_NAME")
     private String nickName;
 
+    @Column(name = "DATE_OF_BIRTH")
+    @Temporal(TemporalType.DATE)
+    private Calendar dateOfBirth;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "RESIDENCE_TYPE")
+    private ResidenceType residenceType;
+
+    @Column(name = "MEDICAL_AID_NAME")
+    private String medicalAidName;
+
+    @Column(name = "MEDICAL_PLAN")
+    private String medicalPlan;
+
+    @Column(name = "MEDICAL_AID_NUMBER")
+    private String medicalAidNumber;
+
+    @Column(name = "MEDICAL_AID_PHONE_NUMBER")
+    private String medicalAidPhoneNumber;
+
+    @Column(name = "PREFERRED_HOSPITAL")
+    private String preferredHospital;
+
+    @Column(name = "DOCTOR")
+    private String doctor;
+
+    @Column(name = "DOCTOR_PHONE_NUMBER")
+    private String doctorPhoneNumber;
+
+    @Column(name = "AMBULANCE_SERVICE")
+    private String ambulanceService;
+
+    @Column(name = "PARENT_GUARDIAN_NAME")
+    private String parentGuardianName;
+
+    @Column(name = "PARENT_GUARDIAN_PHONE_NUMBER")
+    private String parentGuardianPhoneNumber;
+
+    @Column(name = "PARENT_GUARDIAN_EMAIL")
+    private String parentGuardianEmail;
+
+    private int age;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROOM_ID")
     private Room room;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ROOM_ID")
+    private Medical medical;
 
     @OneToMany(
 	    mappedBy = "resident",
 	    cascade = CascadeType.ALL,
 	    orphanRemoval = true
     )
-    private List<Conditions> conditions;
-//
-//    @Column(name = "DATE_OF_BIRTH")
-//    @Temporal(TemporalType.DATE)
-//    private Date dateOfBirth;
-//
-//    @Column(name = "AGE")
-//    private int age;
-//
-//
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "RESIDENCE_TYPE")
-//    private ResidenceType residenceType;
-//
-//    @Column(name = "MEDICAL_AID")
-//    private String medicalAid;
-//
-//    @Column(name = "MEDICAL_AID_NUMBER")
-//    private String MedicalAidNumber;
-//
-//    @Column(name = "PREFERRED_HOSPITAL")
-//    private String preferredHospital;
-//
-//    @Column(name = "DOCTOR")
-//    private String doctor;
-//
-//    @Column(name = "PARENT_GUARDIAN_NAME")
-//    private String contactDetails;
-//
-//    @Column(name = "PARENT_GUARDIAN_NAME")
-//    private String ambulanceService;
-//
-//    @Column(name = "PARENT_GUARDIAN_NAME")
-//    private String parentGuardianName;
-//
-//    @Column(name = "PARENT_GUARDIAN_PHONE_NUMBER")
-//    private String parentGuardianPhoneNumber;
-//
-//    @Column(name = "PARENT_GUARDIAN_EMAIL")
-//    private String parentGuardianEmail;
+    private List<Condition> conditions;
 
-    public void addCondition(Conditions condition) {
+    @OneToMany(
+	    mappedBy = "resident",
+	    cascade = CascadeType.ALL,
+	    orphanRemoval = true
+    )
+    private List<Prescription> prescriptions;
+
+    public void addCondition(Condition condition) {
 	if (Objects.isNull(conditions)) {
 	    conditions = new ArrayList<>();
 	}
@@ -99,10 +116,26 @@ public class Resident extends Auditable<Long> implements Serializable {
 	condition.setResident(this);
     }
 
-    public void removeCondition(Conditions condition) {
+    public void removeCondition(Condition condition) {
 	if (!Objects.isNull(conditions) && conditions.contains(condition)) {
 	    conditions.remove(condition);
 	    condition.setResident(null);
 	}
     }
+
+    public void addPrescription(Prescription prescription) {
+	if (Objects.isNull(prescriptions)) {
+	    prescriptions = new ArrayList<>();
+	}
+	prescriptions.add(prescription);
+	prescription.setResident(this);
+    }
+
+    public void removePrescription(Prescription prescription) {
+	if (!Objects.isNull(prescriptions) && prescriptions.contains(prescription)) {
+	    prescriptions.remove(prescription);
+	    prescription.setResident(null);
+	}
+    }
+
 }

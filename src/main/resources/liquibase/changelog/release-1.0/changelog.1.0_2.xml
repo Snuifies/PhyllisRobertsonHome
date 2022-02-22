@@ -5,6 +5,7 @@
     xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
   
+    <!-- OneToOne With Resident -->
     <changeSet author="Marius" id="Create Room Table" >
 	<createTable tableName="ROOM">
 	    <column name="ID" type="BIGINT" autoIncrement="true"/>
@@ -19,22 +20,28 @@
 	</createTable>
     </changeSet>        
     
-    <changeSet author="Marius" id="Create Resident Table" >
-	<createTable tableName="RESIDENT">
+    <!-- OneToOne With Resident -->
+    <changeSet author="Marius" id="Create Medical Table" >
+	<createTable tableName="MEDICAL">
 	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="ROOM_ID" type="BIGINT"/>
-	    <column name="ID_NUMBER" type="VARCHAR(25)"/>
-	    <column name="NAME" type="VARCHAR(100)"/>
-	    <column name="NICK_NAME" type="VARCHAR(100)"/>
+	    <column name="DOCTOR_VISIT_DATE" type="DATE"/>
+	    <column name="DOCTOR_ATTENDED" type="VARCHAR(50)"/>
+	    <column name="ACCOMPANIED_BY" type="VARCHAR(50)"/>
+	    <column name="TREATMENT" type="VARCHAR(50)"/>
+	    <column name="COPY_OF_PRESCRIPTION" type="VARCHAR(50)"/>
+	    <column name="NEXT_APPOINTMENT" type="DATE"/>
+	    <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
+	    <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
+	    <column name="BLISTERS_RECEIVED" type="INTEGER"/>
 	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
 	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
 	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
 	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
 	</createTable>
-    </changeSet>
-    
-    <changeSet author="Marius" id="Create Conditions Table" >
-	<createTable tableName="CONDITIONS">
+    </changeSet>        
+ 
+    <changeSet author="Marius" id="Create Condition Table" >
+	<createTable tableName="CONDITION">
 	    <column name="ID" type="BIGINT" autoIncrement="true"/>
 	    <column name="RESIDENT_ID" type="BIGINT">
 		<constraints nullable="false"/>
@@ -49,5 +56,53 @@
 	</createTable>
     </changeSet>
 
+    <!-- ManyToOne With Resident -->
+    <changeSet author="Marius" id="Create Prescription Table" >
+	<createTable tableName="PRESCRIPTION">
+	    <column name="ID" type="BIGINT" autoIncrement="true"/>
+	    <column name="RESIDENT_ID" type="BIGINT">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="PRESCRIPTION" type="VARCHAR(250)">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="DOSIS" type="VARCHAR(100)"/>
+	    <column name="ITEM_SENT" type="VARCHAR(100)"/>
+	    <column name="QUANTITY_SENT" type="NUMBER"/>
+	    <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
+	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
+	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
+	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
+	</createTable>
+    </changeSet>
 
+    <changeSet author="Marius" id="Create Resident Table" >
+	<createTable tableName="RESIDENT">
+	    <column name="ID" type="BIGINT" autoIncrement="true"/>
+	    <column name="ID_NUMBER" type="VARCHAR(25)"/>
+	    <column name="NAME" type="VARCHAR(100)"/>
+	    <column name="NICK_NAME" type="VARCHAR(100)"/>
+	    <column name="DATE_OF_BIRTH" type="DATE"/>
+	    <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
+	    <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
+	    <column name="MEDICAL_PLAN" type="VARCHAR(100)"/>
+	    <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
+	    <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
+	    <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
+	    <column name="DOCTOR" type="VARCHAR(100)"/>
+	    <column name="DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
+	    <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
+	    <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
+	    <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
+	    <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+	    <column name="ROOM_ID" type="BIGINT"/>
+	    <column name="MEDICAL_ID" type="BIGINT"/>
+	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
+	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
+	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
+	</createTable>
+    </changeSet>
+  
 </databaseChangeLog>

@@ -22,7 +22,9 @@ import lombok.experimental.FieldNameConstants;
 @Table(name = "FOOD_SERVICES")
 public class FoodServices  extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
+
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
