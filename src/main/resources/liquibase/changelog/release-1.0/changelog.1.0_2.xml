@@ -1,108 +1,250 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-  
-    <!-- OneToOne With Resident -->
-    <changeSet author="Marius" id="Create Room Table" >
-	<createTable tableName="ROOM">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="ROOM_NUMBER" type="VARCHAR(50)">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>  
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
-	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
-    </changeSet>        
-    
-    <!-- OneToOne With Resident -->
-    <changeSet author="Marius" id="Create Medical Table" >
-	<createTable tableName="MEDICAL">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="DOCTOR_VISIT_DATE" type="DATE"/>
-	    <column name="DOCTOR_ATTENDED" type="VARCHAR(50)"/>
-	    <column name="ACCOMPANIED_BY" type="VARCHAR(50)"/>
-	    <column name="TREATMENT" type="VARCHAR(50)"/>
-	    <column name="COPY_OF_PRESCRIPTION" type="VARCHAR(50)"/>
-	    <column name="NEXT_APPOINTMENT" type="DATE"/>
-	    <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
-	    <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
-	    <column name="BLISTERS_RECEIVED" type="INTEGER"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
-	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
-    </changeSet>        
- 
-    <changeSet author="Marius" id="Create Condition Table" >
-	<createTable tableName="CONDITION">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="RESIDENT_ID" type="BIGINT">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="CONDITION" type="VARCHAR(250)">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
-	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="Marius" id="Create Resident Table">
+        <createTable tableName="RESIDENT">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ID_NUMBER" type="VARCHAR(25)"/>
+            <column name="NAME" type="VARCHAR(100)"/>
+            <column name="NICK_NAME" type="VARCHAR(100)"/>
+            <column name="DATE_OF_BIRTH" type="DATE"/>
+            <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
+            <column name="MEDICAL_PLAN" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
+            <column name="DOCTOR" type="VARCHAR(100)"/>
+            <column name="DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+            <!-- Link the OneToOne Room -->
+            <column name="ROOM_ID" type="BIGINT"/>
+            <!-- Link the OneToOne Medical -->
+            <column name="MEDICAL_ID" type="BIGINT"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
     </changeSet>
 
-    <!-- ManyToOne With Resident -->
-    <changeSet author="Marius" id="Create Prescription Table" >
-	<createTable tableName="PRESCRIPTION">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="RESIDENT_ID" type="BIGINT">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="PRESCRIPTION" type="VARCHAR(250)">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="DOSIS" type="VARCHAR(100)"/>
-	    <column name="ITEM_SENT" type="VARCHAR(100)"/>
-	    <column name="QUANTITY_SENT" type="NUMBER"/>
-	    <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
-	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
+    <!-- OneToOne Room With Resident -->
+    <changeSet author="Marius" id="Create Room Table">
+        <createTable tableName="ROOM">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
+            <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
     </changeSet>
 
-    <changeSet author="Marius" id="Create Resident Table" >
-	<createTable tableName="RESIDENT">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="ID_NUMBER" type="VARCHAR(25)"/>
-	    <column name="NAME" type="VARCHAR(100)"/>
-	    <column name="NICK_NAME" type="VARCHAR(100)"/>
-	    <column name="DATE_OF_BIRTH" type="DATE"/>
-	    <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_PLAN" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
-	    <column name="DOCTOR" type="VARCHAR(100)"/>
-	    <column name="DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
-	    <column name="ROOM_ID" type="BIGINT"/>
-	    <column name="MEDICAL_ID" type="BIGINT"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>  
-	    <column name = "CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
+    <!-- OneToOne Medical With Resident -->
+    <changeSet author="Marius" id="Create Medical Table">
+        <createTable tableName="MEDICAL">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="DOCTOR_VISIT_DATE" type="DATE"/>
+            <column name="DOCTOR_ATTENDED" type="VARCHAR(50)"/>
+            <column name="ACCOMPANIED_BY" type="VARCHAR(50)"/>
+            <column name="TREATMENT" type="VARCHAR(250)"/>
+            <column name="COPY_OF_PRESCRIPTION" type="VARCHAR(50)"/>
+            <column name="NEXT_APPOINTMENT" type="DATE"/>
+            <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED" type="INTEGER"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
     </changeSet>
-  
+
+    <!-- ManyToOne Condition With Resident -->
+    <changeSet author="Marius" id="Create Condition Table">
+        <createTable tableName="CONDITION">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Condition To Resident -->
+            <column name="RESIDENT_ID" type="BIGINT"/>
+            <column name="CONDITION" type="VARCHAR(250)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne Prescription With Resident -->
+    <changeSet author="Marius" id="Create Prescription Table">
+        <createTable tableName="PRESCRIPTION">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Prescription To Resident -->
+            <column name="RESIDENT_ID" type="BIGINT"/>
+            <column name="DOSE" type="VARCHAR(100)"/>
+            <column name="ITEM_SENT" type="VARCHAR(100)"/>
+            <column name="QUANTITY_SENT" type="NUMBER"/>
+            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne DailyCare With Resident -->
+    <changeSet author="Marius" id="Create Housekeeping Table">
+        <createTable tableName="HOUSEKEEPING">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne DailyCare To Resident -->
+            <column name="RESIDENT_ID" type="BIGINT"/>
+            <column name="CARE_DATE" type="DATE"/>
+            <column name="CARE_WORKER_ASSIGNED" type="VARCHAR(250)"/>
+            <column name="BATH" type="VARCHAR(250)"/>
+            <column name="SHAVED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="NAILS_CUT" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="HEELS_TREATED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="BED_MADE" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="CLEAN_LINNEN" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="WASHING_REMOVED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="CUPBOARD_PACKED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="WHEELCHAIR_CLEANED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="MEDICATION_MORNING" type="VARCHAR(250)"/>
+            <column name="MEDICATION_BREAKFAST" type="VARCHAR(250)"/>
+            <column name="MEDICATION_LUNCH" type="VARCHAR(250)"/>
+            <column name="MEDICATION_SUPPER" type="VARCHAR(250)"/>
+            <column name="MEDICATION_EVENING" type="VARCHAR(250)"/>
+            <column name="MEDICATION_ACUTE_TIME" type="DATE"/>
+            <column name="MEDICATION_ACUTE_ITEM" type="VARCHAR(250)"/>
+            <column name="COMPLAINT" type="VARCHAR(250)"/>
+            <column name="ACTIONS_ADVISED" type="VARCHAR(250)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne Housekeeping With Room -->
+    <changeSet author="Marius" id="Create Prescription Table">
+        <createTable tableName="PRESCRIPTION">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Housekeeping To Room -->
+            <column name="ROOM_ID" type="BIGINT"/>
+            <column name="HOUSEKEEPING_DATE" type="DATE"/>
+            <column name="WASHING_REMOVED_DATE" type="DATE"/>
+            <column name="WASHING_REMOVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="WASHING_RETURNED_DATE" type="DATE"/>
+            <column name="WASHING_RETURNED_COMMENT" type="VARCHAR(250)"/>
+            <column name="WASHING_ISSUE_DATE" type="DATE"/>
+            <column name="WASHING_ISSUE_COMMENT" type="VARCHAR(250)"/>
+            <column name="ROOM_CLEANED_DATE" type="DATE"/>
+            <column name="ROOM_CLEANED_COMMENT" type="VARCHAR(250)"/>
+            <column name="CLEANING_ISSUES_COMMENT" type="VARCHAR(250)"/>
+            <column name="MONTHLY_DEEP_CLEAN_DATE" type="DATE"/>
+            <column name="MONTHLY_DEEP_CLEAN_COMMENT" type="VARCHAR(250)"/>
+            <column name="FAULT_COMPLAINT_DATE" type="DATE"/>
+            <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
+            <column name="FAULT_RESOLVED_DATE" type="DATE"/>
+            <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- TODO FoodService -->
+    <!-- ManyToOne FoodService With Resident -->
+    <changeSet author="Marius" id="Create FoodService Table">
+        <createTable tableName="FOOD_SERVICE">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Housekeeping To Room -->
+            <column name="RESIDENT_ID" type="BIGINT"/>
+
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="" type=""/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne Allergy With FoodService -->
+    <changeSet author="Marius" id="Create Allergy Table">
+        <createTable tableName="ALLERGY">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Allergy To FoodService -->
+            <column name="FOOD_SERVICE_ID" type="BIGINT"/>
+            <column name="ALLERGY" type="VARCHAR(50)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne Dislike With FoodService -->
+    <changeSet author="Marius" id="Create Dislike Table">
+        <createTable tableName="DISLIKE">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Dislike To FoodService -->
+            <column name="FOOD_SERVICE_ID" type="BIGINT"/>
+            <column name="DISLIKE" type="VARCHAR(50)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne Avoid With FoodService -->
+    <changeSet author="Marius" id="Create Avoid Table">
+        <createTable tableName="AVOID">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Avoid To FoodService -->
+            <column name="FOOD_SERVICE_ID" type="BIGINT"/>
+            <column name="AVOID" type="VARCHAR(50)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- ManyToOne Preference With FoodService -->
+    <changeSet author="Marius" id="Create Preference Table">
+        <createTable tableName="PREFERENCE">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <!-- Link the ManyToOne Preference To FoodService -->
+            <column name="FOOD_SERVICE_ID" type="BIGINT"/>
+            <column name="PREFERENCE" type="VARCHAR(50)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_BY" type="VARCHAR(25)"/>
+            <column name="MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

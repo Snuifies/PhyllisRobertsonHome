@@ -37,8 +37,8 @@ public class Prescription extends Auditable<Long> implements Serializable {
     @Column(name = "PRESCRIPTION")
     private String prescription;
 
-    @Column(name = "DOSIS")
-    private String dosis;
+    @Column(name = "DOSE")
+    private String dose;
 
     @Column(name = "ITEM_SENT")
     private String itemSent;

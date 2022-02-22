@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ import lombok.experimental.FieldNameConstants;
 @AllArgsConstructor
 @Entity
 @Table(name = "FOOD_SERVICES")
-public class FoodServices  extends Auditable<Long> implements Serializable {
+public class FoodServices extends Auditable<Long> implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
@@ -28,8 +29,12 @@ public class FoodServices  extends Auditable<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "FOOD_SERVICE_DATE")
+    @Temporal(TemporalType.DATE)
+    private Calendar foodServiceDate;
+
 //    private String Allergies;
-//    private String DietType;
+//    private DietType DietType;
 //    private String Dislikes;
 //    private String Avoid;
 //    private String Preference;

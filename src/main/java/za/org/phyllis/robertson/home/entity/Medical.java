@@ -60,5 +60,7 @@ public class Medical extends Auditable<Long> implements Serializable {
     @Column(name = "BLISTERS_RECEIVED")
     private int BlistersReceived;
 
+    @OneToOne(mappedBy = Resident.Fields.medical, fetch = FetchType.LAZY)
+    private Resident resident;
 
  }
