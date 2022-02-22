@@ -4,15 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import lombok.experimental.FieldNameConstants;
 
 /**
@@ -60,7 +54,7 @@ public class Medical extends Auditable<Long> implements Serializable {
     @Column(name = "BLISTERS_RECEIVED")
     private int BlistersReceived;
 
-    @OneToOne(mappedBy = Resident.Fields.medical, fetch = FetchType.LAZY)
-    private Resident resident;
+//    @OneToOne(mappedBy = Resident.Fields.medical, fetch = FetchType.LAZY)
+//    private Resident resident;
 
  }

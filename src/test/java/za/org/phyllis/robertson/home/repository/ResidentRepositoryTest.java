@@ -23,21 +23,13 @@ public class ResidentRepositoryTest {
     ResidentRepository residentRepository;
     static String roomNumber = "Room 12";
 
-    @BeforeEach
-    public void saveRoom() {
-	Room room = Room.builder()
-		.roomNumber(roomNumber)
-		.available(Boolean.TRUE)
-		.build();
-	roomRepository.saveAndFlush(room);
-    }
-
     @Test
     public void givenResidentWhenSaveThenGetOk() {
 // given
-	Optional<Room> roomEntity = roomRepository.findByRoomNumber(roomNumber);
-
-	assertTrue(roomEntity.isPresent());
+	Room roomEntity =  roomRepository.saveAndFlush(Room.builder()
+		.roomNumber(roomNumber)
+		.available(Boolean.TRUE)
+		.build());
 	String idNumber = "ID_NUMBER";
 	String name = "NAME";
 	String nickName = "NICKNAME";
@@ -45,7 +37,7 @@ public class ResidentRepositoryTest {
 		.idNumber(idNumber)
 		.name(name)
 		.nickName(nickName)
-		.room(roomEntity.get())
+		.room(roomEntity)
 		.build();
 
 // when
@@ -56,16 +48,17 @@ public class ResidentRepositoryTest {
 	assertEquals(idNumber, residentEntity.get().getIdNumber());
 	assertEquals(name, residentEntity.get().getName());
 	assertEquals(nickName, residentEntity.get().getNickName());
-	residentRepository.delete(resident);
-	roomRepository.delete(roomEntity.get());
+	residentRepository.deleteAll();
+	roomRepository.deleteAll();
     }
 
     @Test
-    public void givenResidentWhenSaveThenGetRoomOk() {
+    public void givenResidentWhenSaveThenGetByRoomIdOk() {
 // given
-	Optional<Room> roomEntity = roomRepository.findByRoomNumber(roomNumber);
-// when
-	assertTrue(roomEntity.isPresent());
+	Room roomEntity =  roomRepository.saveAndFlush(Room.builder()
+		.roomNumber(roomNumber)
+		.available(Boolean.TRUE)
+		.build());
 	String idNumber = "ID_NUMBER";
 	String name = "NAME";
 	String nickName = "NICKNAME";
@@ -73,43 +66,18 @@ public class ResidentRepositoryTest {
 		.idNumber(idNumber)
 		.name(name)
 		.nickName(nickName)
-		.room(roomEntity.get())
+		.room(roomEntity)
 		.build();
+// when
 	residentRepository.save(resident);
 // then
-	Optional<Resident> residentEntity = residentRepository.findByRoom(roomEntity.get().getId());
+	Optional<Resident> residentEntity = residentRepository.findByRoom(roomEntity.getId());
 	assertTrue(residentEntity.isPresent());
 	assertEquals(idNumber, residentEntity.get().getIdNumber());
 	assertEquals(name, residentEntity.get().getName());
 	assertEquals(nickName, residentEntity.get().getNickName());
-	assertEquals(roomEntity.get().getId(), residentEntity.get().getRoom().getId());
-	residentRepository.delete(resident);
-	roomRepository.delete(roomEntity.get());
-    }
-
-    @Test
-    public void givenResidentWhenSaveThenGetOnlyOneRoomObjectOk() {
-// given
-	Optional<Room> roomEntity = roomRepository.findByRoomNumber(roomNumber);
-// when
-	assertTrue(roomEntity.isPresent());
-	String idNumber = "ID_NUMBER";
-	String name = "NAME";
-	String nickName = "NICKNAME";
-	Resident resident = Resident.builder()
-		.idNumber(idNumber)
-		.name(name)
-		.nickName(nickName)
-		.room(roomEntity.get())
-		.build();
-	residentRepository.save(resident);
-// then
-	List<Room> roomEntities = roomRepository.findAll();
-	assertEquals(1, roomEntities.size());
-
-	List<Resident> residents = residentRepository.findAll();
-	assertEquals(1, residents.size());
-	residentRepository.delete(resident);
-	roomRepository.delete(roomEntity.get());
+	assertEquals(roomEntity.getId(), residentEntity.get().getRoom().getId());
+	residentRepository.deleteAll();
+	roomRepository.deleteAll();
     }
 }
