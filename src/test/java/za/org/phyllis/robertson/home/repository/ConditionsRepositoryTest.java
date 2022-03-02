@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import za.org.phyllis.robertson.home.entity.Condition;
-import za.org.phyllis.robertson.home.entity.Resident;
-import za.org.phyllis.robertson.home.entity.Room;
+import za.org.phyllis.robertson.home.entity.resident.Condition;
+import za.org.phyllis.robertson.home.entity.resident.Resident;
+import za.org.phyllis.robertson.home.entity.room.Room;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

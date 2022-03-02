@@ -1,47 +1,47 @@
 package za.org.phyllis.robertson.home.config;
 
-import za.org.phyllis.robertson.home.service.UserDetailsServiceImpl;
+import za.org.phyllis.robertson.home.service.security.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import za.org.phyllis.robertson.home.model.UserRole;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import za.org.phyllis.robertson.home.model.security.UserRole;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/staff").hasAuthority(UserRole.STAFF.name())
-                .antMatchers("/manager").hasAuthority(UserRole.MANAGER.name())
-                .antMatchers("/admin").hasAuthority(UserRole.ADMINISTRATOR.name())
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin();
-    }
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(
+//        prePostEnabled = true)
+public class WebSecurityConfig {// extends WebSecurityConfigurerAdapter {
+//
+//    @Autowired
+//    UserServiceImpl userDetailsService;
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Override
+//    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+//        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/staff").hasAuthority(UserRole.STAFF.name())
+//                .antMatchers("/manager").hasAuthority(UserRole.MANAGER.name())
+//                .antMatchers("/admin").hasAuthority(UserRole.ADMINISTRATOR.name())
+//                .anyRequest()
+//                .authenticated();
+//                .and()
+//                .formLogin();
+//    }
 }
