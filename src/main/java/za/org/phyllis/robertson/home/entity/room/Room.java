@@ -1,6 +1,5 @@
 package za.org.phyllis.robertson.home.entity.room;
 
-import za.org.phyllis.robertson.home.entity.resident.Resident;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +8,9 @@ import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import za.org.phyllis.robertson.home.entity.Auditable;
 
 /**
@@ -36,29 +38,25 @@ public class Room extends Auditable<Long> implements Serializable {
     @Column(name = "AVAILABLE")
     private Boolean available;
 
-    @OneToOne(mappedBy = Resident.Fields.room, fetch = FetchType.LAZY)
-    private Resident resident;
-//
-//    @OneToMany(
-//            mappedBy = "room",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    private List<Housekeeping> housekeepings;
-//
-//    public void addHousekeeping(Housekeeping housekeeping) {
-//        if (Objects.isNull(housekeepings)) {
-//            housekeepings = new ArrayList<>();
-//        }
-//        housekeepings.add(housekeeping);
-//        housekeeping.setRoom(this);
-//    }
-//
-//    public void removeHousekeeping(Housekeeping housekeeping) {
-//        if (!Objects.isNull(housekeepings) && housekeepings.contains(housekeeping)) {
-//            housekeepings.remove(housekeeping);
-//            housekeeping.setRoom(null);
-//        }
-//    }
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Housekeeping> housekeepings;
 
+    public void addHousekeeping(Housekeeping housekeeping) {
+	if (Objects.isNull(housekeepings)) {
+	    housekeepings = new ArrayList<>();
+	}
+	housekeepings.add(housekeeping);
+	housekeeping.setRoom(this);
+    }
+
+    public void removeHousekeeping(Housekeeping housekeeping) {
+	if (!Objects.isNull(housekeepings) && housekeepings.contains(housekeeping)) {
+	    housekeepings.remove(housekeeping);
+	    housekeeping.setRoom(null);
+	}
+    }
+
+//    @OneToOne(mappedBy = Resident.Fields.room, fetch = FetchType.LAZY)
+//    private Resident resident;
+//
 }

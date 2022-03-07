@@ -17,34 +17,33 @@
 	</createTable>
     </changeSet>
 
-    <!-- One Resident Allowed Per Room -->
-    <changeSet author="Marius" id="Create Resident Table">
-	<createTable tableName="RESIDENT">
+    <!-- ManyToOne Housekeeping With Room -->
+    <changeSet author="Marius" id="Create Housekeeping Table">
+	<createTable tableName="HOUSEKEEPING">
 	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="ID_NUMBER" type="VARCHAR(25)"/>
-	    <column name="NAME" type="VARCHAR(100)"/>
-	    <column name="NICK_NAME" type="VARCHAR(100)"/>
-	    <column name="DATE_OF_BIRTH" type="DATE"/>
-	    <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_PLAN" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
-	    <column name="HOUSE_DOCTOR" type="VARCHAR(100)"/>
-	    <column name="HOUSE_DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+	    <!-- Link the ManyToOne Housekeeping To Room -->
+	    <column name="ROOM_ID" type="BIGINT"/>
+	    <column name="HOUSEKEEPING_DATE" type="DATE"/>
+	    <column name="WASHING_REMOVED_DATE" type="DATE"/>
+	    <column name="WASHING_REMOVED_COMMENT" type="VARCHAR(250)"/>
+	    <column name="WASHING_RETURNED_DATE" type="DATE"/>
+	    <column name="WASHING_RETURNED_COMMENT" type="VARCHAR(250)"/>
+	    <column name="WASHING_ISSUE_DATE" type="DATE"/>
+	    <column name="WASHING_ISSUE_COMMENT" type="VARCHAR(250)"/>
+	    <column name="ROOM_CLEANED_DATE" type="DATE"/>
+	    <column name="ROOM_CLEANED_COMMENT" type="VARCHAR(250)"/>
+	    <column name="CLEANING_ISSUES_COMMENT" type="VARCHAR(250)"/>
+	    <column name="MONTHLY_DEEP_CLEAN_DATE" type="DATE"/>
+	    <column name="MONTHLY_DEEP_CLEAN_COMMENT" type="VARCHAR(250)"/>
+	    <column name="FAULT_COMPLAINT_DATE" type="DATE"/>
+	    <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
+	    <column name="FAULT_RESOLVED_DATE" type="DATE"/>
+	    <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
 	    <column name="CREATED_DATE" type="TIMESTAMP"/>
 	    <column name="CREATED_BY" type="VARCHAR(25)"/>
 	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
 	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	    <!-- Link One Resident to One Room -->
-	    <column name="ROOM_ID" type="BIGINT">
-		<constraints nullable="false" unique="true"/>
-	    </column>
 	</createTable>
     </changeSet>
+    
 </databaseChangeLog>
