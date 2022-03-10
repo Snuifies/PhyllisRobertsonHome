@@ -6,14 +6,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 import za.org.phyllis.robertson.home.entity.Auditable;
-import za.org.phyllis.robertson.home.model.security.UserDO;
 
 @FieldNameConstants
 @Data
@@ -51,5 +50,18 @@ public class User extends Auditable<Long> implements Serializable {
 	    joinColumns = @JoinColumn(name = "USER_ID"),
 	    inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+	if (Objects.isNull(roles)) {
+	    roles = new HashSet<>();
+	}
+	roles.add(role);
+    }
+
+    public void removeRole(Role role) {
+	if (!Objects.isNull(roles) && roles.contains(role)) {
+	    roles.remove(role);
+	}
+    }
 
 }

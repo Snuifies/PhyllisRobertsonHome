@@ -2,11 +2,13 @@ package za.org.phyllis.robertson.home.model.security;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import za.org.phyllis.robertson.home.entity.security.User;
 
+@Builder
 public class UserDO implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -14,7 +16,7 @@ public class UserDO implements UserDetails {
     private String username;
     private String email;
     private String password;
-    private ArrayList<String> roles;
+    private ArrayList<UserRole> userRoles;
 
     public UserDO(User user) {
 	this(user.getId(),
@@ -23,26 +25,28 @@ public class UserDO implements UserDetails {
 		user.getPassword(),
 		user.getRoles()
 			.stream()
-			.map(role -> role.getName().name())
+			.map(role -> role.getName())
 			.collect(Collectors.toList()));
     }
 
     public UserDO(Long id, String username, String email, String password,
-	    Collection<? extends String> roles) {
+	    Collection<? extends UserRole> roles) {
 	this.id = id;
 	this.username = username;
 	this.email = email;
 	this.password = password;
-	this.roles = new ArrayList(roles);
+	if (Objects.nonNull(roles) && !roles.isEmpty()) {
+	    this.userRoles = new ArrayList(roles);
+	}
     }
 
-    public Collection<String> getRoles() {
-	return roles;
+    public Collection<UserRole> getRoles() {
+	return userRoles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-	return roles.stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
+	return userRoles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -93,5 +97,18 @@ public class UserDO implements UserDetails {
 	}
 	UserDO user = (UserDO) o;
 	return Objects.equals(id, user.id);
+    }
+
+    public void addUserRole(UserRole userRole) {
+	if (Objects.isNull(userRoles)) {
+	    userRoles = new ArrayList<>();
+	}
+	userRoles.add(userRole);
+    }
+
+    public void removeUserRole(UserRole userRole) {
+	if (!Objects.isNull(userRoles) && userRoles.contains(userRole)) {
+	    userRoles.remove(userRole);
+	}
     }
 }

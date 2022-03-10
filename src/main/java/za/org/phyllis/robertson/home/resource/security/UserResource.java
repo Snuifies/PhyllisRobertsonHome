@@ -37,7 +37,7 @@ public class UserResource {
 
     @PostMapping
     public ResponseEntity<UserDO> createUser(@RequestBody UserDO userDO) {
-	UserDO result = userService.saveUser(userDO);
+	UserDO result = userService.createUser(userDO);
 	return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 

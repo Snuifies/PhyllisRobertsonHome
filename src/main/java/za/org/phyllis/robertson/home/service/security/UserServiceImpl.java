@@ -2,10 +2,12 @@ package za.org.phyllis.robertson.home.service.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import za.org.phyllis.robertson.home.model.security.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.repository.security.UserRepository;
@@ -29,10 +31,19 @@ public class UserServiceImpl {
 	userRepository.deleteById(id);
     }
 
+    /**
+     * TODO CREATE THE USER OBJECT
+     *
+     * @param userDO
+     * @return
+     */
     @Transactional
-    public UserDO saveUser(UserDO userDO) {
-	return userRepository.findById(userDO.getId())
-		.map(UserDO::new).get();
+    public UserDO createUser(UserDO userDO) {
+	if (userRepository.findByUsername(userDO.getUsername()).isPresent()) {
+	    throw new ResourceAlreadyExistsException("User Already Exists");
+	};
+//	userRepository.findByUsername(userDO.getUsername()).orElse(userRepository.findById(userDO.getId()))
+	return userRepository.save();
     }
 
     @Transactional
