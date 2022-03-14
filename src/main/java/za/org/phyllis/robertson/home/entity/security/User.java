@@ -26,6 +26,20 @@ import za.org.phyllis.robertson.home.entity.Auditable;
 	})
 public class User extends Auditable<Long> implements Serializable {
 
+
+    public User(long id, String username, String password, String email) {
+	this.id = id;
+	this.username = username;
+	this.password = password;
+	this.email = email;
+    }
+
+    public User(String username, String password, String email) {
+	this.username = username;
+	this.password = password;
+	this.email = email;
+    }
+
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id

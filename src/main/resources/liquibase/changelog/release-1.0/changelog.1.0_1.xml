@@ -28,7 +28,7 @@
         <!-- Create ROLES Table -->
         <createTable tableName="ROLES">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="USER_ROLE" type="VARCHAR(20)"/>
+            <column name="ROLE" type="VARCHAR(20)"/>
             <column name="CREATED_DATE" type="TIMESTAMP"/>  
             <column name = "CREATED_BY" type="VARCHAR(25)"/>
             <column name="MODIFIED_DATE" type="TIMESTAMP"/>
@@ -45,15 +45,15 @@
         </createTable>
         <!-- Add Default ADMINISTRATOR Role -->
         <insert tableName="ROLES">
-            <column name="USER_ROLE" value="ADMINISTRATOR"/>
+            <column name="ROLE" value="ADMINISTRATOR"/>
         </insert>
         <!-- Add Default MANAGER Role -->
         <insert tableName="ROLES">
-            <column name="USER_ROLE" value="MANAGER"/>
+            <column name="ROLE" value="MANAGER"/>
         </insert>
         <!-- Add Default STAFF Role -->
         <insert tableName="ROLES">
-            <column name="USER_ROLE" value="STAFF"/>
+            <column name="ROLE" value="STAFF"/>
         </insert>
     </changeSet>
     
@@ -79,17 +79,17 @@
         <!-- Admin Role Link-->
         <insert tableName="USER_ROLES">
             <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='admin' AND EMAIL='admin@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'ADMINISTRATOR')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE ROLE = 'ADMINISTRATOR')"/>
         </insert>
         <!-- Manager Role Link -->
         <insert tableName="USER_ROLES">
             <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='manager' AND EMAIL='manager@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'MANAGER')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE ROLE = 'MANAGER')"/>
         </insert>
         <!-- Staff Role Link -->
         <insert tableName="USER_ROLES">
             <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='staff' AND EMAIL='staff@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'STAFF')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE ROLE = 'STAFF')"/>
         </insert>
     </changeSet>
 

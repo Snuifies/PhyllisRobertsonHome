@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import za.org.phyllis.robertson.home.entity.security.Role;
 import za.org.phyllis.robertson.home.entity.security.User;
-import za.org.phyllis.robertson.home.model.security.UserRole;
 
 import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import za.org.phyllis.robertson.home.api.model.UserRole;
 
 /**
  *
@@ -30,8 +30,8 @@ public class UserRepositoryTest {
 
     @Test
     void testUserRepository() {
-	Role staff = roleRepository.findByName(UserRole.STAFF).get();
-	Role manager = roleRepository.findByName(UserRole.STAFF).get();
+	Role staff = roleRepository.findByRole(UserRole.STAFF.name()).get();
+	Role manager = roleRepository.findByRole(UserRole.STAFF.name()).get();
 	User user = new User(0L,
 		"Peter",
 		"Pan",

@@ -1,4 +1,6 @@
-package za.org.phyllis.robertson.home.model.security;
+package za.org.phyllis.robertson.home.api.model;
+
+
 
 public enum UserRole {
     STAFF,

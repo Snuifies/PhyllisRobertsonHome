@@ -24,31 +24,31 @@ public class ResidentResource {
 
     @GetMapping("/residents")
     public ResponseEntity<List<Resident>> getAllResidents() {
-        List<Resident> residents = repository.findAll();
-        return new ResponseEntity<>(residents, HttpStatus.OK);
+	List<Resident> residents = repository.findAll();
+	return new ResponseEntity<>(residents, HttpStatus.OK);
     }
 
     @PostMapping("/residents/")
     public ResponseEntity<Resident> createResident(@RequestBody Resident resident) {
-        Resident result = repository.save(Resident.builder().build());
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+	Resident result = repository.save(Resident.builder().build());
+	return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @GetMapping("/residents/{id}")
-    public ResponseEntity<Resident> getResident(@PathVariable("id") long id) {
-        Resident resident = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Order not Found"));
-        return new ResponseEntity<>(resident, HttpStatus.OK);
+    public ResponseEntity<Resident> getResident(@PathVariable("id") Long id) {
+	Resident resident = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id.toString()));
+	return new ResponseEntity<>(resident, HttpStatus.OK);
     }
 
     @DeleteMapping("/residents/{id}")
     public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
-        repository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	repository.deleteById(id);
+	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/residents")
     public ResponseEntity<HttpStatus> deleteAllResidents() {
-        repository.deleteAll();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	repository.deleteAll();
+	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

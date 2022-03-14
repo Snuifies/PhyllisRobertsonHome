@@ -1,4 +1,6 @@
-package za.org.phyllis.robertson.home.model.security;
+package za.org.phyllis.robertson.home.api.model;
+
+
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,6 +8,7 @@ import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import za.org.phyllis.robertson.home.entity.security.Role;
 import za.org.phyllis.robertson.home.entity.security.User;
 
 @Builder
@@ -16,7 +19,7 @@ public class UserDO implements UserDetails {
     private String username;
     private String email;
     private String password;
-    private ArrayList<UserRole> userRoles;
+    private ArrayList<String> roles;
 
     public UserDO(User user) {
 	this(user.getId(),
@@ -25,28 +28,28 @@ public class UserDO implements UserDetails {
 		user.getPassword(),
 		user.getRoles()
 			.stream()
-			.map(role -> role.getName())
+			.map(role -> role.getRole())
 			.collect(Collectors.toList()));
     }
 
     public UserDO(Long id, String username, String email, String password,
-	    Collection<? extends UserRole> roles) {
+	    List<String> roles) {
 	this.id = id;
 	this.username = username;
 	this.email = email;
 	this.password = password;
 	if (Objects.nonNull(roles) && !roles.isEmpty()) {
-	    this.userRoles = new ArrayList(roles);
+	    this.roles = new ArrayList(roles);
 	}
     }
 
-    public Collection<UserRole> getRoles() {
-	return userRoles;
+    public Collection<String> getRoles() {
+	return roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-	return userRoles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
+	return roles.stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -99,16 +102,16 @@ public class UserDO implements UserDetails {
 	return Objects.equals(id, user.id);
     }
 
-    public void addUserRole(UserRole userRole) {
-	if (Objects.isNull(userRoles)) {
-	    userRoles = new ArrayList<>();
+    public void addRole(String role) {
+	if (Objects.isNull(roles)) {
+	    roles = new ArrayList<>();
 	}
-	userRoles.add(userRole);
+	roles.add(role);
     }
 
-    public void removeUserRole(UserRole userRole) {
-	if (!Objects.isNull(userRoles) && userRoles.contains(userRole)) {
-	    userRoles.remove(userRole);
+    public void removeRole(String role) {
+	if (!Objects.isNull(roles) && roles.contains(role)) {
+	    roles.remove(role);
 	}
     }
 }
