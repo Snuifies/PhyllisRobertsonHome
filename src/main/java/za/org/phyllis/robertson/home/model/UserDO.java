@@ -3,56 +3,52 @@ package za.org.phyllis.robertson.home.model;
 import za.org.phyllis.robertson.home.entity.Role;
 import za.org.phyllis.robertson.home.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
+import java.io.Serializable;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class UserDetailsImpl {//implements UserDetails {
-
+public class UserDO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
     private String username;
     private String email;
     @JsonIgnore
     private String password;
-    private Collection<String> authorities;
+    private Collection<String> roles;
 
-    public UserDetailsImpl(User user) {
+    public UserDO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.password = user.getPassword();
         Set<Role> roles = user.getRoles();
-        this.authorities = roles.stream().map(role -> role.getName().name()).collect(Collectors.toList());
+        this.roles = roles.stream().map(role -> role.getRole()).collect(Collectors.toList());
     }
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
-            Collection<String> authorities) {
+    public UserDO(Long id, String username, String email, String password,
+            Collection<String> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
+        this.roles = roles;
     }
 
-    public static UserDetailsImpl build(User user) {
-        List<String> authorities = user.getRoles().stream()
-                .map(role -> role.getName().name())
+    public static UserDO build(User user) {
+        List<String> roles = user.getRoles().stream()
+                .map(role -> role.getRole())
                 .collect(Collectors.toList());
-        return new UserDetailsImpl(
+        return new UserDO(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities);
+                roles);
     }
 
-//    @Override
-    public Collection<String> getAuthorities() {
-        return authorities;
+   public Collection<String> getRoles() {
+        return roles;
     }
 
     public Long getId() {
@@ -63,32 +59,26 @@ public class UserDetailsImpl {//implements UserDetails {
         return email;
     }
 
-//    @Override
     public String getPassword() {
         return password;
     }
 
-//    @Override
     public String getUsername() {
         return username;
     }
 
-//    @Ov/erride
     public boolean isAccountNonExpired() {
         return true;
     }
 
-//    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-//    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-//    @Override
     public boolean isEnabled() {
         return true;
     }
@@ -101,7 +91,7 @@ public class UserDetailsImpl {//implements UserDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UserDetailsImpl user = (UserDetailsImpl) o;
+        UserDO user = (UserDO) o;
         return Objects.equals(id, user.id);
     }
 }

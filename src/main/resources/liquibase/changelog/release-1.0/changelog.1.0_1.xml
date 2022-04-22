@@ -24,7 +24,7 @@
             <column name="ID" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false"/>
             </column>
-            <column name="USER_ROLE" type="VARCHAR(20)" defaultValue="USER">
+            <column name="ROLE" type="VARCHAR(20)" defaultValue="USER">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -45,11 +45,11 @@
             <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
         </insert>
         <insert tableName="ROLES">
-            <column name="USER_ROLE" value="ADMINISTRATOR"/>
+            <column name="ROLE" value="ADMINISTRATOR"/>
         </insert>
         <insert tableName="USER_ROLES">
             <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='snuifies' AND EMAIL='snuifies@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'ADMINISTRATOR')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE ROLE = 'ADMINISTRATOR')"/>
         </insert>
     </changeSet>
     <changeSet author="MARIUS" id="3">
@@ -59,11 +59,11 @@
             <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
         </insert>
         <insert tableName="ROLES">
-            <column name="USER_ROLE" value="MODERATOR"/>
+            <column name="ROLE" value="MODERATOR"/>
         </insert>
         <insert tableName="USER_ROLES">
             <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='user1' AND EMAIL='user1@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'MODERATOR')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE ROLE = 'MODERATOR')"/>
         </insert>
         <insert tableName="USERS" >
             <column name="USERNAME" value="user2"/>
@@ -71,11 +71,11 @@
             <column name="PASSWORD" value="$2a$12$TfMLSufIYzhjr174BlD8V.qchIF5xnk1KHrF2Pm5toXjZ4MhHs3sS"/>
         </insert>
         <insert tableName="ROLES">
-            <column name="USER_ROLE" value="USER"/>
+            <column name="ROLE" value="USER"/>
         </insert>
         <insert tableName="USER_ROLES">
             <column name="USER_ID" valueComputed="(SELECT id FROM USERS WHERE USERNAME='user2' AND EMAIL='user2@gmail.com')"/>
-            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE USER_ROLE = 'USER')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT id FROM ROLES WHERE ROLE = 'USER')"/>
         </insert>
     </changeSet>
 

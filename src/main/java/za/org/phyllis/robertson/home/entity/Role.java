@@ -1,42 +1,34 @@
 package za.org.phyllis.robertson.home.entity;
-
-import za.org.phyllis.robertson.home.model.UserRole;
-
+import java.io.Serializable;
 import javax.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "ROLES")
-public class Role {
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20, name = "USER_ROLE")
-    private UserRole name;
-
-    public Role() {
-
-    }
-
-    public Role(UserRole name) {
-        this.name = name;
-    }
+    @Column(length = 20, name = "ROLE")
+    private String role;
 
     public Integer getId() {
-        return id;
+	return id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+	this.id = id;
     }
 
-    public UserRole getName() {
-        return name;
+    public String getRole() {
+	return role;
     }
 
-    public void setName(UserRole name) {
-        this.name = name;
+    public void setRole(String role) {
+	this.role = role;
     }
+
+
 }
