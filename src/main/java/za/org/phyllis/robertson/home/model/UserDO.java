@@ -3,12 +3,13 @@ package za.org.phyllis.robertson.home.model;
 import za.org.phyllis.robertson.home.entity.Role;
 import za.org.phyllis.robertson.home.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class UserDO implements Serializable{
+public class UserDO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String username;
@@ -27,12 +28,14 @@ public class UserDO implements Serializable{
     }
 
     public UserDO(Long id, String username, String email, String password,
-            Collection<String> roles) {
+                  Collection<String> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        if (Objects.nonNull(roles) && !roles.isEmpty()) {
+            this.roles = new ArrayList(roles);
+        }
     }
 
     public static UserDO build(User user) {
@@ -47,7 +50,7 @@ public class UserDO implements Serializable{
                 roles);
     }
 
-   public Collection<String> getRoles() {
+    public Collection<String> getRoles() {
         return roles;
     }
 

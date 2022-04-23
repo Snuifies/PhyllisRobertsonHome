@@ -13,7 +13,7 @@ public class SqlMigrationDoneEvent extends ApplicationEvent {
      * Create a new {@code ApplicationEvent}.
      *
      * @param source the object on which the event initially occurred or with
-     * which the event is associated (never {@code null})
+     *               which the event is associated (never {@code null})
      */
     public SqlMigrationDoneEvent(Object source, final boolean success) {
         super(source);

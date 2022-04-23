@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    
+    <changeSet author="MARIUS" id="Hibernate Envers Auditing Table">
+	<createTable tableName="REVINFO">
+	    <column name="REV" type="BIGINT" autoIncrement="true"/>
+	    <column name="REVTSTMP" type="BIGINT" autoIncrement="true"/>
+	</createTable>
+	<addPrimaryKey tableName="REVINFO" columnNames="REV" />
+	<createSequence sequenceName="HIBERNATE_SEQUENCE" incrementBy="1" minValue="1" maxValue="9223372036854775807" startValue="1"/>
+	<rollback>
+	    <dropPrimaryKey tableName="REVINFO"/>
+	    <dropTable tableName="REVINFO"/>
+	    <dropSequence sequenceName="HIBERNATE_SEQUENCE"/>
+	</rollback>
+    </changeSet>
+  
+    <changeSet author="MARIUS" id="Hibernate USERS_AUD Table">
+	<createTable tableName="USERS_AUD">
+	    <column name="ID" type="BIGINT" autoIncrement="true">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="USERNAME" type="VARCHAR(25)">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="EMAIL" type="VARCHAR(100)">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="PASSWORD" type="VARCHAR(120)">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="REV" type="BIGINT">
+		<constraints referencedTableName="REVINFO"
+			     foreignKeyName="FK_USERS_REVINFO"
+			     referencedColumnNames="REV"
+			     nullable="false"/>
+	    </column>
+	    <column name="REVTYPE" type="BIGINT" autoIncrement="true">
+		<constraints nullable="false"/>
+	    </column>
+	</createTable>
+	<addPrimaryKey tableName="USERS_AUD" columnNames="ID, REV" />
+ 
+	<createTable tableName="ROLES_AUD">
+	    <column name="ID" type="BIGINT" autoIncrement="true">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="ROLE" type="VARCHAR(20)" defaultValue="USER">
+		<constraints nullable="false"/>
+	    </column>
+	    <column name="REV" type="BIGINT">
+		<constraints referencedTableName="REVINFO"
+			     foreignKeyName="FK_ROLE_REVINFO"
+			     referencedColumnNames="REV"
+			     nullable="false"/>
+	    </column>
+	    <column name="REVTYPE" type="BIGINT">
+		<constraints nullable="false"/>
+	    </column>	    
+	</createTable>
+	<addPrimaryKey tableName="ROLES_AUD" columnNames="ID, REV"/>
+
+	<createTable tableName="USER_ROLES_AUD">
+	    <column name="USER_ID" type="BIGINT"/>
+	    <column name="ROLE_ID" type="BIGINT"/>
+	    <column name="REV" type="BIGINT">
+		<constraints referencedTableName="REVINFO"
+			     foreignKeyName="FK_USER_ROLES_REVINFO"
+			     referencedColumnNames="REV"
+			     nullable="false"/>
+	    </column>
+	    <column name="REVTYPE" type="BIGINT">
+		<constraints nullable="false"/>
+	    </column>	    
+	</createTable>
+	<addPrimaryKey tableName="USER_ROLES_AUD" columnNames="REV" />
+
+	<rollback>
+	    <dropTable tableName="USER_ROLES_AUD"/>
+	    <dropTable tableName="ROLES_AUD" />
+	    <dropTable tableName="USERS_AUD"/>
+	    <dropTable tableName="USER_ROLES"/>
+	    <dropTable tableName="ROLES" />
+	    <dropTable tableName="USERS"/>
+	</rollback>
+    </changeSet>
+       
+</databaseChangeLog>

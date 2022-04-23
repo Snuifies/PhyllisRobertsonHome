@@ -6,4 +6,6 @@
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <include file="liquibase/changelog/release-1.0/changelog.1.0_1.xml"/>
+    <include file="liquibase/changelog/release-1.0/changelog.1.0_2.xml"/>
+    <include file="liquibase/changelog/release-1.0/changelog.1.0_3.xml"/>
 </databaseChangeLog>
