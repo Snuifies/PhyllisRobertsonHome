@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.envers.Audited;
 
 @Audited
-@Entity
+@Entity(name = "USERS")
 @Table(name = "USERS")
 public class User implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import org.hibernate.envers.Audited;
 
 @Audited
-@Entity
+@Entity(name = "ROLES")
 @Table(name = "ROLES")
 public class Role implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

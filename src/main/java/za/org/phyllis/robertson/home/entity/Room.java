@@ -1,6 +1,7 @@
 package za.org.phyllis.robertson.home.entity;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,8 +10,9 @@ import java.time.LocalDate;
 /**
  * @author snuif
  */
+@Audited
 @Data
-@Entity(name = "Room")
+@Entity(name = "ROOM")
 @Table(name = "ROOM")
 public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
