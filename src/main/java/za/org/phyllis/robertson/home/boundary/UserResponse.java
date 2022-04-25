@@ -1,4 +1,4 @@
-package za.org.phyllis.robertson.home.resource;
+package za.org.phyllis.robertson.home.boundary;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +10,6 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import za.org.phyllis.robertson.home.entity.Role;
 import za.org.phyllis.robertson.home.model.RoleDO;
 import za.org.phyllis.robertson.home.model.UserDO;
 

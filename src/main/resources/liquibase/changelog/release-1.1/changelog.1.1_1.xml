@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Room Objects -->
+    <changeSet author="Marius" id="Create Room Table">
+        <createTable tableName="ROOM">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
+            <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
+            <column name="HOUSEKEEPING_DATE" type="DATE"/>
+            <column name="WASHING_REMOVED_DATE" type="DATE"/>
+            <column name="WASHING_REMOVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="WASHING_RETURNED_DATE" type="DATE"/>
+            <column name="WASHING_RETURNED_COMMENT" type="VARCHAR(250)"/>
+            <column name="WASHING_ISSUE_DATE" type="DATE"/>
+            <column name="WASHING_ISSUE_COMMENT" type="VARCHAR(250)"/>
+            <column name="ROOM_CLEANED_DATE" type="DATE"/>
+            <column name="ROOM_CLEANED_COMMENT" type="VARCHAR(250)"/>
+            <column name="CLEANING_ISSUES_DATE" type="DATE"/>
+            <column name="CLEANING_ISSUES_COMMENT" type="VARCHAR(250)"/>
+            <column name="MONTHLY_DEEP_CLEAN_DATE" type="DATE"/>
+            <column name="MONTHLY_DEEP_CLEAN_COMMENT" type="VARCHAR(250)"/>
+            <column name="FAULT_COMPLAINT_DATE" type="DATE"/>
+            <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
+            <column name="FAULT_RESOLVED_DATE" type="DATE"/>
+            <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Marius" id="Create Room Audit Table">
+        <createTable tableName="ROOM_AUD">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
+            <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
+            <column name="HOUSEKEEPING_DATE" type="DATE"/>
+            <column name="WASHING_REMOVED_DATE" type="DATE"/>
+            <column name="WASHING_REMOVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="WASHING_RETURNED_DATE" type="DATE"/>
+            <column name="WASHING_RETURNED_COMMENT" type="VARCHAR(250)"/>
+            <column name="WASHING_ISSUE_DATE" type="DATE"/>
+            <column name="WASHING_ISSUE_COMMENT" type="VARCHAR(250)"/>
+            <column name="ROOM_CLEANED_DATE" type="DATE"/>
+            <column name="ROOM_CLEANED_COMMENT" type="VARCHAR(250)"/>
+            <column name="CLEANING_ISSUES_DATE" type="DATE"/>
+            <column name="CLEANING_ISSUES_COMMENT" type="VARCHAR(250)"/>
+            <column name="MONTHLY_DEEP_CLEAN_DATE" type="DATE"/>
+            <column name="MONTHLY_DEEP_CLEAN_COMMENT" type="VARCHAR(250)"/>
+            <column name="FAULT_COMPLAINT_DATE" type="DATE"/>
+            <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
+            <column name="FAULT_RESOLVED_DATE" type="DATE"/>
+            <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="REV" type="BIGINT">
+                <constraints referencedTableName="REVINFO"
+                             foreignKeyName="FK_ROOM_REVINFO"
+                             referencedColumnNames="REV"
+                             nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="ROOM_AUD" columnNames="ID, REV"/>
+    </changeSet>
+
+    <changeSet author="Marius" id="Add 1st Room">
+        <insert tableName="ROOM">
+            <column name="ROOM_NUMBER" value="1G1"/>
+            <column name="AVAILABLE" value="true"/>
+            <column name="HOUSEKEEPING_DATE" value="${now}"/>
+            <column name="WASHING_REMOVED_DATE" value="${now}"/>
+            <column name="WASHING_REMOVED_COMMENT" value="WASHING_REMOVED"/>
+            <column name="WASHING_RETURNED_DATE" value="${now}"/>
+            <column name="WASHING_RETURNED_COMMENT" value="WASHING_RETURNED"/>
+            <column name="WASHING_ISSUE_DATE" value="${now}"/>
+            <column name="WASHING_ISSUE_COMMENT" value="ISSUE_COMMENT"/>
+            <column name="ROOM_CLEANED_DATE" value="${now}"/>
+            <column name="ROOM_CLEANED_COMMENT" value="CLEANED_COMMENT"/>
+            <column name="CLEANING_ISSUES_DATE" value="${now}"/>
+            <column name="CLEANING_ISSUES_COMMENT" value="ISSUES_COMMENT"/>
+            <column name="MONTHLY_DEEP_CLEAN_DATE" value="${now}"/>
+            <column name="MONTHLY_DEEP_CLEAN_COMMENT" value="DEEP_CLEAN_COMMENT"/>
+            <column name="FAULT_COMPLAINT_DATE" value="${now}"/>
+            <column name="FAULT_COMPLAINT_COMMENT" value="COMPLAINT LODGED"/>
+            <column name="FAULT_RESOLVED_DATE" value="${now}"/>
+            <column name="FAULT_RESOLVED_COMMENT" value="COMPLAINT RESOLVED"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

@@ -10,7 +10,7 @@ import org.hibernate.envers.Audited;
 @Entity
 @Table(name = "ROLES")
 public class Role implements Serializable {
-
+    private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

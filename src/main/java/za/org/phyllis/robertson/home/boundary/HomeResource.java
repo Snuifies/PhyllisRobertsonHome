@@ -1,4 +1,4 @@
-package za.org.phyllis.robertson.home.resource;
+package za.org.phyllis.robertson.home.boundary;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

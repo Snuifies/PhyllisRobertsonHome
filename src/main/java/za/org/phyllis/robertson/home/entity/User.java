@@ -1,5 +1,6 @@
 package za.org.phyllis.robertson.home.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,7 +14,8 @@ import org.hibernate.envers.Audited;
 @Audited
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
