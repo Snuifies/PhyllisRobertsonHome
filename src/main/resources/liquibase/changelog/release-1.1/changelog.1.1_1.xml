@@ -27,6 +27,7 @@
             <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
             <column name="FAULT_RESOLVED_DATE" type="DATE"/>
             <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="DESCRIPTION" type="VARCHAR(250)"/>
         </createTable>
     </changeSet>
 
@@ -52,6 +53,7 @@
             <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
             <column name="FAULT_RESOLVED_DATE" type="DATE"/>
             <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
+            <column name="DESCRIPTION" type="VARCHAR(250)"/>
             <column name="REV" type="BIGINT">
                 <constraints referencedTableName="REVINFO"
                              foreignKeyName="FK_ROOM_REVINFO"
@@ -86,6 +88,7 @@
             <column name="FAULT_COMPLAINT_COMMENT" value="COMPLAINT LODGED"/>
             <column name="FAULT_RESOLVED_DATE" value="${now}"/>
             <column name="FAULT_RESOLVED_COMMENT" value="COMPLAINT RESOLVED"/>
+            <column name="DESCRIPTION" value="Room With A View"/>
         </insert>
 
     </changeSet>

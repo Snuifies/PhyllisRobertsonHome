@@ -5,7 +5,7 @@ package za.org.phyllis.robertson.home.exception;
  */
 public class ResourceNotFoundException extends Exception {
 
-    private final static String RESOURCE_NOT_FOUND = "Resouce Not Found for %s";
+    private final static String RESOURCE_NOT_FOUND = "Resource Not Found for %s";
 
     public ResourceNotFoundException() {
         super();

@@ -1,6 +1,9 @@
 package za.org.phyllis.robertson.home.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -10,8 +13,11 @@ import java.time.LocalDate;
 /**
  * @author snuif
  */
-@Audited
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Audited
 @Entity(name = "ROOM")
 @Table(name = "ROOM")
 public class Room implements Serializable {
@@ -78,6 +84,9 @@ public class Room implements Serializable {
 
     @Column(name = "FAULT_RESOLVED_COMMENT")
     private String FaultResolvedComment;
+
+    @Column(name = "DESCRIPTION")
+    private String description;
 
 
 }

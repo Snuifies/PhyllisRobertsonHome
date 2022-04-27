@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import za.org.phyllis.robertson.home.entity.Room;
 import za.org.phyllis.robertson.home.model.RoleDO;
+import za.org.phyllis.robertson.home.model.RoomDO;
 import za.org.phyllis.robertson.home.model.UserDO;
 
 import java.io.Serializable;
@@ -27,6 +28,9 @@ public class RoomResponse implements Serializable {
     private String message;
 
     @JsonProperty
-    List<Room> rooms;
+    List<RoomDO> rooms;
+
+    @JsonProperty
+    RoomDO room;
 
 }

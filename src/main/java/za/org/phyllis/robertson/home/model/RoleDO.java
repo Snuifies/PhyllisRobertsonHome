@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 import za.org.phyllis.robertson.home.entity.Role;
 
 /**
  * @author snuif
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 public class RoleDO implements Serializable {
@@ -24,8 +27,4 @@ public class RoleDO implements Serializable {
                 role.getRole());
     }
 
-    public RoleDO(Long id, String role) {
-        this.id = id;
-        this.role = role;
-    }
 }
