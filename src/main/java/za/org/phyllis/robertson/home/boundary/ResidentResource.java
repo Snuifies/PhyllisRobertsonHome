@@ -17,7 +17,7 @@ public class ResidentResource {
         return ResidentResponse.builder().residents(residentService.findAllResidents()).build();
     }
 
-    @GetMapping("id/{idNumber}")
+    @GetMapping("/id/{idNumber}")
     public ResidentResponse findResidentByIdNumber(@PathVariable("idNumber") String idNumber) {
         try {
             return ResidentResponse.builder().resident(residentService.findResidentByIdNumber(idNumber)).build();
@@ -26,7 +26,7 @@ public class ResidentResource {
         }
     }
 
-    @GetMapping("room/{roomNumber}")
+    @GetMapping("/room/{roomNumber}")
     public ResidentResponse findResidentByRoomNumber(@PathVariable("roomNumber") String roomNumber) {
         try {
             return ResidentResponse.builder().resident(residentService.findResidentByRoomNumber(roomNumber)).build();
@@ -35,7 +35,7 @@ public class ResidentResource {
         }
     }
 
-    @GetMapping("nickname/{nickName}")
+    @GetMapping("/nickname/{nickName}")
     public ResidentResponse findResidentByNickName(@PathVariable("nickName") String nickName) {
         try {
             return ResidentResponse.builder().resident(residentService.findResidentByNickName(nickName)).build();
@@ -44,7 +44,7 @@ public class ResidentResource {
         }
     }
 
-    @PatchMapping("nickname/{idNumber}/{newNickName}")
+    @PatchMapping("/nickname/{idNumber}/{newNickName}")
     public ResidentResponse findResidentByNickName(@PathVariable("idNumber") String idNumber,
                                                    @PathVariable("newNickName") String newNickName) {
         try {

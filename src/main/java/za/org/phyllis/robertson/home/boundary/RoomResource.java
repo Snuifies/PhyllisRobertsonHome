@@ -18,7 +18,7 @@ public class RoomResource {
         return RoomResponse.builder().rooms(roomService.findAllRooms()).build();
     }
 
-    @GetMapping("{roomNumber}")
+    @GetMapping("/{roomNumber}")
     public RoomResponse getRoom(@PathVariable("roomNumber") String roomNumber) {
         try {
             return RoomResponse.builder().room(roomService.findByRoomNumber(roomNumber)).build();
@@ -27,7 +27,7 @@ public class RoomResource {
         }
     }
 
-    @PutMapping("{description}")
+    @PutMapping("/{description}")
     public RoomResponse addRoom(@PathVariable("roomNumber") String roomNumber, @PathVariable("description") String description) {
         try {
             return RoomResponse.builder().room(roomService.addRoom(roomNumber, description)).build();
@@ -36,7 +36,7 @@ public class RoomResource {
         }
     }
 
-    @PatchMapping("{roomNumber}/{description}")
+    @PatchMapping("/{roomNumber}/{description}")
     public RoomResponse updateRoomDescription(@PathVariable("roomNumber") String roomNumber, @PathVariable("description") String description) {
         try {
             return RoomResponse.builder().room(roomService.updateRoomDescription(roomNumber, description)).build();

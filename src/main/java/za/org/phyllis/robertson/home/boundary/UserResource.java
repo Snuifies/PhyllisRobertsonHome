@@ -8,23 +8,23 @@ import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.service.UserService;
 
 @RestController
-@RequestMapping("/users/")
+@RequestMapping("/users")
 public class UserResource {
 
     @Autowired
     UserService userService;
 
-    @GetMapping
+    @GetMapping("/roles")
     public UserResponse getAllRoles() {
         return UserResponse.builder().roles(userService.findAllRoles()).build();
     }
 
-    @GetMapping("roles")
+    @GetMapping
     public UserResponse getAllUsers() {
         return UserResponse.builder().users(userService.findAll()).build();
     }
 
-    @GetMapping("{username}")
+    @GetMapping("/{username}")
     public UserResponse getUser(@PathVariable("username") @NotNull String username) {
         try {
             return UserResponse.builder().user(userService.findByUsername(username)).build();
@@ -33,7 +33,7 @@ public class UserResource {
         }
     }
 
-    @PostMapping("{username}/{email}")
+    @PostMapping("/{username}/{email}")
     public UserResponse updateUserEmailAddress(@PathVariable("username") @NotNull String username, @PathVariable("email") @NotNull String newEmail) {
         try {
             return UserResponse.builder().user(userService.updateUserEmailAddress(username, newEmail)).build();
@@ -42,7 +42,7 @@ public class UserResource {
         }
     }
 
-    @DeleteMapping("role/{username}/{role}")
+    @DeleteMapping("/role/{username}/{role}")
     public UserResponse deleteUserRole(@PathVariable("username") @NotNull String username, @PathVariable("role") @NotNull String role) {
         try {
             return UserResponse.builder().user(userService.deleteUserRole(username, role)).build();
@@ -51,7 +51,7 @@ public class UserResource {
         }
     }
 
-    @PostMapping("role/{username}/{role}")
+    @PostMapping("/role/{username}/{role}")
     public UserResponse addUserRole(@PathVariable("username") @NotNull String username, @PathVariable("role") @NotNull String role) {
         try {
             return UserResponse.builder().user(userService.addUserRole(username, role)).build();
