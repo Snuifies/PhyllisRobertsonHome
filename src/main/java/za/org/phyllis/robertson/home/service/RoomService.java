@@ -4,11 +4,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.org.phyllis.robertson.home.entity.Room;
-import za.org.phyllis.robertson.home.entity.User;
 import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.RoomDO;
-import za.org.phyllis.robertson.home.model.UserDO;
 import za.org.phyllis.robertson.home.repository.RoomRepository;
 
 import java.util.List;

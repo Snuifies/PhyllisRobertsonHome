@@ -19,7 +19,6 @@ import java.time.LocalDate;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
         "roomNumber",
         "available",
         "houseKeepingDate",
@@ -39,7 +38,8 @@ import java.time.LocalDate;
         "faultComplaintComment",
         "faultResolvedDate",
         "faultResolvedComment",
-        "description"
+        "description",
+        "resident"
 })
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,9 +47,6 @@ import java.time.LocalDate;
 @Builder
 public class RoomDO implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
-
-    @JsonProperty("id")
-    private long id;
 
     @JsonProperty("roomNumber")
     private String roomNumber;
@@ -111,8 +108,10 @@ public class RoomDO implements Serializable {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("resident")
+    private String resident;
+
     public RoomDO(Room room) {
-        this.id = room.getId();
         this.roomNumber = room.getRoomNumber();
         this.available = room.isAvailable();
         this.houseKeepingDate = room.getHouseKeepingDate();
@@ -133,5 +132,8 @@ public class RoomDO implements Serializable {
         this.faultResolvedDate = room.getFaultResolvedDate();
         this.faultResolvedComment = room.getFaultResolvedComment();
         this.description = room.getDescription();
+        if (room.getResident() != null){
+            this.resident = room.getResident().getName();
+        }
     }
 }

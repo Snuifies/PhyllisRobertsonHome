@@ -24,10 +24,6 @@ public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @Column(name = "ROOM_NUMBER")
     private String roomNumber;
 
@@ -88,5 +84,7 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @OneToOne(mappedBy = "room")
+    private Resident resident;
 
 }

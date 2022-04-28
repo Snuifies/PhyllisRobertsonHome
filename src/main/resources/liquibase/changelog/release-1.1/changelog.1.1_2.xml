@@ -1,38 +1,89 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    
+
     <!-- One Resident Allowed Per Room -->
     <changeSet author="Marius" id="Create Resident Table">
-	<createTable tableName="RESIDENT">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="ID_NUMBER" type="VARCHAR(25)"/>
-	    <column name="NAME" type="VARCHAR(100)"/>
-	    <column name="NICK_NAME" type="VARCHAR(100)"/>
-	    <column name="DATE_OF_BIRTH" type="DATE"/>
-	    <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_PLAN" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
-	    <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
-	    <column name="HOUSE_DOCTOR" type="VARCHAR(100)"/>
-	    <column name="HOUSE_DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
-	    <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>
-	    <column name="CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	    <!--Link One Resident to One Room--> 
-	    <column name="ROOM_ID" type="BIGINT">
-		<constraints nullable="false" unique="true"/>
-	    </column>
-	</createTable>
+        <createTable tableName="RESIDENT">
+            <column name="ROOM_NUMBER" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="ID_NUMBER" type="VARCHAR(25)"/>
+            <column name="NAME" type="VARCHAR(100)"/>
+            <column name="NICK_NAME" type="VARCHAR(100)"/>
+            <column name="DATE_OF_BIRTH" type="DATE"/>
+            <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PLAN" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
+            <column name="HOUSE_DOCTOR" type="VARCHAR(100)"/>
+            <column name="HOUSE_DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Marius" id="Create Room Audit Table">
+        <createTable tableName="RESIDENT_AUD">
+            <column name="ROOM_NUMBER" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="ID_NUMBER" type="VARCHAR(25)"/>
+            <column name="NAME" type="VARCHAR(100)"/>
+            <column name="NICK_NAME" type="VARCHAR(100)"/>
+            <column name="DATE_OF_BIRTH" type="DATE"/>
+            <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PLAN" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
+            <column name="HOUSE_DOCTOR" type="VARCHAR(100)"/>
+            <column name="HOUSE_DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+            <column name="REV" type="BIGINT">
+                <constraints referencedTableName="REVINFO"
+                             foreignKeyName="FK_ROOM_REVINFO"
+                             referencedColumnNames="REV"
+                             nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="RESIDENT_AUD" columnNames="ROOM_NUMBER, REV"/>
+    </changeSet>
+
+
+    <changeSet author="Marius" id="Add 1st Resident">
+        <insert tableName="RESIDENT">
+            <column name="ROOM_NUMBER" value="1G1"/>
+            <column name="ID_NUMBER" value="6212205027084"/>
+            <column name="NAME"  value="MARIUS SNYMAN"/>
+            <column name="NICK_NAME" value="SNUIFIES"/>
+            <column name="DATE_OF_BIRTH" type="${now}"/>
+            <column name="RESIDENCE_TYPE" value="SUPERVISION"/>
+            <column name="MEDICAL_AID_NAME" value="MEDIHELP"/>
+            <column name="MEDICAL_AID_PLAN" value="LITE"/>
+            <column name="MEDICAL_AID_NUMBER" value="12345"/>
+            <column name="MEDICAL_AID_PHONE_NUMBER" value="0122345234"/>
+            <column name="PREFERRED_HOSPITAL" value="EUGENE MARAIS"/>
+            <column name="HOUSE_DOCTOR" value="JANIE KOCK"/>
+            <column name="HOUSE_DOCTOR_PHONE_NUMBER" value="0121231234"/>
+            <column name="AMBULANCE_SERVICE" value="NEDCARE"/>
+            <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>
+            <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>
+            <column name="PARENT_GUARDIAN_EMAIL" value="SNUIFIES@GMAIL.COM"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

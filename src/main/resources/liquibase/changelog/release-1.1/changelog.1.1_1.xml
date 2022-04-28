@@ -7,7 +7,6 @@
     <!-- Room Objects -->
     <changeSet author="Marius" id="Create Room Table">
         <createTable tableName="ROOM">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
             <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
             <column name="HOUSEKEEPING_DATE" type="DATE"/>
@@ -33,7 +32,6 @@
 
     <changeSet author="Marius" id="Create Room Audit Table">
         <createTable tableName="ROOM_AUD">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
             <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
             <column name="HOUSEKEEPING_DATE" type="DATE"/>
@@ -64,7 +62,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="ROOM_AUD" columnNames="ID, REV"/>
+        <addPrimaryKey tableName="ROOM_AUD" columnNames="ROOM_NUMBER, REV"/>
     </changeSet>
 
     <changeSet author="Marius" id="Add 1st Room">
@@ -90,6 +88,6 @@
             <column name="FAULT_RESOLVED_COMMENT" value="COMPLAINT RESOLVED"/>
             <column name="DESCRIPTION" value="Room With A View"/>
         </insert>
-
     </changeSet>
+
 </databaseChangeLog>
