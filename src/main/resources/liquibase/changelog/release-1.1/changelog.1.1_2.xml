@@ -4,11 +4,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-
-    <!-- One Resident Allowed Per Room -->
     <changeSet author="Marius" id="Create Resident Table">
         <createTable tableName="RESIDENT">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ID" type="BIGINT"/>
             <column name="ID_NUMBER" type="VARCHAR(25)"/>
             <column name="NAME" type="VARCHAR(100)"/>
             <column name="NICK_NAME" type="VARCHAR(100)"/>
@@ -25,8 +23,16 @@
             <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
             <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
             <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+            <column name="DOCTOR_VISIT_DATE" type="DATE"/>
+            <column name="ATTENDING_DOCTOR" type="VARCHAR(100)"/>
+            <column name="ACCOMPANIED_BY" type="VARCHAR(100)"/>
+            <column name="TREATMENT" type="VARCHAR(250)"/>
+            <column name="COPY_OF_PRESCRIPTION" type="BLOB"/>
+            <column name="NEXT_APPOINTMENT" type="DATE"/>
+            <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED" type="INTEGER"/>
         </createTable>
-        <addPrimaryKey tableName="RESIDENT" columnNames="ID"/>
     </changeSet>
 
     <changeSet author="Marius" id="Create Resident Audit Table">
@@ -48,6 +54,15 @@
             <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
             <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
             <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+            <column name="DOCTOR_VISIT_DATE" type="DATE"/>
+            <column name="ATTENDING_DOCTOR" type="VARCHAR(100)"/>
+            <column name="ACCOMPANIED_BY" type="VARCHAR(100)"/>
+            <column name="TREATMENT" type="VARCHAR(250)"/>
+            <column name="COPY_OF_PRESCRIPTION" type="BLOB"/>
+            <column name="NEXT_APPOINTMENT" type="DATE"/>
+            <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED" type="INTEGER"/>
             <column name="REV" type="BIGINT">
                 <constraints referencedTableName="REVINFO"
                              foreignKeyName="FK_ROOM_REVINFO"
@@ -63,6 +78,7 @@
 
     <changeSet author="Marius" id="Add 1st Resident">
         <insert tableName="RESIDENT">
+            <column name="ID" valueComputed="(SELECT ID FROM ROOM WHERE ROOM_NUMBER='1G1')"/>
             <column name="ID_NUMBER" value="6212205027084"/>
             <column name="NAME"  value="MARIUS SNYMAN"/>
             <column name="NICK_NAME" value="SNUIFIES"/>
@@ -79,6 +95,46 @@
             <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>
             <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>
             <column name="PARENT_GUARDIAN_EMAIL" value="SNUIFIES@GMAIL.COM"/>
+            <column name="DOCTOR_VISIT_DATE" value="${now}"/>
+            <column name="ATTENDING_DOCTOR" value="Piet Pompies"/>
+            <column name="ACCOMPANIED_BY" value="Suster Hester"/>
+            <column name="TREATMENT" value="Treated"/>
+            <column name="COPY_OF_PRESCRIPTION" value="null"/>
+            <column name="NEXT_APPOINTMENT" value="${now}"/>
+            <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>
+            <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>
+            <column name="BLISTERS_RECEIVED" value="5"/>
         </insert>
     </changeSet>
+    <changeSet author="Marius" id="Add 2nd Resident">
+        <insert tableName="RESIDENT">
+            <column name="ID" valueComputed="(SELECT ID FROM ROOM WHERE ROOM_NUMBER='1G2')"/>
+            <column name="ID_NUMBER" value="6512205027082"/>
+            <column name="NAME"  value="MARINA ALERS"/>
+            <column name="NICK_NAME" value="ALTA"/>
+            <column name="DATE_OF_BIRTH" type="${now}"/>
+            <column name="RESIDENCE_TYPE" value="SUPERVISION"/>
+            <column name="MEDICAL_AID_NAME" value="MEDIHELP"/>
+            <column name="MEDICAL_AID_PLAN" value="LITE"/>
+            <column name="MEDICAL_AID_NUMBER" value="12345"/>
+            <column name="MEDICAL_AID_PHONE_NUMBER" value="0122345234"/>
+            <column name="PREFERRED_HOSPITAL" value="EUGENE MARAIS"/>
+            <column name="HOUSE_DOCTOR" value="JANIE KOCK"/>
+            <column name="HOUSE_DOCTOR_PHONE_NUMBER" value="0121231234"/>
+            <column name="AMBULANCE_SERVICE" value="NEDCARE"/>
+            <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>
+            <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>
+            <column name="PARENT_GUARDIAN_EMAIL" value="MARINA@GMAIL.COM"/>
+            <column name="DOCTOR_VISIT_DATE" value="${now}"/>
+            <column name="ATTENDING_DOCTOR" value="Piet Pompies"/>
+            <column name="ACCOMPANIED_BY" value="Suster Hester"/>
+            <column name="TREATMENT" value="Treated"/>
+            <column name="COPY_OF_PRESCRIPTION" value="null"/>
+            <column name="NEXT_APPOINTMENT" value="${now}"/>
+            <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>
+            <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>
+            <column name="BLISTERS_RECEIVED" value="5"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

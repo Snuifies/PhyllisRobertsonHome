@@ -1,23 +1,19 @@
 package za.org.phyllis.robertson.home.service;
 
-import java.util.List;
-
-import za.org.phyllis.robertson.home.entity.User;
-import za.org.phyllis.robertson.home.model.UserDO;
-import za.org.phyllis.robertson.home.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import za.org.phyllis.robertson.home.model.RoleDO;
 import za.org.phyllis.robertson.home.entity.Role;
-import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
+import za.org.phyllis.robertson.home.entity.User;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
+import za.org.phyllis.robertson.home.model.RoleDO;
+import za.org.phyllis.robertson.home.model.UserDO;
 import za.org.phyllis.robertson.home.repository.RoleRepository;
+import za.org.phyllis.robertson.home.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {

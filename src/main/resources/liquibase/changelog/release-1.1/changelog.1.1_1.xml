@@ -92,5 +92,29 @@
             <column name="DESCRIPTION" value="Room With A View"/>
         </insert>
     </changeSet>
+    <changeSet author="Marius" id="Add 2nd Room">
+        <insert tableName="ROOM">
+            <column name="ROOM_NUMBER" value="1G2"/>
+            <column name="AVAILABLE" value="true"/>
+            <column name="HOUSEKEEPING_DATE" value="${now}"/>
+            <column name="WASHING_REMOVED_DATE" value="${now}"/>
+            <column name="WASHING_REMOVED_COMMENT" value="WASHING_REMOVED"/>
+            <column name="WASHING_RETURNED_DATE" value="${now}"/>
+            <column name="WASHING_RETURNED_COMMENT" value="WASHING_RETURNED"/>
+            <column name="WASHING_ISSUE_DATE" value="${now}"/>
+            <column name="WASHING_ISSUE_COMMENT" value="ISSUE_COMMENT"/>
+            <column name="ROOM_CLEANED_DATE" value="${now}"/>
+            <column name="ROOM_CLEANED_COMMENT" value="CLEANED_COMMENT"/>
+            <column name="CLEANING_ISSUES_DATE" value="${now}"/>
+            <column name="CLEANING_ISSUES_COMMENT" value="ISSUES_COMMENT"/>
+            <column name="MONTHLY_DEEP_CLEAN_DATE" value="${now}"/>
+            <column name="MONTHLY_DEEP_CLEAN_COMMENT" value="DEEP_CLEAN_COMMENT"/>
+            <column name="FAULT_COMPLAINT_DATE" value="${now}"/>
+            <column name="FAULT_COMPLAINT_COMMENT" value="COMPLAINT LODGED"/>
+            <column name="FAULT_RESOLVED_DATE" value="${now}"/>
+            <column name="FAULT_RESOLVED_COMMENT" value="COMPLAINT RESOLVED"/>
+            <column name="DESCRIPTION" value="Another Room With A View"/>
+        </insert>
+    </changeSet>
 
 </databaseChangeLog>

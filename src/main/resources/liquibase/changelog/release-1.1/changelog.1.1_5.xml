@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="Marius" id="Create Condition Table">
+        <createTable tableName="CONDITION">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="RESIDENT_ID" type="BIGINT"/>
+            <column name="CONDITION" type="VARCHAR(250)"/>
+        </createTable>
+        <createTable tableName="CONDITION_AUD">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="RESIDENT_ID" type="BIGINT"/>
+            <column name="CONDITION" type="VARCHAR(250)"/>
+            <column name="REV" type="BIGINT">
+                <constraints referencedTableName="REVINFO"
+                             foreignKeyName="FK_ROOM_REVINFO"
+                             referencedColumnNames="REV"
+                             nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="CONDITION_AUD" columnNames="ID, REV"/>
+
+        <insert tableName="CONDITION">
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
+            <column name="CONDITION" value="Nausea"/>
+        </insert>
+        <insert tableName="CONDITION">
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
+            <column name="CONDITION" value="toe blisters"/>
+        </insert>
+        <insert tableName="CONDITION">
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6512205027082')"/>
+            <column name="CONDITION" value="Asmatic"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

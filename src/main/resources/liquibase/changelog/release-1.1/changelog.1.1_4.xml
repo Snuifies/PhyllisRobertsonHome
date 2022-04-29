@@ -1,135 +1,69 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
- 
-
-
-    <!-- OneToOne Medical With Resident -->
-    <changeSet author="Marius" id="Create Medical Table">
-	<createTable tableName="MEDICAL">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="DOCTOR_VISIT_DATE" type="DATE"/>
-	    <column name="DOCTOR_ATTENDED" type="VARCHAR(50)"/>
-	    <column name="ACCOMPANIED_BY" type="VARCHAR(50)"/>
-	    <column name="TREATMENT" type="VARCHAR(250)"/>
-	    <column name="COPY_OF_PRESCRIPTION" type="VARCHAR(50)"/>
-	    <column name="NEXT_APPOINTMENT" type="DATE"/>
-	    <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
-	    <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
-	    <column name="BLISTERS_RECEIVED" type="INTEGER"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>
-	    <column name="CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
+    <changeSet author="Marius" id="Create RESIDENT_MEAL Table">
+        <createTable tableName="RESIDENT_MEAL">
+            <column name="ID" type="BIGINT"/>
+            <column name="FOOD_SERVICE_DATE" type="DATE"/>
+            <column name="DIET_TYPE" type="VARCHAR(250)"/>
+            <column name="COMPLAINT_DATE" type="DATE"/>
+            <column name="COMPLAINT_DETAIL" type="VARCHAR(250)"/>
+            <column name="PLANNED_ABSENCE_DATE" type="DATE"/>
+            <column name="MEALS_ABSENT_DETAIL" type="VARCHAR(250)"/>
+            <column name="PACKED_LUNCH_REQUEST_DATE" type="DATE"/>
+            <column name="KEPT_LUNCH_REQUEST_DATE" type="DATE"/>
+            <column name="BED_MEAL_REQUEST_DATE" type="DATE"/>
+            <column name="BED_MEAL_REQUEST_TYPE" type="VARCHAR(250)"/>
+            <column name="FOOD_NOT_EATEN_DATE" type="DATE"/>
+            <column name="FOOD_NOT_EATEN_DETAIL" type="VARCHAR(250)"/>
+        </createTable>
+        <createTable tableName="RESIDENT_MEAL_AUD">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="FOOD_SERVICE_DATE" type="DATE"/>
+            <column name="DIET_TYPE" type="VARCHAR(250)"/>
+            <column name="COMPLAINT_DATE" type="DATE"/>
+            <column name="COMPLAINT_DETAIL" type="VARCHAR(250)"/>
+            <column name="PLANNED_ABSENCE_DATE" type="DATE"/>
+            <column name="MEALS_ABSENT_DETAIL" type="VARCHAR(250)"/>
+            <column name="PACKED_LUNCH_REQUEST_DATE" type="DATE"/>
+            <column name="KEPT_LUNCH_REQUEST_DATE" type="DATE"/>
+            <column name="BED_MEAL_REQUEST_DATE" type="DATE"/>
+            <column name="BED_MEAL_REQUEST_TYPE" type="VARCHAR(250)"/>
+            <column name="FOOD_NOT_EATEN_DATE" type="DATE"/>
+            <column name="FOOD_NOT_EATEN_DETAIL" type="VARCHAR(250)"/>
+            <column name="REV" type="BIGINT">
+                <constraints referencedTableName="REVINFO"
+                             foreignKeyName="FK_ROOM_REVINFO"
+                             referencedColumnNames="REV"
+                             nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="RESIDENT_MEAL_AUD" columnNames="ID, REV"/>
     </changeSet>
 
-    <!-- ManyToOne Condition With Resident -->
-    <changeSet author="Marius" id="Create Condition Table">
-	<createTable tableName="CONDITION">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <!-- Link the ManyToOne Condition To Resident -->
-	    <column name="RESIDENT_ID" type="BIGINT"/>
-	    <column name="CONDITION" type="VARCHAR(250)"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>
-	    <column name="CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
-    </changeSet>
-
-    <!-- ManyToOne Prescription With Resident -->
-    <changeSet author="Marius" id="Create Prescription Table">
-	<createTable tableName="PRESCRIPTION">
-	    <column name="ID" type="BIGINT" autoIncrement="true" />
-	    <!-- Link the ManyToOne Prescription To Resident -->
-	    <column name="RESIDENT_ID" type="BIGINT"/>
-	    <column name="DOSE" type="VARCHAR(100)"/>
-	    <column name="ITEM_SENT" type="VARCHAR(100)"/>
-	    <column name="QUANTITY_SENT" type="NUMBER"/>
-	    <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>
-	    <column name="CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
+    <changeSet author="Marius" id="Add 1st ResidentMeals">
+        <insert tableName="RESIDENT_MEAL">
+            <column name="ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
+            <column name="FOOD_SERVICE_DATE" value="${NOW}"/>
+            <column name="DIET_TYPE" value="HYPERTENSION"/>
+            <column name="COMPLAINT_DATE" value="${NOW}"/>
+            <column name="COMPLAINT_DETAIL" value="DIET COMPLAINT"/>
+            <column name="PLANNED_ABSENCE_DATE" value="${NOW}"/>
+            <column name="MEALS_ABSENT_DETAIL" value="DIET ABSENCE"/>
+            <column name="PACKED_LUNCH_REQUEST_DATE" value="${NOW}"/>
+            <column name="KEPT_LUNCH_REQUEST_DATE" value="${NOW}"/>
+            <column name="BED_MEAL_REQUEST_DATE" value="${NOW}"/>
+            <column name="BED_MEAL_REQUEST_TYPE" value="SUPPER"/>
+            <column name="FOOD_NOT_EATEN_DATE" value="${NOW}"/>
+            <column name="FOOD_NOT_EATEN_DETAIL" value="Food Not Eaten"/>
+        </insert>
     </changeSet>
 
 
-    <!-- TODO FoodService -->
-    <!-- ManyToOne FoodService With Resident -->
-    <changeSet author="Marius" id="Create FoodService Table">
-	<createTable tableName="FOOD_SERVICE">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <!-- Link the ManyToOne Housekeeping To Room -->
-	    <column name="RESIDENT_ID" type="BIGINT"/>
-	    <column name="FOOD_SERVICE_DATE" type="DATE"/>
-	    <column name="DIET_TYPE" type="VARCHAR(250)"/>
-	    <column name="COMPLAINT_DATE" type="DATE"/>
-	    <column name="COMPLAINT_DETAIL" type="VARCHAR(250)"/>
-	    <column name="PLANNED_ABSENCE_DATE" type="DATE"/>
-	    <column name="MEALS_ABSENT_DETAIL" type="VARCHAR(250)"/>
-	    <column name="PACKED_LUNCH_REQUEST_DATE" type="DATE"/>
-	    <column name="KEPT_LUNCH_REQUEST_DATE" type="DATE"/>
-	    <column name="BED_MEAL_REQUEST_DATE" type="DATE"/>
-	    <column name="BED_MEAL_REQUEST_TYPE" type="VARCHAR(250)"/>
-	    <column name="FOOD_NOT_EATEN_DATE" type="DATE"/>
-	    <column name="FOOD_NOT_EATEN_DETAIL" type="VARCHAR(250)"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>
-	    <column name="CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
-    </changeSet>
-
-    <!-- ManyToMany FoodPreferences With Resident -->
-    <changeSet author="Marius" id="Create FoodPreference Table">
-	<createTable tableName="FOOD_PREFERENCE">
-	    <column name="ID" type="BIGINT" autoIncrement="true"/>
-	    <column name="FOOD_CATEGORY" type="VARCHAR(250)"/>
-	    <column name="FOOD_REACTION" type="VARCHAR(250)"/>
-	    <column name="CREATED_DATE" type="TIMESTAMP"/>
-	    <column name="CREATED_BY" type="VARCHAR(25)"/>
-	    <column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	    <column name="MODIFIED_BY" type="VARCHAR(25)"/>
-	</createTable>
-    </changeSet>
-
-    <!-- Create ManyToMany FoodPreference Link Table -->
-    <createTable tableName="RESIDENT_FOOD_PREFERENCE">
-	<column name="RESIDENT_ID" type="BIGINT"/>
-	<column name="FOOD_PREFERENCE_ID" type="BIGINT"/>
-	<column name="CREATED_DATE" type="TIMESTAMP"/>  
-	<column name = "CREATED_BY" type="VARCHAR(25)"/>
-	<column name="MODIFIED_DATE" type="TIMESTAMP"/>
-	<column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-    </createTable>
-
-	<!-- ManyToMany FoodPreferences With Resident -->
-	<changeSet author="Marius" id="Create FoodPreference Table">
-		<createTable tableName="FOOD_PREFERENCE">
-			<column name="ID" type="BIGINT" autoIncrement="true"/>
-			<column name="FOOD_CATEGORY" type="VARCHAR(250)"/>
-			<column name="FOOD_REACTION" type="VARCHAR(250)"/>
-			<column name="CREATED_DATE" type="TIMESTAMP"/>
-			<column name="CREATED_BY" type="VARCHAR(25)"/>
-			<column name="MODIFIED_DATE" type="TIMESTAMP"/>
-			<column name="MODIFIED_BY" type="VARCHAR(25)"/>
-		</createTable>
-	</changeSet>
-
-	<!-- Create ManyToMany FoodPreference Link Table -->
-	<changeSet author="Marius" id="Create FoodPreference Table">
-		<createTable tableName="RESIDENT_FOOD_PREFERENCE">
-			<column name="RESIDENT_ID" type="BIGINT"/>
-			<column name="FOOD_PREFERENCE_ID" type="BIGINT"/>
-			<column name="CREATED_DATE" type="TIMESTAMP"/>
-			<column name = "CREATED_BY" type="VARCHAR(25)"/>
-			<column name="MODIFIED_DATE" type="TIMESTAMP"/>
-			<column name = "MODIFIED_BY" type="VARCHAR(25)"/>
-		</createTable>
-	</changeSet>
 </databaseChangeLog>

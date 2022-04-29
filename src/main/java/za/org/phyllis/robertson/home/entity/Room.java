@@ -26,7 +26,7 @@ public class Room implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "ROOM_NUMBER")
     private String roomNumber;

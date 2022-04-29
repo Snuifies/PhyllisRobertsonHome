@@ -1,6 +1,5 @@
 package za.org.phyllis.robertson.home.config;
 
-import za.org.phyllis.robertson.home.event.publisher.SqlMigrationEventPublisher;
 import liquibase.exception.LiquibaseException;
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.extern.log4j.Log4j2;
@@ -13,6 +12,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.util.StopWatch;
+import za.org.phyllis.robertson.home.event.publisher.SqlMigrationEventPublisher;
 
 import javax.sql.DataSource;
 import java.util.concurrent.CompletableFuture;

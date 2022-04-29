@@ -1,10 +1,10 @@
 package za.org.phyllis.robertson.home.event.publisher;
 
-import za.org.phyllis.robertson.home.event.SqlMigrationDoneEvent;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import za.org.phyllis.robertson.home.event.SqlMigrationDoneEvent;
 
 /**
  * Publisher for SqlMigrationDoneEvent events

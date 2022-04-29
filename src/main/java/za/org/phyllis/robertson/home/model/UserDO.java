@@ -8,11 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import za.org.phyllis.robertson.home.entity.Role;
 import za.org.phyllis.robertson.home.entity.User;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -28,6 +27,7 @@ import java.util.stream.Collectors;
 @Builder
 public class UserDO implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @JsonProperty("id")
     private Long id;
     @JsonProperty("username")

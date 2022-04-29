@@ -12,19 +12,21 @@ import java.io.Serializable;
 
 @FieldNameConstants
 @Data
+@Audited
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited
-@Entity(name = "ROLES")
-@Table(name = "ROLES")
-public class Role implements Serializable {
+@Entity(name = "CONDITION")
+@Table(name = "CONDITION")
+public class ResidentCondition implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20, name = "ROLE")
-    private String role;
+    @Column(name = "CONDITION")
+    private String condition;
+
 }

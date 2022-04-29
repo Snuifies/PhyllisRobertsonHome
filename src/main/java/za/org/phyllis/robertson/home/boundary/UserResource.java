@@ -1,11 +1,11 @@
 package za.org.phyllis.robertson.home.boundary;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.service.UserService;
+
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/users")

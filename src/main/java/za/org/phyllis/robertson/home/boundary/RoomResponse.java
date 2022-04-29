@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import za.org.phyllis.robertson.home.entity.Room;
-import za.org.phyllis.robertson.home.model.RoleDO;
 import za.org.phyllis.robertson.home.model.RoomDO;
-import za.org.phyllis.robertson.home.model.UserDO;
 
 import java.io.Serializable;
 import java.util.List;

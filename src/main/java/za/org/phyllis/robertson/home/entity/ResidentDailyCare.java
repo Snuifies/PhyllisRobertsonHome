@@ -28,8 +28,7 @@ public class ResidentDailyCare implements Serializable {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "CARE_DATE")
     @Temporal(TemporalType.DATE)
@@ -95,7 +94,7 @@ public class ResidentDailyCare implements Serializable {
     private String actionsAdvised;
 
     @MapsId
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID")
    private Resident resident;
 

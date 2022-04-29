@@ -7,10 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.envers.Audited;
 import za.org.phyllis.robertson.home.entity.Room;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -19,6 +17,7 @@ import java.time.LocalDate;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "id",
         "roomNumber",
         "available",
         "houseKeepingDate",
@@ -47,6 +46,9 @@ import java.time.LocalDate;
 @Builder
 public class RoomDO implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
+
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("roomNumber")
     private String roomNumber;

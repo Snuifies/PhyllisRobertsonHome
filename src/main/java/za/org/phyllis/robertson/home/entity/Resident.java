@@ -6,12 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import za.org.phyllis.robertson.home.model.ResidenceType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author snuif
@@ -29,7 +31,7 @@ public class Resident implements Serializable {
 
     @Id
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "ID_NUMBER")
     private String idNumber;
@@ -81,12 +83,56 @@ public class Resident implements Serializable {
     @Column(name = "PARENT_GUARDIAN_EMAIL")
     private String parentGuardianEmail;
 
+    @Column(name = "DOCTOR_VISIT_DATE")
+    @Temporal(TemporalType.DATE)
+    private Calendar doctorVisitDate;
+
+    @Column(name = "ATTENDING_DOCTOR")
+    private String attendingDoctor;
+
+    @Column(name = "ACCOMPANIED_BY")
+    private String accompaniedBy;
+
+    @Column(name = "TREATMENT")
+    private String treatment;
+
+    @Column(name = "COPY_OF_PRESCRIPTION")
+    private Byte[] copyOfPrescription;
+
+    @Column(name = "NEXT_APPOINTMENT")
+    @Temporal(TemporalType.DATE)
+    private Calendar nextAppointment;
+
+    @Column(name = "MEDICATION_TO_PHARMACY_DATE")
+    @Temporal(TemporalType.DATE)
+    private Calendar medicationToPharmacyDate;
+
+    @Column(name = "BLISTERS_RECEIVED_DATE")
+    @Temporal(TemporalType.DATE)
+    private Calendar blistersReceivedDate;
+
+    @Column(name = "BLISTERS_RECEIVED")
+    private int blistersReceived;
+
     @MapsId
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID")
     private Room room;
 
-    @OneToOne(mappedBy = "resident")
+    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
     private ResidentDailyCare residentDailyCare;
+
+    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
+    private ResidentMeal residentMeal;
+
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "RESIDENT_ID")
+    private Set<ResidentCondition> conditions = new HashSet<>();
+
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "RESIDENT_ID")
+    private Set<Prescription> prescriptions = new HashSet<>();
 
 }

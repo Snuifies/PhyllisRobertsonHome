@@ -7,34 +7,27 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import za.org.phyllis.robertson.home.entity.Role;
+import za.org.phyllis.robertson.home.entity.ResidentCondition;
 
-import java.io.Serializable;
-
-/**
- * @author snuif
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "id",
-        "role"
+        "condition"
 })
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
-public class RoleDO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class ResidentConditionDO {
 
     @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("role")
-    private String role;
+    @JsonProperty("condition")
+    private String condition;
 
-    public RoleDO(Role role) {
-        this(role.getId(),
-                role.getRole());
+    public ResidentConditionDO(ResidentCondition condition) {
+        this.id = condition.getId();
+        this.condition = condition.getCondition();
     }
-
 }
