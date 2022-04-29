@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import za.org.phyllis.robertson.home.entity.Resident;
+import za.org.phyllis.robertson.home.entity.ResidentDailyCare;
 import za.org.phyllis.robertson.home.entity.Room;
 
 import javax.persistence.*;
@@ -95,7 +96,10 @@ public class ResidentDO implements Serializable {
     private String parentGuardianEmail;
 
     @JsonProperty("room")
-    private String room;
+    private RoomDO room;
+
+    @JsonProperty("residentDailyCare")
+    private ResidentDailyCareDO residentDailyCare;
 
     public ResidentDO(Resident resident) {
         this.idNumber = resident.getIdNumber();
@@ -115,7 +119,10 @@ public class ResidentDO implements Serializable {
         this.parentGuardianPhoneNumber = resident.getParentGuardianPhoneNumber();
         this.parentGuardianEmail = resident.getParentGuardianEmail();
         if (resident.getRoom() != null) {
-            this.room = resident.getRoom().getRoomNumber();
+            this.room = new RoomDO(resident.getRoom());
+        }
+        if (resident.getResidentDailyCare() != null) {
+            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
         }
 
     }

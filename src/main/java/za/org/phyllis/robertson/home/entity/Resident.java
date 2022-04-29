@@ -85,4 +85,8 @@ public class Resident implements Serializable {
     @OneToOne
     @JoinColumn(name = "ID")
     private Room room;
+
+    @OneToOne(mappedBy = "resident")
+    private ResidentDailyCare residentDailyCare;
+
 }
