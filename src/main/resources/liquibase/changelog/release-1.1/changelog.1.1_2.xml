@@ -4,14 +4,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-
-    <!-- One Resident Allowed Per Room -->
     <changeSet author="Marius" id="Create Resident Table">
         <createTable tableName="RESIDENT">
-            <column name="ROOM_NUMBER" type="VARCHAR(50)">
+            <column name="ID_NUMBER" type="VARCHAR(25)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="ID_NUMBER" type="VARCHAR(25)"/>
             <column name="NAME" type="VARCHAR(100)"/>
             <column name="NICK_NAME" type="VARCHAR(100)"/>
             <column name="DATE_OF_BIRTH" type="DATE"/>
@@ -28,14 +25,14 @@
             <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
             <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
         </createTable>
+        <addPrimaryKey tableName="RESIDENT" columnNames="ID_NUMBER"/>
     </changeSet>
 
-    <changeSet author="Marius" id="Create Room Audit Table">
+    <changeSet author="Marius" id="Create Resident Audit Table">
         <createTable tableName="RESIDENT_AUD">
-            <column name="ROOM_NUMBER" type="VARCHAR(50)">
+            <column name="ID_NUMBER" type="VARCHAR(25)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="ID_NUMBER" type="VARCHAR(25)"/>
             <column name="NAME" type="VARCHAR(100)"/>
             <column name="NICK_NAME" type="VARCHAR(100)"/>
             <column name="DATE_OF_BIRTH" type="DATE"/>
@@ -61,13 +58,12 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="RESIDENT_AUD" columnNames="ROOM_NUMBER, REV"/>
+        <addPrimaryKey tableName="RESIDENT_AUD" columnNames="ID_NUMBER, REV"/>
     </changeSet>
 
 
     <changeSet author="Marius" id="Add 1st Resident">
         <insert tableName="RESIDENT">
-            <column name="ROOM_NUMBER" value="1G1"/>
             <column name="ID_NUMBER" value="6212205027084"/>
             <column name="NAME"  value="MARIUS SNYMAN"/>
             <column name="NICK_NAME" value="SNUIFIES"/>

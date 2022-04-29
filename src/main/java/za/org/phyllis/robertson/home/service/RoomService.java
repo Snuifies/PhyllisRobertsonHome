@@ -3,6 +3,7 @@ package za.org.phyllis.robertson.home.service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import za.org.phyllis.robertson.home.entity.Room;
 import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
@@ -24,16 +25,19 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
+    @Transactional
     public List<RoomDO> findAllRooms() {
         return roomRepository.findAll().stream().map(RoomDO::new).collect(Collectors.toList());
     }
 
+    @Transactional
     public RoomDO findByRoomNumber(String roomNumber) throws ResourceNotFoundException {
         Optional<Room> room = roomRepository.findByRoomNumber(roomNumber);
         room.orElseThrow(() -> new ResourceNotFoundException(String.format("Room :%s", roomNumber)));
         return room.map(RoomDO::new).get();
     }
 
+    @Transactional
     public RoomDO addRoom(String roomNumber, String description) {
         Optional<Room> roomOpt = roomRepository.findByRoomNumber(roomNumber);
         if (roomOpt.isPresent()) {
@@ -44,6 +48,7 @@ public class RoomService {
         return new RoomDO(room);
     }
 
+    @Transactional
     public RoomDO updateRoomDescription(String roomNumber, String description) throws ResourceNotFoundException {
         Optional<Room> room = roomRepository.findByRoomNumber(roomNumber);
         room.orElseThrow(() -> new ResourceNotFoundException(String.format("Room :%s", roomNumber)));

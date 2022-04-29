@@ -96,9 +96,9 @@ public class ResidentDO implements Serializable {
         this.parentGuardianName = resident.getParentGuardianName();
         this.parentGuardianPhoneNumber = resident.getParentGuardianPhoneNumber();
         this.parentGuardianEmail = resident.getParentGuardianEmail();
-        if (resident.getRoom() != null) {
-            this.room = resident.getRoom().getRoomNumber();
-        }
+//        if (resident.getRoom() != null) {
+//            this.room = resident.getRoom().getRoomNumber();
+//        }
 
     }
 }

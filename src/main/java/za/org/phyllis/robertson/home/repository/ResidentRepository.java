@@ -10,7 +10,6 @@ import java.util.Optional;
  * @author snuif
  */
 public interface ResidentRepository extends JpaRepository<Resident, Long> {
-    public Optional<Resident> findByRoomNumber(String roomNumber);
 
     public Optional<Resident> findByIdNumber(String idNumber);
 

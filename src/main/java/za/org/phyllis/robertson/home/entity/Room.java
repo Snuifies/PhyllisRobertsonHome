@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 /**
  * @author snuif
  */
+@FieldNameConstants
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -84,7 +86,8 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToOne(mappedBy = "room")
-    private Resident resident;
+//    @OneToOne
+//    @JoinColumn(name = Resident.Fields.idNumber)
+//    private Resident resident;
 
 }

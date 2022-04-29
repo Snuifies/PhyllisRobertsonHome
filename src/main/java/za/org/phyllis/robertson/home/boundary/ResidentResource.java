@@ -26,15 +26,6 @@ public class ResidentResource {
         }
     }
 
-    @GetMapping("/room/{roomNumber}")
-    public ResidentResponse findResidentByRoomNumber(@PathVariable("roomNumber") String roomNumber) {
-        try {
-            return ResidentResponse.builder().resident(residentService.findResidentByRoomNumber(roomNumber)).build();
-        } catch (ResourceNotFoundException e) {
-            return ResidentResponse.builder().message(e.getMessage()).build();
-        }
-    }
-
     @GetMapping("/nickname/{nickName}")
     public ResidentResponse findResidentByNickName(@PathVariable("nickName") String nickName) {
         try {

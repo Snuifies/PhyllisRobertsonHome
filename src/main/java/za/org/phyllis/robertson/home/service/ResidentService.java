@@ -3,6 +3,7 @@ package za.org.phyllis.robertson.home.service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import za.org.phyllis.robertson.home.entity.Resident;
 import za.org.phyllis.robertson.home.entity.Room;
 import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
@@ -27,29 +28,27 @@ public class ResidentService {
         this.residentRepository = residentRepository;
     }
 
+    @Transactional
     public List<ResidentDO> findAllResidents() {
         return residentRepository.findAll().stream().map(ResidentDO::new).collect(Collectors.toList());
     }
 
 
+    @Transactional
     public ResidentDO findResidentByIdNumber(String idNumber) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
         resident.orElseThrow(() -> new ResourceNotFoundException(String.format("ID Number :%s", idNumber)));
         return resident.map(ResidentDO::new).get();
     }
 
-    public ResidentDO findResidentByRoomNumber(String roomNumber) throws ResourceNotFoundException {
-        Optional<Resident> resident = residentRepository.findByRoomNumber(roomNumber);
-        resident.orElseThrow(() -> new ResourceNotFoundException(String.format("Room Number :%s", roomNumber)));
-        return resident.map(ResidentDO::new).get();
-    }
-
+    @Transactional
     public ResidentDO findResidentByNickName(String nickName) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByNickName(nickName);
         resident.orElseThrow(() -> new ResourceNotFoundException(String.format("NickName :%s", nickName)));
         return resident.map(ResidentDO::new).get();
     }
 
+    @Transactional
     public ResidentDO changeResidentNickName(String idNumber, String newNickName) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
         resident.orElseThrow(() -> new ResourceNotFoundException(String.format("ID Number :%s", idNumber)));

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.envers.Audited;
 import za.org.phyllis.robertson.home.model.ResidenceType;
 
@@ -15,6 +16,7 @@ import java.util.Calendar;
 /**
  * @author snuif
  */
+@FieldNameConstants
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,10 +27,8 @@ import java.util.Calendar;
 public class Resident implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
-    @Id
-    @Column(name = "ROOM_NUMBER")
-    private String roomNumber;
 
+    @Id
     @Column(name = "ID_NUMBER")
     private String idNumber;
 
@@ -79,8 +79,9 @@ public class Resident implements Serializable {
     @Column(name = "PARENT_GUARDIAN_EMAIL")
     private String parentGuardianEmail;
 
-    @OneToOne
-    @JoinColumn(name = "ROOM_NUMBER")
-    @MapsId
-    private Room room;
+//    @MapsId
+//    @OneToOne
+//    @JoinColumn(name = Room.Fields.roomNumber)
+//   private Room room;
+
 }
