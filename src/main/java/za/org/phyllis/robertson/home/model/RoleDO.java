@@ -25,11 +25,11 @@ import za.org.phyllis.robertson.home.entity.Role;
 @Data
 @Builder
 public class RoleDO implements Serializable {
-
-
     private static final long serialVersionUID = 1L;
+
     @JsonProperty("id")
     private Long id;
+
     @JsonProperty("role")
     private String role;
 

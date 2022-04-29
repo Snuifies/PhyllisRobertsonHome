@@ -132,8 +132,8 @@ public class RoomDO implements Serializable {
         this.faultResolvedDate = room.getFaultResolvedDate();
         this.faultResolvedComment = room.getFaultResolvedComment();
         this.description = room.getDescription();
-//        if (room.getResident() != null){
-//            this.resident = room.getResident().getName();
-//        }
+        if (room.getResident() != null){
+            this.resident = room.getResident().getName();
+        }
     }
 }

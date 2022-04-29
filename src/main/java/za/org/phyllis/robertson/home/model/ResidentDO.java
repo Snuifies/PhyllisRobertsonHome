@@ -43,39 +43,57 @@ import java.util.Calendar;
 @AllArgsConstructor
 @Builder
 public class ResidentDO implements Serializable {
+
     private static final long serialVersionUID = -5172178857306870614L;
+
     @JsonProperty("idNumber")
     private String idNumber;
+
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("nickName")
     private String nickName;
+
     @JsonProperty("dateOfBirth")
     private Calendar dateOfBirth;
+
     @JsonProperty("residenceType")
     private ResidenceType residenceType;
+
     @JsonProperty("medicalAidName")
     private String medicalAidName;
+
     @JsonProperty("medicalAidPlan")
     private String medicalAidPlan;
+
     @JsonProperty("medicalAidNumber")
     private String medicalAidNumber;
+
     @JsonProperty("medicalAidPhoneNumber")
     private String medicalAidPhoneNumber;
+
     @JsonProperty("preferredHospital")
     private String preferredHospital;
+
     @JsonProperty("houseDoctor")
     private String houseDoctor;
+
     @JsonProperty("houseDoctorPhoneNumber")
     private String houseDoctorPhoneNumber;
+
     @JsonProperty("ambulanceService")
     private String ambulanceService;
+
     @JsonProperty("parentGuardianName")
     private String parentGuardianName;
+
     @JsonProperty("parentGuardianPhoneNumber")
     private String parentGuardianPhoneNumber;
+
     @JsonProperty("parentGuardianEmail")
     private String parentGuardianEmail;
+
     @JsonProperty("room")
     private String room;
 
@@ -96,9 +114,9 @@ public class ResidentDO implements Serializable {
         this.parentGuardianName = resident.getParentGuardianName();
         this.parentGuardianPhoneNumber = resident.getParentGuardianPhoneNumber();
         this.parentGuardianEmail = resident.getParentGuardianEmail();
-//        if (resident.getRoom() != null) {
-//            this.room = resident.getRoom().getRoomNumber();
-//        }
+        if (resident.getRoom() != null) {
+            this.room = resident.getRoom().getRoomNumber();
+        }
 
     }
 }

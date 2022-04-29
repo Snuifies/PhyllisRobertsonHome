@@ -5,13 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import za.org.phyllis.robertson.home.entity.Resident;
-import za.org.phyllis.robertson.home.entity.Room;
-import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.ResidentDO;
-import za.org.phyllis.robertson.home.model.RoomDO;
 import za.org.phyllis.robertson.home.repository.ResidentRepository;
-import za.org.phyllis.robertson.home.repository.RoomRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +45,7 @@ public class ResidentService {
     }
 
     @Transactional
-    public ResidentDO changeResidentNickName(String idNumber, String newNickName) throws ResourceNotFoundException {
+    public ResidentDO updateResidentByNickName(String idNumber, String newNickName) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
         resident.orElseThrow(() -> new ResourceNotFoundException(String.format("ID Number :%s", idNumber)));
         resident.get().setNickName(newNickName);

@@ -27,8 +27,10 @@ import java.util.Calendar;
 public class Resident implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
-
     @Id
+    @Column(name = "ID")
+    private long id;
+
     @Column(name = "ID_NUMBER")
     private String idNumber;
 
@@ -79,9 +81,8 @@ public class Resident implements Serializable {
     @Column(name = "PARENT_GUARDIAN_EMAIL")
     private String parentGuardianEmail;
 
-//    @MapsId
-//    @OneToOne
-//    @JoinColumn(name = Room.Fields.roomNumber)
-//   private Room room;
-
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "ID")
+    private Room room;
 }

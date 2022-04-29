@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldNameConstants;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 /**
  * @author snuif
  */
-@FieldNameConstants
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +24,10 @@ public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @Column(name = "ROOM_NUMBER")
     private String roomNumber;
 
@@ -86,8 +88,7 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-//    @OneToOne
-//    @JoinColumn(name = Resident.Fields.idNumber)
-//    private Resident resident;
+    @OneToOne(mappedBy = "room")
+    private Resident resident;
 
 }
