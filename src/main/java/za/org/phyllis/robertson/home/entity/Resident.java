@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.AuditMappedBy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 import za.org.phyllis.robertson.home.model.ResidenceType;
@@ -13,6 +14,8 @@ import za.org.phyllis.robertson.home.model.ResidenceType;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author snuif
@@ -126,11 +129,12 @@ public class Resident implements Serializable {
     @JoinColumn(name = "ROOM_NUMBER")
     private ResidentMeal residentMeal;
 
-////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "RESIDENT_ID")
-//    private Set<ResidentCondition> conditions = new HashSet<>();
-//
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "RESIDENT_ROOM_NUMBER")
+    private Set<ResidentCondition> conditions = new HashSet<>();
+
 ////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "RESIDENT_ID")

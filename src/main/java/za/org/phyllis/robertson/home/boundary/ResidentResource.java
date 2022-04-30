@@ -45,13 +45,4 @@ public class ResidentResource {
         }
     }
 
-    @PatchMapping("/conditions/{idNumber}/{newCondition}")
-    public ResidentResponse addResidentCondition(@PathVariable("idNumber") String idNumber,
-                                                 @PathVariable("newCondition") String newCondition) {
-        try {
-            return ResidentResponse.builder().resident(residentService.addResidentCondition(idNumber, newCondition)).build();
-        } catch (ResourceNotFoundException e) {
-            return ResidentResponse.builder().message(e.getMessage()).build();
-        }
-    }
 }

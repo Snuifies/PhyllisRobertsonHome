@@ -155,13 +155,13 @@ public class ResidentDO implements Serializable {
         if (!Objects.isNull(resident.getResidentDailyCare())) {
             this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
         }
-//        if (!Objects.isNull(resident.getResidentMeal())) {
-//            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
-//        }
-//        if (!Objects.isNull(resident.getConditions())) {
-//            conditions.addAll(
-//                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));
-//        }
+        if (!Objects.isNull(resident.getResidentMeal())) {
+            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
+        }
+        if (!Objects.isNull(resident.getConditions())) {
+            conditions.addAll(
+                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));
+        }
 //        if (!Objects.isNull(resident.getPrescriptions())) {
 //            prescriptions.addAll(
 //                    resident.getPrescriptions().stream().map(PrescriptionDO::new).collect(Collectors.toSet()));
