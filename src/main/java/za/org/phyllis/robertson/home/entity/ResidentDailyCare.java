@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @FieldNameConstants
 @Data
-@Audited
+//@Audited(withModifiedFlag = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "RESIDENT_DAILY_CARE")

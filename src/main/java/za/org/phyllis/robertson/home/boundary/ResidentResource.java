@@ -37,9 +37,19 @@ public class ResidentResource {
 
     @PatchMapping("/nickname/{idNumber}/{newNickName}")
     public ResidentResponse updateResidentByNickName(@PathVariable("idNumber") String idNumber,
-                                                   @PathVariable("newNickName") String newNickName) {
+                                                     @PathVariable("newNickName") String newNickName) {
         try {
             return ResidentResponse.builder().resident(residentService.updateResidentByNickName(idNumber, newNickName)).build();
+        } catch (ResourceNotFoundException e) {
+            return ResidentResponse.builder().message(e.getMessage()).build();
+        }
+    }
+
+    @PatchMapping("/conditions/{idNumber}/{newCondition}")
+    public ResidentResponse addResidentCondition(@PathVariable("idNumber") String idNumber,
+                                                 @PathVariable("newCondition") String newCondition) {
+        try {
+            return ResidentResponse.builder().resident(residentService.addResidentCondition(idNumber, newCondition)).build();
         } catch (ResourceNotFoundException e) {
             return ResidentResponse.builder().message(e.getMessage()).build();
         }

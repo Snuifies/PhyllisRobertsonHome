@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited
+@Audited(withModifiedFlag = true)
 @Entity(name = "ROLES")
 @Table(name = "ROLES")
 public class Role implements Serializable {

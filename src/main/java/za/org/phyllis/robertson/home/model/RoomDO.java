@@ -11,13 +11,13 @@ import za.org.phyllis.robertson.home.entity.Room;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * @author snuif
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
         "roomNumber",
         "available",
         "houseKeepingDate",
@@ -46,9 +46,6 @@ import java.time.LocalDate;
 @Builder
 public class RoomDO implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
-
-    @JsonProperty("id")
-    private Long id;
 
     @JsonProperty("roomNumber")
     private String roomNumber;
@@ -134,7 +131,7 @@ public class RoomDO implements Serializable {
         this.faultResolvedDate = room.getFaultResolvedDate();
         this.faultResolvedComment = room.getFaultResolvedComment();
         this.description = room.getDescription();
-        if (room.getResident() != null){
+        if (!Objects.isNull(room.getResident())){
             this.resident = room.getResident().getName();
         }
     }

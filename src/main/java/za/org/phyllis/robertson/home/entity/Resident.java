@@ -23,15 +23,15 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited
+@Audited(withModifiedFlag = true)
 @Entity(name = "RESIDENT")
 @Table(name = "RESIDENT")
 public class Resident implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ID")
-    private Long id;
+    @Column(name = "ROOM_NUMBER")
+    private String roomNumber;
 
     @Column(name = "ID_NUMBER")
     private String idNumber;
@@ -114,25 +114,24 @@ public class Resident implements Serializable {
     @Column(name = "BLISTERS_RECEIVED")
     private int blistersReceived;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID")
+    @OneToOne
+    @JoinColumn(name = "ROOM_NUMBER")
     private Room room;
 
-    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
-    private ResidentDailyCare residentDailyCare;
-
-    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
-    private ResidentMeal residentMeal;
-
-//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "RESIDENT_ID")
-    private Set<ResidentCondition> conditions = new HashSet<>();
-
-//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "RESIDENT_ID")
-    private Set<Prescription> prescriptions = new HashSet<>();
+//    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
+//    private ResidentDailyCare residentDailyCare;
+//
+//    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
+//    private ResidentMeal residentMeal;
+//
+////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "RESIDENT_ID")
+//    private Set<ResidentCondition> conditions = new HashSet<>();
+//
+////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "RESIDENT_ID")
+//    private Set<Prescription> prescriptions = new HashSet<>();
 
 }

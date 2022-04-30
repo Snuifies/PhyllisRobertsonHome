@@ -3,47 +3,24 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    
-   <changeSet author="MARIUS" id="USERS And Roles Tables" >
-	<createTable tableName="USERS">
-	    <column name="ID" type="BIGINT" autoIncrement="true">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="USERNAME" type="VARCHAR(25)">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="EMAIL" type="VARCHAR(100)">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="PASSWORD" type="VARCHAR(120)">
-		<constraints nullable="false"/>
-	    </column>
-	</createTable>
-	<addPrimaryKey tableName="USERS" columnNames="ID" />
-	<createTable tableName="ROLES">
-	    <column name="ID" type="BIGINT" autoIncrement="true">
-		<constraints nullable="false"/>
-	    </column>
-	    <column name="ROLE" type="VARCHAR(20)" defaultValue="USER">
-		<constraints nullable="false"/>
-	    </column>
-	</createTable>
-	<addPrimaryKey tableName="ROLES" columnNames="ID" />
-	<createTable tableName="USER_ROLES">
-	    <column name="USER_ID" type="BIGINT"/>
-	    <column name="ROLE_ID" type="BIGINT"/>
-	</createTable>
-	<addPrimaryKey tableName="USER_ROLES" columnNames="USER_ID, ROLE_ID" />
-	
-	<!-- Roll Back -->
-	<rollback>
-	    <dropPrimaryKey tableName="USER_ROLES"/>
-	    <dropPrimaryKey tableName="ROLES"/>
-	    <dropPrimaryKey tableName="USERS"/>
-	    <dropTable tableName="USER_ROLES"/>
-	    <dropTable tableName="ROLES" />
-	    <dropTable tableName="USERS"/>
-	</rollback>
+
+    <changeSet author="MARIUS" id="Hibernate Envers Auditing Table">
+        <createTable tableName="REVINFO">
+            <column name="REV" type="BIGINT" autoIncrement="true"/>
+            <column name="REVTSTMP" type="BIGINT" autoIncrement="true"/>
+        </createTable>
+        <addPrimaryKey tableName="REVINFO" columnNames="REV"/>
+        <createSequence sequenceName="HIBERNATE_SEQUENCE" incrementBy="1" minValue="1" maxValue="9223372036854775807"
+                        startValue="1"/>
+        <rollback>
+            <dropPrimaryKey tableName="REVINFO"/>
+            <dropTable tableName="REVINFO"/>
+            <dropSequence sequenceName="HIBERNATE_SEQUENCE"/>
+        </rollback>
+        <rollback>
+            <dropSequence sequenceName="hibernate_sequence"/>
+            <dropPrimaryKey tableName="REVINFO"/>
+            <dropPrimaryKey tableName="REVINFO"/>
+        </rollback>
     </changeSet>
-    
 </databaseChangeLog>

@@ -6,7 +6,7 @@
 
     <changeSet author="Marius" id="Create Resident Table">
         <createTable tableName="RESIDENT">
-            <column name="ID" type="BIGINT"/>
+            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
             <column name="ID_NUMBER" type="VARCHAR(25)"/>
             <column name="NAME" type="VARCHAR(100)"/>
             <column name="NICK_NAME" type="VARCHAR(100)"/>
@@ -33,36 +33,64 @@
             <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
             <column name="BLISTERS_RECEIVED" type="INTEGER"/>
         </createTable>
+        <addPrimaryKey tableName="RESIDENT" columnNames="ROOM_NUMBER"/>
     </changeSet>
 
     <changeSet author="Marius" id="Create Resident Audit Table">
         <createTable tableName="RESIDENT_AUD">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
+            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="ID_NUMBER" type="VARCHAR(25)"/>
+            <column name="ID_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="NAME" type="VARCHAR(100)"/>
+            <column name="NAME_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="NICK_NAME" type="VARCHAR(100)"/>
+            <column name="NICK_NAME_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="DATE_OF_BIRTH" type="DATE"/>
+            <column name="DATE_OF_BIRTH_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="RESIDENCE_TYPE" type="VARCHAR(100)"/>
+            <column name="RESIDENCE_TYPE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="MEDICAL_AID_NAME" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NAME_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="MEDICAL_AID_PLAN" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PLAN_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="MEDICAL_AID_NUMBER" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="MEDICAL_AID_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="MEDICAL_AID_PHONE_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="PREFERRED_HOSPITAL" type="VARCHAR(100)"/>
+            <column name="PREFERRED_HOSPITAL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="HOUSE_DOCTOR" type="VARCHAR(100)"/>
+            <column name="HOUSE_DOCTOR_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="HOUSE_DOCTOR_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="HOUSE_DOCTOR_PHONE_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="AMBULANCE_SERVICE" type="VARCHAR(100)"/>
+            <column name="AMBULANCE_SERVICE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="PARENT_GUARDIAN_NAME" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_NAME_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="PARENT_GUARDIAN_PHONE_NUMBER" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_PHONE_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="PARENT_GUARDIAN_EMAIL" type="VARCHAR(100)"/>
+            <column name="PARENT_GUARDIAN_EMAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="DOCTOR_VISIT_DATE" type="DATE"/>
+            <column name="DOCTOR_VISIT_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="ATTENDING_DOCTOR" type="VARCHAR(100)"/>
+            <column name="ATTENDING_DOCTOR_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="ACCOMPANIED_BY" type="VARCHAR(100)"/>
+            <column name="ACCOMPANIED_BY_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="TREATMENT" type="VARCHAR(250)"/>
+            <column name="TREATMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="COPY_OF_PRESCRIPTION" type="BLOB"/>
+            <column name="COPY_OF_PRESCRIPTION_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="NEXT_APPOINTMENT" type="DATE"/>
+            <column name="NEXT_APPOINTMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
+            <column name="MEDICATION_TO_PHARMACY_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
+            <column name="BLISTERS_RECEIVED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="BLISTERS_RECEIVED" type="INTEGER"/>
+            <column name="BLISTERS_RECEIVED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="ROOM_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="REV" type="BIGINT">
                 <constraints referencedTableName="REVINFO"
                              foreignKeyName="FK_ROOM_REVINFO"
@@ -73,68 +101,66 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="RESIDENT_AUD" columnNames="ID, REV"/>
+        <addPrimaryKey tableName="RESIDENT_AUD" columnNames="ROOM_NUMBER, REV"/>
     </changeSet>
 
-    <changeSet author="Marius" id="Add 1st Resident">
-        <insert tableName="RESIDENT">
-            <column name="ID" valueComputed="(SELECT ID FROM ROOM WHERE ROOM_NUMBER='1G1')"/>
-            <column name="ID_NUMBER" value="6212205027084"/>
-            <column name="NAME"  value="MARIUS SNYMAN"/>
-            <column name="NICK_NAME" value="SNUIFIES"/>
-            <column name="DATE_OF_BIRTH" type="${now}"/>
-            <column name="RESIDENCE_TYPE" value="SUPERVISION"/>
-            <column name="MEDICAL_AID_NAME" value="MEDIHELP"/>
-            <column name="MEDICAL_AID_PLAN" value="LITE"/>
-            <column name="MEDICAL_AID_NUMBER" value="12345"/>
-            <column name="MEDICAL_AID_PHONE_NUMBER" value="0122345234"/>
-            <column name="PREFERRED_HOSPITAL" value="EUGENE MARAIS"/>
-            <column name="HOUSE_DOCTOR" value="JANIE KOCK"/>
-            <column name="HOUSE_DOCTOR_PHONE_NUMBER" value="0121231234"/>
-            <column name="AMBULANCE_SERVICE" value="NEDCARE"/>
-            <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>
-            <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>
-            <column name="PARENT_GUARDIAN_EMAIL" value="SNUIFIES@GMAIL.COM"/>
-            <column name="DOCTOR_VISIT_DATE" value="${now}"/>
-            <column name="ATTENDING_DOCTOR" value="Piet Pompies"/>
-            <column name="ACCOMPANIED_BY" value="Suster Hester"/>
-            <column name="TREATMENT" value="Treated"/>
-            <column name="COPY_OF_PRESCRIPTION" value="null"/>
-            <column name="NEXT_APPOINTMENT" value="${now}"/>
-            <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>
-            <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>
-            <column name="BLISTERS_RECEIVED" value="5"/>
-        </insert>
-    </changeSet>
-    <changeSet author="Marius" id="Add 2nd Resident">
-        <insert tableName="RESIDENT">
-            <column name="ID" valueComputed="(SELECT ID FROM ROOM WHERE ROOM_NUMBER='1G2')"/>
-            <column name="ID_NUMBER" value="6512205027082"/>
-            <column name="NAME"  value="MARINA ALERS"/>
-            <column name="NICK_NAME" value="ALTA"/>
-            <column name="DATE_OF_BIRTH" type="${now}"/>
-            <column name="RESIDENCE_TYPE" value="SUPERVISION"/>
-            <column name="MEDICAL_AID_NAME" value="MEDIHELP"/>
-            <column name="MEDICAL_AID_PLAN" value="LITE"/>
-            <column name="MEDICAL_AID_NUMBER" value="12345"/>
-            <column name="MEDICAL_AID_PHONE_NUMBER" value="0122345234"/>
-            <column name="PREFERRED_HOSPITAL" value="EUGENE MARAIS"/>
-            <column name="HOUSE_DOCTOR" value="JANIE KOCK"/>
-            <column name="HOUSE_DOCTOR_PHONE_NUMBER" value="0121231234"/>
-            <column name="AMBULANCE_SERVICE" value="NEDCARE"/>
-            <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>
-            <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>
-            <column name="PARENT_GUARDIAN_EMAIL" value="MARINA@GMAIL.COM"/>
-            <column name="DOCTOR_VISIT_DATE" value="${now}"/>
-            <column name="ATTENDING_DOCTOR" value="Piet Pompies"/>
-            <column name="ACCOMPANIED_BY" value="Suster Hester"/>
-            <column name="TREATMENT" value="Treated"/>
-            <column name="COPY_OF_PRESCRIPTION" value="null"/>
-            <column name="NEXT_APPOINTMENT" value="${now}"/>
-            <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>
-            <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>
-            <column name="BLISTERS_RECEIVED" value="5"/>
-        </insert>
-    </changeSet>
+<!--    <changeSet author="Marius" id="Add 1st Resident">-->
+<!--        <insert tableName="RESIDENT">-->
+<!--            <column name="ID_NUMBER" value="6212205027084"/>-->
+<!--            <column name="NAME"  value="MARIUS SNYMAN"/>-->
+<!--            <column name="NICK_NAME" value="SNUIFIES"/>-->
+<!--            <column name="DATE_OF_BIRTH" type="${now}"/>-->
+<!--            <column name="RESIDENCE_TYPE" value="SUPERVISION"/>-->
+<!--            <column name="MEDICAL_AID_NAME" value="MEDIHELP"/>-->
+<!--            <column name="MEDICAL_AID_PLAN" value="LITE"/>-->
+<!--            <column name="MEDICAL_AID_NUMBER" value="12345"/>-->
+<!--            <column name="MEDICAL_AID_PHONE_NUMBER" value="0122345234"/>-->
+<!--            <column name="PREFERRED_HOSPITAL" value="EUGENE MARAIS"/>-->
+<!--            <column name="HOUSE_DOCTOR" value="JANIE KOCK"/>-->
+<!--            <column name="HOUSE_DOCTOR_PHONE_NUMBER" value="0121231234"/>-->
+<!--            <column name="AMBULANCE_SERVICE" value="NEDCARE"/>-->
+<!--            <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>-->
+<!--            <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>-->
+<!--            <column name="PARENT_GUARDIAN_EMAIL" value="SNUIFIES@GMAIL.COM"/>-->
+<!--            <column name="DOCTOR_VISIT_DATE" value="${now}"/>-->
+<!--            <column name="ATTENDING_DOCTOR" value="Piet Pompies"/>-->
+<!--            <column name="ACCOMPANIED_BY" value="Suster Hester"/>-->
+<!--            <column name="TREATMENT" value="Treated"/>-->
+<!--            <column name="COPY_OF_PRESCRIPTION" value="null"/>-->
+<!--            <column name="NEXT_APPOINTMENT" value="${now}"/>-->
+<!--            <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>-->
+<!--            <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>-->
+<!--            <column name="BLISTERS_RECEIVED" value="5"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="Marius" id="Add 2nd Resident">-->
+<!--        <insert tableName="RESIDENT">-->
+<!--            <column name="ID_NUMBER" value="6512205027082"/>-->
+<!--            <column name="NAME"  value="MARINA ALERS"/>-->
+<!--            <column name="NICK_NAME" value="ALTA"/>-->
+<!--            <column name="DATE_OF_BIRTH" type="${now}"/>-->
+<!--            <column name="RESIDENCE_TYPE" value="SUPERVISION"/>-->
+<!--            <column name="MEDICAL_AID_NAME" value="MEDIHELP"/>-->
+<!--            <column name="MEDICAL_AID_PLAN" value="LITE"/>-->
+<!--            <column name="MEDICAL_AID_NUMBER" value="12345"/>-->
+<!--            <column name="MEDICAL_AID_PHONE_NUMBER" value="0122345234"/>-->
+<!--            <column name="PREFERRED_HOSPITAL" value="EUGENE MARAIS"/>-->
+<!--            <column name="HOUSE_DOCTOR" value="JANIE KOCK"/>-->
+<!--            <column name="HOUSE_DOCTOR_PHONE_NUMBER" value="0121231234"/>-->
+<!--            <column name="AMBULANCE_SERVICE" value="NEDCARE"/>-->
+<!--            <column name="PARENT_GUARDIAN_NAME" value="MY PA"/>-->
+<!--            <column name="PARENT_GUARDIAN_PHONE_NUMBER" value="0124561234"/>-->
+<!--            <column name="PARENT_GUARDIAN_EMAIL" value="MARINA@GMAIL.COM"/>-->
+<!--            <column name="DOCTOR_VISIT_DATE" value="${now}"/>-->
+<!--            <column name="ATTENDING_DOCTOR" value="Piet Pompies"/>-->
+<!--            <column name="ACCOMPANIED_BY" value="Suster Hester"/>-->
+<!--            <column name="TREATMENT" value="Treated"/>-->
+<!--            <column name="COPY_OF_PRESCRIPTION" value="null"/>-->
+<!--            <column name="NEXT_APPOINTMENT" value="${now}"/>-->
+<!--            <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>-->
+<!--            <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>-->
+<!--            <column name="BLISTERS_RECEIVED" value="5"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
 
 </databaseChangeLog>

@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 @FieldNameConstants
 @Data
-@Audited
+//@Audited(withModifiedFlag = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

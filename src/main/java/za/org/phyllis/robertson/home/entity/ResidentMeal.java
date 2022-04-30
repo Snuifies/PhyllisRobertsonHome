@@ -22,7 +22,7 @@ import java.util.Calendar;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited
+//@Audited(withModifiedFlag = true)
 @Entity(name = "RESIDENT_MEAL")
 @Table(name = "RESIDENT_MEAL")
 public class ResidentMeal implements Serializable {

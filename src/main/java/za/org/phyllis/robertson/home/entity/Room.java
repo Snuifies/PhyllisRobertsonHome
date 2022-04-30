@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,24 +18,20 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited
+@Audited(withModifiedFlag = true)
 @Entity(name = "ROOM")
 @Table(name = "ROOM")
 public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "ROOM_NUMBER")
     private String roomNumber;
 
     @Column(name = "AVAILABLE")
     private boolean available;
 
-    @Column(name = "HOUSEKEEPING_DATE")
+    @Column(name = "HOUSE_KEEPING_DATE")
     private LocalDate houseKeepingDate;
 
     @Column(name = "WASHING_REMOVED_DATE")
@@ -88,6 +85,7 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     @OneToOne(mappedBy = "room")
     private Resident resident;
 

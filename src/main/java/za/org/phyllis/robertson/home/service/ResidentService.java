@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import za.org.phyllis.robertson.home.entity.Resident;
+import za.org.phyllis.robertson.home.entity.ResidentCondition;
+import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.ResidentDO;
 import za.org.phyllis.robertson.home.repository.ResidentRepository;
@@ -52,4 +54,16 @@ public class ResidentService {
         residentRepository.save(resident.get());
         return resident.map(ResidentDO::new).get();
     }
+
+    public ResidentDO addResidentCondition(String idNumber, String newCondition) throws ResourceNotFoundException {
+        Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
+        resident.orElseThrow(() -> new ResourceNotFoundException(String.format("ID Number :%s", idNumber)));
+//        Optional<Boolean> conditionAlreadyLogged = resident.get().getConditions().stream().map(condition -> condition.getCondition().equalsIgnoreCase(newCondition)).findFirst();
+//        conditionAlreadyLogged.ifPresent(aBoolean -> new ResourceAlreadyExistsException(String.format("ID Number [%s]: Condition [%s]", idNumber, newCondition)));
+//        ResidentCondition condition = ResidentCondition.builder().condition(newCondition).build();
+//        resident.get().getConditions().add(condition);
+//        residentRepository.save(resident.get());
+        return resident.map(ResidentDO::new).get();
+    }
+
 }

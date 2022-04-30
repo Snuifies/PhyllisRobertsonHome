@@ -20,7 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited
+@Audited(withModifiedFlag = true)
 @Entity(name = "USERS")
 @Table(name = "USERS")
 public class User implements Serializable {
