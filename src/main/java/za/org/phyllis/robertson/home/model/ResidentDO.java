@@ -108,7 +108,7 @@ public class ResidentDO implements Serializable {
     @JsonProperty("treatment")
     private String treatment;
     @JsonProperty("copyOfPrescription")
-    private Byte[] copyOfPrescription;
+    private byte[] copyOfPrescription;
     @JsonProperty("nextAppointment")
     private Calendar nextAppointment;
     @JsonProperty("medicationToPharmacyDate")

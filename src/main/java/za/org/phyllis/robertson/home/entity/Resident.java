@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 import za.org.phyllis.robertson.home.model.ResidenceType;
@@ -97,7 +98,8 @@ public class Resident implements Serializable {
     private String treatment;
 
     @Column(name = "COPY_OF_PRESCRIPTION")
-    private Byte[] copyOfPrescription;
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] copyOfPrescription;
 
     @Column(name = "NEXT_APPOINTMENT")
     @Temporal(TemporalType.DATE)
