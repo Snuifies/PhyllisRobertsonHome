@@ -10,15 +10,15 @@ import za.org.phyllis.robertson.home.model.BathType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * @author snuif
  */
 @FieldNameConstants
 @Data
-//@Audited(withModifiedFlag = true)
+@Audited(withModifiedFlag = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "RESIDENT_DAILY_CARE")
@@ -27,12 +27,11 @@ public class ResidentDailyCare implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ID")
-    private Long id;
+    @Column(name = "ROOM_NUMBER")
+    private String roomNumber;
 
     @Column(name = "CARE_DATE")
-    @Temporal(TemporalType.DATE)
-    private Calendar careDate;
+    private LocalDate careDate;
 
     @Column(name = "CARE_WORKER_ASSIGNED")
     private String careWorkerAssigned;
@@ -81,8 +80,7 @@ public class ResidentDailyCare implements Serializable {
     private String medicationEvening;
 
     @Column(name = "MEDICATION_ACUTE_TIME")
-    @Temporal(TemporalType.TIME)
-    private Date medicationAcuteTime;
+    private String medicationAcuteTime;
 
     @Column(name = "MEDICATION_ACUTE_ITEM")
     private String medicationAcuteItem;
@@ -93,9 +91,7 @@ public class ResidentDailyCare implements Serializable {
     @Column(name = "ACTIONS_ADVISED")
     private String actionsAdvised;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID")
+    @OneToOne(mappedBy = "room")
    private Resident resident;
 
 }

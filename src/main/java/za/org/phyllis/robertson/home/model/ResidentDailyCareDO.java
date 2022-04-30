@@ -10,12 +10,14 @@ import lombok.NoArgsConstructor;
 import za.org.phyllis.robertson.home.entity.ResidentDailyCare;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
+        "roomNumber",
         "careDate",
         "careWorkerAssigned",
         "bath",
@@ -44,11 +46,11 @@ import java.util.Date;
 public class ResidentDailyCareDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("id")
-    private long id;
+    @JsonProperty("roomNumber")
+    private String roomNumber;
 
     @JsonProperty("careDate")
-    private Calendar careDate;
+    private LocalDate careDate;
 
     @JsonProperty("careWorkerAssigned")
     private String careWorkerAssigned;
@@ -96,7 +98,7 @@ public class ResidentDailyCareDO implements Serializable {
     private String medicationEvening;
 
     @JsonProperty("medicationAcuteTime")
-    private Date medicationAcuteTime;
+    private String medicationAcuteTime;
 
     @JsonProperty("medicationAcuteItem")
     private String medicationAcuteItem;
@@ -108,7 +110,7 @@ public class ResidentDailyCareDO implements Serializable {
     private String actionsAdvised;
 
     public ResidentDailyCareDO(ResidentDailyCare residentDailyCare) {
-        this.id = residentDailyCare.getId();
+        this.roomNumber = residentDailyCare.getRoomNumber();
         this.careDate = residentDailyCare.getCareDate();
         this.careWorkerAssigned = residentDailyCare.getCareWorkerAssigned();
         this.bath = residentDailyCare.getBath();

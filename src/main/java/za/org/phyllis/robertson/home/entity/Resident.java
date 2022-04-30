@@ -13,8 +13,6 @@ import za.org.phyllis.robertson.home.model.ResidenceType;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author snuif
@@ -98,7 +96,7 @@ public class Resident implements Serializable {
     private String treatment;
 
     @Column(name = "COPY_OF_PRESCRIPTION")
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] copyOfPrescription;
 
     @Column(name = "NEXT_APPOINTMENT")
@@ -120,9 +118,11 @@ public class Resident implements Serializable {
     @JoinColumn(name = "ROOM_NUMBER")
     private Room room;
 
-//    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
-//    private ResidentDailyCare residentDailyCare;
-//
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @OneToOne
+    @JoinColumn(name = "ROOM_NUMBER")
+   private ResidentDailyCare residentDailyCare;
+
 //    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
 //    private ResidentMeal residentMeal;
 //

@@ -152,9 +152,9 @@ public class ResidentDO implements Serializable {
         if (!Objects.isNull(resident.getRoom())) {
             this.room = new RoomDO(resident.getRoom());
         }
-//        if (!Objects.isNull(resident.getResidentDailyCare())) {
-//            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
-//        }
+        if (!Objects.isNull(resident.getResidentDailyCare())) {
+            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
+        }
 //        if (!Objects.isNull(resident.getResidentMeal())) {
 //            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
 //        }
