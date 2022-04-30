@@ -22,7 +22,7 @@ import java.util.Calendar;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-//@Audited(withModifiedFlag = true)
+@Audited(withModifiedFlag = true)
 @Entity(name = "RESIDENT_MEAL")
 @Table(name = "RESIDENT_MEAL")
 public class ResidentMeal implements Serializable {
@@ -30,8 +30,8 @@ public class ResidentMeal implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ID")
-    private Long id;
+    @Column(name = "ROOM_NUMBER")
+    private String roomNumber;
 
     @Column(name = "FOOD_SERVICE_DATE")
     @Temporal(TemporalType.DATE)
@@ -57,7 +57,7 @@ public class ResidentMeal implements Serializable {
 
     @Column(name = "PACKED_LUNCH_REQUEST_DATE")
     @Temporal(TemporalType.DATE)
-    private Calendar packedLunchRequestedDate;
+    private Calendar packedLunchRequestDate;
 
     @Column(name = "KEPT_LUNCH_REQUEST_DATE")
     @Temporal(TemporalType.DATE)
@@ -76,11 +76,9 @@ public class ResidentMeal implements Serializable {
     private Calendar foodNotEatenDate;
 
     @Column(name = "FOOD_NOT_EATEN_DETAIL")
-    private String foodNotEaten;
+    private String foodNotEatenDetail;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID")
+    @OneToOne(mappedBy = "room")
     private Resident resident;
 
 }

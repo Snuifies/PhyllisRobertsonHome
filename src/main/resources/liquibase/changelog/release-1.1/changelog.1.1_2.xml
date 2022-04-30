@@ -92,6 +92,7 @@
             <column name="BLISTERS_RECEIVED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="ROOM_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="RESIDENT_DAILY_CARE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="RESIDENT_MEAL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
             <column name="REV" type="BIGINT">
                 <constraints referencedTableName="REVINFO"
                              foreignKeyName="FK_ROOM_REVINFO"

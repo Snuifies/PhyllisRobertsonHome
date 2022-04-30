@@ -118,14 +118,14 @@ public class Resident implements Serializable {
     @JoinColumn(name = "ROOM_NUMBER")
     private Room room;
 
-//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     @OneToOne
     @JoinColumn(name = "ROOM_NUMBER")
-   private ResidentDailyCare residentDailyCare;
+    private ResidentDailyCare residentDailyCare;
 
-//    @OneToOne(mappedBy = "resident",fetch = FetchType.LAZY)
-//    private ResidentMeal residentMeal;
-//
+    @OneToOne
+    @JoinColumn(name = "ROOM_NUMBER")
+    private ResidentMeal residentMeal;
+
 ////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "RESIDENT_ID")

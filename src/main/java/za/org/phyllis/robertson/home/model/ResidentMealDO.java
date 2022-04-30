@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
+        "roomNumber",
         "foodServiceDate",
         "dietType",
         "complaintDate",
@@ -27,7 +27,7 @@ import java.util.Calendar;
         "keptLunchRequestDate",
         "bedMealRequestDate",
         "foodNotEatenDate",
-        "foodNotEaten"
+        "foodNotEatenDetail"
 })
 @Data
 @NoArgsConstructor
@@ -36,8 +36,8 @@ import java.util.Calendar;
 public class ResidentMealDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("id")
-    private long id;
+    @JsonProperty("roomNumber")
+    private String roomNumber;
     @JsonProperty("foodServiceDate")
     private Calendar foodServiceDate;
     @JsonProperty("dietType")
@@ -50,8 +50,8 @@ public class ResidentMealDO implements Serializable {
     private Calendar plannedAbsenceDate;
     @JsonProperty("mealsAbsentDetail")
     private String mealsAbsentDetail;
-    @JsonProperty("packedLunchRequestedDate")
-    private Calendar packedLunchRequestedDate;
+    @JsonProperty("packedLunchRequestDate")
+    private Calendar packedLunchRequestDate;
     @JsonProperty("keptLunchRequestDate")
     private Calendar keptLunchRequestDate;
     @JsonProperty("bedMealRequestDate")
@@ -60,22 +60,22 @@ public class ResidentMealDO implements Serializable {
     private MealType bedMealRequestType;
     @JsonProperty("foodNotEatenDate")
     private Calendar foodNotEatenDate;
-    @JsonProperty("foodNotEaten")
-    private String foodNotEaten;
+    @JsonProperty("foodNotEatenDetail")
+    private String foodNotEatenDetail;
 
     public ResidentMealDO(ResidentMeal meal) {
-        this.id = meal.getId();
+        this.roomNumber = meal.getRoomNumber();
         this.foodServiceDate = meal.getFoodServiceDate();
         this.dietType = meal.getDietType();
         this.complaintDate = meal.getComplaintDate();
         this.complaintDetail = meal.getComplaintDetail();
         this.plannedAbsenceDate = meal.getPlannedAbsenceDate();
         this.mealsAbsentDetail = meal.getMealsAbsentDetail();
-        this.packedLunchRequestedDate = meal.getPackedLunchRequestedDate();
+        this.packedLunchRequestDate = meal.getPackedLunchRequestDate();
         this.keptLunchRequestDate = meal.getKeptLunchRequestDate();
         this.bedMealRequestDate = meal.getBedMealRequestDate();
         this.bedMealRequestType = meal.getBedMealRequestType();
         this.foodNotEatenDate = meal.getFoodNotEatenDate();
-        this.foodNotEaten = meal.getFoodNotEaten();
+        this.foodNotEatenDetail = meal.getFoodNotEatenDetail();
     }
 }
