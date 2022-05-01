@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.Type;
-import org.hibernate.envers.AuditMappedBy;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.hibernate.envers.RelationTargetAuditMode;
 import za.org.phyllis.robertson.home.model.ResidenceType;
 
@@ -129,10 +129,9 @@ public class Resident implements Serializable {
     @JoinColumn(name = "ROOM_NUMBER")
     private ResidentMeal residentMeal;
 
+    @NotAudited
 //    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "RESIDENT_ROOM_NUMBER")
+    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<ResidentCondition> conditions = new HashSet<>();
 
 ////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)

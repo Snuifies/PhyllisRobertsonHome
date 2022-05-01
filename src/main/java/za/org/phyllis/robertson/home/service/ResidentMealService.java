@@ -27,13 +27,13 @@ public class ResidentMealService {
 
     public ResidentMealDO findResidentMealByRoomNumber(String roomNumber) throws ResourceNotFoundException {
         Optional<ResidentMeal> residentMeal = repository.findByRoomNumber(roomNumber);
-        residentMeal.orElseThrow(() -> new ResourceNotFoundException(String.format("Resident Meal Record Not found for Room :%s", roomNumber)));
+        residentMeal.orElseThrow(() -> new ResourceNotFoundException("ResidentMeal", String.format("Resident Meal Record Not found for Room :%s", roomNumber)));
         return residentMeal.map(ResidentMealDO::new).get();
     }
 
     public ResidentMealDO updateResidentMealDietType(String roomNumber, DietType dietType) throws ResourceNotFoundException {
         Optional<ResidentMeal> residentMeal = repository.findByRoomNumber(roomNumber);
-        residentMeal.orElseThrow(() -> new ResourceNotFoundException(String.format("Resident Meal Record Not found for Room :%s", roomNumber)));
+        residentMeal.orElseThrow(() -> new ResourceNotFoundException("ResidentMeal", String.format("Resident Meal Record Not found for Room :%s", roomNumber)));
         residentMeal.get().setDietType(dietType);
         repository.save(residentMeal.get());
         return residentMeal.map(ResidentMealDO::new).get();

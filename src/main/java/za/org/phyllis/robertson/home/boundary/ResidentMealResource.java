@@ -22,7 +22,7 @@ public class ResidentMealResource {
     public ResidentMealResponse findResidentMealByRoomNumber(@PathVariable("roomNumber") String roomNumber) {
         try {
             return ResidentMealResponse.builder().residentMeal(service.findResidentMealByRoomNumber(roomNumber)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return ResidentMealResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -31,7 +31,7 @@ public class ResidentMealResource {
     public ResidentMealResponse updateResidentMealDietType(@PathVariable("roomNumber") String roomNumber, @PathVariable("dietType") DietType dietType) {
         try {
             return ResidentMealResponse.builder().residentMeal(service.updateResidentMealDietType(roomNumber, dietType)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return ResidentMealResponse.builder().message(e.getMessage()).build();
         }
     }

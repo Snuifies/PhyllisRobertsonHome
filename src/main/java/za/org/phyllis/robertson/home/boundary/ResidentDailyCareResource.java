@@ -25,7 +25,7 @@ public class ResidentDailyCareResource {
     public ResidentDailyCareResponse findDailyCareByRoomNumber(@PathVariable("roomNumber") String roomNumber) {
         try {
             return ResidentDailyCareResponse.builder().dailyCare(service.findDailyCareByRoomNumber(roomNumber)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return ResidentDailyCareResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -34,7 +34,7 @@ public class ResidentDailyCareResource {
     public ResidentDailyCareResponse updateDailyCareBathType(@PathVariable("roomNumber") String roomNumber, @PathVariable("bathType") BathType bathType) {
         try {
             return ResidentDailyCareResponse.builder().dailyCare(service.updateDailyCareBathType(roomNumber, bathType)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return ResidentDailyCareResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -43,7 +43,7 @@ public class ResidentDailyCareResource {
     public ResidentDailyCareResponse updateDailyCareMedicationAcuteTime(@PathVariable("roomNumber") String roomNumber, @PathVariable("medicationTime") @DateTimeFormat(pattern = "HH:mm") LocalTime medicationTime) {
         try {
             return ResidentDailyCareResponse.builder().dailyCare(service.updateDailyCareMedicationAcuteTime(roomNumber, medicationTime)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return ResidentDailyCareResponse.builder().message(e.getMessage()).build();
         }
     }

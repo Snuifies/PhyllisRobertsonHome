@@ -28,7 +28,7 @@ public class UserResource {
     public UserResponse getUser(@PathVariable("username") @NotNull String username) {
         try {
             return UserResponse.builder().user(userService.findByUsername(username)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return UserResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -37,7 +37,7 @@ public class UserResource {
     public UserResponse updateUserEmailAddress(@PathVariable("username") @NotNull String username, @PathVariable("email") @NotNull String newEmail) {
         try {
             return UserResponse.builder().user(userService.updateUserEmailAddress(username, newEmail)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return UserResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -46,7 +46,7 @@ public class UserResource {
     public UserResponse deleteUserRole(@PathVariable("username") @NotNull String username, @PathVariable("role") @NotNull String role) {
         try {
             return UserResponse.builder().user(userService.deleteUserRole(username, role)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return UserResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -55,7 +55,7 @@ public class UserResource {
     public UserResponse addUserRole(@PathVariable("username") @NotNull String username, @PathVariable("role") @NotNull String role) {
         try {
             return UserResponse.builder().user(userService.addUserRole(username, role)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return UserResponse.builder().message(e.getMessage()).build();
         }
     }

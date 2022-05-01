@@ -12,25 +12,25 @@
         </createTable>
         <addPrimaryKey tableName="RESIDENT_CONDITION" columnNames="ROOM_NUMBER"/>
 
-        <createTable tableName="RESIDENT_CONDITION_AUD">
-            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
-            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="RESIDENT_ROOM_NUMBER" type="VARCHAR(50)"/>
-            <column name="RESIDENT_ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="CONDITION" type="VARCHAR(250)"/>
-            <column name="CONDITION_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="REV" type="BIGINT">
-                <constraints referencedTableName="REVINFO"
-                             foreignKeyName="FK_ROOM_REVINFO"
-                             referencedColumnNames="REV"
-                             nullable="false"/>
-            </column>
-            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <addPrimaryKey tableName="RESIDENT_CONDITION_AUD" columnNames="ROOM_NUMBER, REV"/>
+<!--        <createTable tableName="RESIDENT_CONDITION_AUD">-->
+<!--            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>-->
+<!--            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="RESIDENT_ROOM_NUMBER" type="VARCHAR(50)"/>-->
+<!--            <column name="RESIDENT_ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CONDITION" type="VARCHAR(250)"/>-->
+<!--            <column name="CONDITION_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="REV" type="BIGINT">-->
+<!--                <constraints referencedTableName="REVINFO"-->
+<!--                             foreignKeyName="FK_ROOM_REVINFO"-->
+<!--                             referencedColumnNames="REV"-->
+<!--                             nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="REVTYPE" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--        <addPrimaryKey tableName="RESIDENT_CONDITION_AUD" columnNames="ROOM_NUMBER, REV"/>-->
 
 <!--        <insert tableName="CONDITION">-->
 <!--            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>-->

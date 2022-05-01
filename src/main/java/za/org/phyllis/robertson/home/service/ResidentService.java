@@ -35,21 +35,21 @@ public class ResidentService {
     @Transactional
     public ResidentDO findResidentByIdNumber(String idNumber) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
-        resident.orElseThrow(() -> new ResourceNotFoundException(String.format("ID Number :%s", idNumber)));
+        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("ID Number :%s", idNumber)));
         return resident.map(ResidentDO::new).get();
     }
 
     @Transactional
     public ResidentDO findResidentByNickName(String nickName) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByNickName(nickName);
-        resident.orElseThrow(() -> new ResourceNotFoundException(String.format("NickName :%s", nickName)));
+        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("NickName :%s", nickName)));
         return resident.map(ResidentDO::new).get();
     }
 
     @Transactional
     public ResidentDO updateResidentByNickName(String idNumber, String newNickName) throws ResourceNotFoundException {
         Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
-        resident.orElseThrow(() -> new ResourceNotFoundException(String.format("ID Number :%s", idNumber)));
+        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("ID Number :%s", idNumber)));
         resident.get().setNickName(newNickName);
         residentRepository.save(resident.get());
         return resident.map(ResidentDO::new).get();

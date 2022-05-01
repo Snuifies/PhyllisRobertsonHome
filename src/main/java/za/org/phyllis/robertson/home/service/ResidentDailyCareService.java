@@ -28,23 +28,23 @@ public class ResidentDailyCareService {
 
     public ResidentDailyCareDO findDailyCareByRoomNumber(String roomNumber) throws ResourceNotFoundException {
         Optional<ResidentDailyCare> dailyCare = repository.findByRoomNumber(roomNumber);
-        dailyCare.orElseThrow(() -> new ResourceNotFoundException(String.format("Daily Care Record Not found for Room :%s", roomNumber)));
+        dailyCare.orElseThrow(() -> new ResourceNotFoundException("ResidentDailyCare", String.format("Daily Care Record Not found for Room :%s", roomNumber)));
         return dailyCare.map(ResidentDailyCareDO::new).get();
 
     }
 
     public ResidentDailyCareDO updateDailyCareBathType(String roomNumber, BathType bathType) throws ResourceNotFoundException {
         Optional<ResidentDailyCare> dailyCare = repository.findByRoomNumber(roomNumber);
-        dailyCare.orElseThrow(() -> new ResourceNotFoundException(String.format("Daily Care Record Not found for Room :%s", roomNumber)));
+        dailyCare.orElseThrow(() -> new ResourceNotFoundException("ResidentDailyCare", String.format("Daily Care Record Not found for Room :%s", roomNumber)));
         dailyCare.get().setBath(bathType);
         repository.save(dailyCare.get());
         return dailyCare.map(ResidentDailyCareDO::new).get();
     }
 
-    public ResidentDailyCareDO updateDailyCareMedicationAcuteTime(String roomNumber, LocalTime medicationTime)  throws ResourceNotFoundException {
+    public ResidentDailyCareDO updateDailyCareMedicationAcuteTime(String roomNumber, LocalTime medicationTime) throws ResourceNotFoundException {
         Optional<ResidentDailyCare> dailyCare = repository.findByRoomNumber(roomNumber);
-        dailyCare.orElseThrow(() -> new ResourceNotFoundException(String.format("Daily Care Record Not found for Room :%s", roomNumber)));
-        dailyCare.get().setMedicationAcuteTime(medicationTime.getHour() +  ":" + medicationTime.getMinute());
+        dailyCare.orElseThrow(() -> new ResourceNotFoundException("ResidentDailyCare", String.format("Daily Care Record Not found for Room :%s", roomNumber)));
+        dailyCare.get().setMedicationAcuteTime(medicationTime.getHour() + ":" + medicationTime.getMinute());
         repository.save(dailyCare.get());
         return dailyCare.map(ResidentDailyCareDO::new).get();
     }

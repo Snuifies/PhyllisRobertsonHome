@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @FieldNameConstants
 @Data
-@Audited(withModifiedFlag = true)
+//@Audited(withModifiedFlag = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -29,8 +29,8 @@ public class ResidentCondition implements Serializable {
     @Column(name = "CONDITION")
     private String condition;
 
-    //    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "RESIDENT_ROOM_NUMBER")
     private Resident resident;
 
 }

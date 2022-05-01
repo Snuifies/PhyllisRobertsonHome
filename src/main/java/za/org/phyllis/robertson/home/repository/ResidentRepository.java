@@ -15,4 +15,6 @@ public interface ResidentRepository extends JpaRepository<Resident, Long> {
     public Optional<Resident> findByIdNumber(String idNumber);
 
     public Optional<Resident> findByNickName(String nickName);
+
+    Optional<Resident> findByRoomNumber(String roomNumber);
 }

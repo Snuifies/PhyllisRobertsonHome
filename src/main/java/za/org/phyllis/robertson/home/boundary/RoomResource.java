@@ -22,7 +22,7 @@ public class RoomResource {
     public RoomResponse getRoom(@PathVariable("roomNumber") String roomNumber) {
         try {
             return RoomResponse.builder().room(roomService.findByRoomNumber(roomNumber)).build();
-        } catch (ResourceNotFoundException ex) {
+        } catch (Exception ex) {
             return RoomResponse.builder().message(ex.getMessage()).build();
         }
     }
@@ -31,7 +31,7 @@ public class RoomResource {
     public RoomResponse addRoom(@PathVariable("roomNumber") String roomNumber, @PathVariable("description") String description) {
         try {
             return RoomResponse.builder().room(roomService.addRoom(roomNumber, description)).build();
-        } catch (ResourceAlreadyExistsException e) {
+        } catch (Exception e) {
             return RoomResponse.builder().message(e.getMessage()).build();
         }
     }
@@ -40,7 +40,7 @@ public class RoomResource {
     public RoomResponse updateRoomDescription(@PathVariable("roomNumber") String roomNumber, @PathVariable("description") String description) {
         try {
             return RoomResponse.builder().room(roomService.updateRoomDescription(roomNumber, description)).build();
-        } catch (ResourceNotFoundException e) {
+        } catch (Exception e) {
             return RoomResponse.builder().message(e.getMessage()).build();
         }
     }
