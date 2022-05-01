@@ -87,4 +87,34 @@ public class ResidentResource {
         }
     }
 
+    @GetMapping("/conditions/{idNumber}")
+    public ResidentConditionResponse findResidentConditions(@PathVariable("idNumber") String idNumber) {
+        try {
+            return ResidentConditionResponse.builder().conditions(residentService.findResidentConditionsByResidentIdNumber(idNumber)).build();
+        } catch (Exception e) {
+            return ResidentConditionResponse.builder().message(e.getMessage()).build();
+        }
+    }
+
+    @PatchMapping("/conditions/{idNumber}/{newCondition}")
+    public ResidentConditionResponse addResidentCondition(@PathVariable("idNumber") String idNumber,
+                                                 @PathVariable("newCondition") String newCondition) {
+        try {
+            return ResidentConditionResponse.builder().conditions(residentService.addResidentCondition(idNumber, newCondition)).build();
+        } catch (Exception e) {
+            return ResidentConditionResponse.builder().message(e.getMessage()).build();
+        }
+    }
+    @DeleteMapping("/conditions/{idNumber}/{condition}")
+    public ResidentConditionResponse deleteResidentCondition(@PathVariable("idNumber") String idNumber,
+                                                          @PathVariable("condition") String condition) {
+        try {
+            return ResidentConditionResponse.builder().conditions(residentService.deleteResidentCondition(idNumber, condition)).build();
+        } catch (Exception e) {
+            return ResidentConditionResponse.builder().message(e.getMessage()).build();
+        }
+    }
+
+
+
 }

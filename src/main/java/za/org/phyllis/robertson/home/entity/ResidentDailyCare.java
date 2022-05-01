@@ -21,7 +21,7 @@ import java.time.LocalTime;
 //@Audited(withModifiedFlag = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "RESIDENT_DAILY_CARE")
+@Entity//(name = "RESIDENT_DAILY_CARE")
 @Table(name = "RESIDENT_DAILY_CARE")
 public class ResidentDailyCare implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

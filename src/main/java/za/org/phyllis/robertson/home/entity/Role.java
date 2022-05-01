@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 //@Audited(withModifiedFlag = true)
-@Entity(name = "ROLES")
+@Entity//(name = "ROLES")
 @Table(name = "ROLES")
 public class Role implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

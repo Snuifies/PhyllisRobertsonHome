@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 //@Audited(withModifiedFlag = true)
-@Entity(name = "ROOM")
+@Entity//(name = "ROOM")
 @Table(name = "ROOM")
 public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

@@ -27,7 +27,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 //@Audited(withModifiedFlag = true)
-@Entity(name = "RESIDENT")
+@Entity//(name = "RESIDENT")
 @Table(name = "RESIDENT")
 public class Resident implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
@@ -130,9 +130,9 @@ public class Resident implements Serializable {
     private ResidentMeal residentMeal;
 
 //    @NotAudited
-////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-//    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    private Set<ResidentCondition> conditions = new HashSet<>();
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @OneToMany(mappedBy = "resident")
+    private Set<ResidentCondition> conditions = new HashSet<>();
 
 ////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 //@Audited(withModifiedFlag = true)
-@Entity(name = "USERS")
+@Entity//(name = "USERS")
 @Table(name = "USERS")
 public class User implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

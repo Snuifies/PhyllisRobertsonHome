@@ -20,7 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 //@Audited(withModifiedFlag = true)
-@Entity(name = "PRESCRIPTION")
+@Entity//(name = "PRESCRIPTION")
 @Table(name = "PRESCRIPTION")
 public class Prescription implements Serializable {
 
