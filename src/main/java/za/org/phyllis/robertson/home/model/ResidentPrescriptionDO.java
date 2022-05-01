@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import za.org.phyllis.robertson.home.entity.Prescription;
+import za.org.phyllis.robertson.home.entity.ResidentPrescription;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -21,7 +21,7 @@ import za.org.phyllis.robertson.home.entity.Prescription;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PrescriptionDO {
+public class ResidentPrescriptionDO {
 
     @JsonProperty("id")
     private Long id;
@@ -41,7 +41,7 @@ public class PrescriptionDO {
     @JsonProperty("prescriptionDueForRenewal")
     private Boolean prescriptionDueForRenewal;
 
-    public PrescriptionDO(Prescription prescription) {
+    public ResidentPrescriptionDO(ResidentPrescription prescription) {
         this.id = prescription.getId();
         this.prescription = prescription.getPrescription();
         this.dose = prescription.getDose();

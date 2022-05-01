@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
         "attendingDoctor",
         "accompaniedBy",
         "treatment",
-        "nextAppointment",
+        "nextAppointmentDate",
         "medicationToPharmacyDate",
         "blistersReceivedDate",
         "blistersReceived",
@@ -137,8 +137,8 @@ public class ResidentDO implements Serializable {
     @JsonProperty("copyOfPrescription")
     private byte[] copyOfPrescription;
 
-    @JsonProperty("nextAppointment")
-    private Calendar nextAppointment;
+    @JsonProperty("nextAppointmentDate")
+    private Calendar nextAppointmentDate;
 
     @JsonProperty("medicationToPharmacyDate")
     private Calendar medicationToPharmacyDate;
@@ -153,7 +153,7 @@ public class ResidentDO implements Serializable {
     private Set<ResidentConditionDO> conditions = new HashSet<>();
 
     @Column(name = "prescriptions")
-    private Set<PrescriptionDO> prescriptions = new HashSet<>();
+    private Set<ResidentPrescriptionDO> prescriptions = new HashSet<>();
 
     public ResidentDO(Resident resident) {
         this.idNumber = resident.getIdNumber();
@@ -173,12 +173,11 @@ public class ResidentDO implements Serializable {
         this.parentGuardianPhoneNumber = resident.getParentGuardianPhoneNumber();
         this.parentGuardianEmail = resident.getParentGuardianEmail();
         this.doctorVisitDate = resident.getDoctorVisitDate();
-        this.doctorVisitDate = resident.getDoctorVisitDate();
         this.attendingDoctor = resident.getAttendingDoctor();
         this.accompaniedBy = resident.getAccompaniedBy();
         this.treatment = resident.getTreatment();
         this.copyOfPrescription = resident.getCopyOfPrescription();
-        this.nextAppointment = resident.getNextAppointment();
+        this.nextAppointmentDate = resident.getNextAppointmentDate();
         this.medicationToPharmacyDate = resident.getMedicationToPharmacyDate();
         this.blistersReceivedDate = resident.getBlistersReceivedDate();
         this.blistersReceived = resident.getBlistersReceived();
@@ -191,14 +190,14 @@ public class ResidentDO implements Serializable {
         if (!Objects.isNull(resident.getResidentMeal())) {
             this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
         }
-//        if (!Objects.isNull(resident.getConditions())) {
-//            conditions.addAll(
-//                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));
-//        }
-//        if (!Objects.isNull(resident.getPrescriptions())) {
-//            prescriptions.addAll(
-//                    resident.getPrescriptions().stream().map(PrescriptionDO::new).collect(Collectors.toSet()));
-//        }
-
+        if (!Objects.isNull(resident.getConditions())) {
+            conditions.addAll(
+                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));
+        }
+        if (!Objects.isNull(resident.getPrescriptions())) {
+            prescriptions.addAll(
+                    resident.getPrescriptions().stream().map(ResidentPrescriptionDO::new).collect(Collectors.toSet()));
+        }
     }
+
 }

@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 //@Audited(withModifiedFlag = true)
-@Entity//(name = "ROOM")
+@Entity
 @Table(name = "ROOM")
 public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
@@ -89,7 +89,7 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToOne(mappedBy = "room")
+    @OneToOne(mappedBy = "room", fetch = FetchType.LAZY)
     private Resident resident;
 
 }

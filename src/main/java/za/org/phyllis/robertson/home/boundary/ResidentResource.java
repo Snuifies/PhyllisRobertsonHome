@@ -115,6 +115,32 @@ public class ResidentResource {
         }
     }
 
+    @GetMapping("/prescriptions/{idNumber}")
+    public ResidentPrescriptionResponse findResidentPrescriptions(@PathVariable("idNumber") String idNumber) {
+        try {
+            return ResidentPrescriptionResponse.builder().prescriptions(residentService.findResidentPrescriptions(idNumber)).build();
+        } catch (Exception e) {
+            return ResidentPrescriptionResponse.builder().message(e.getMessage()).build();
+        }
+    }
 
+    @GetMapping("/prescriptions/{idNumber}/{prescription}")
+    public ResidentPrescriptionResponse addResidentPrescriptions(@PathVariable("idNumber") String idNumber, @PathVariable("prescription") String prescription) {
+        try {
+            return ResidentPrescriptionResponse.builder().prescriptions(residentService.addResidentPrescriptions(idNumber, prescription)).build();
+        } catch (Exception e) {
+            return ResidentPrescriptionResponse.builder().message(e.getMessage()).build();
+        }
+    }
+
+
+    @DeleteMapping("/prescriptions/{idNumber}/{prescription}")
+    public ResidentPrescriptionResponse deleteResidentPrescription(@PathVariable("idNumber") String idNumber, @PathVariable("prescription") String prescription) {
+        try {
+            return ResidentPrescriptionResponse.builder().prescriptions(residentService.deleteResidentPrescription(idNumber, prescription)).build();
+        } catch (Exception e) {
+            return ResidentPrescriptionResponse.builder().message(e.getMessage()).build();
+        }
+    }
 
 }

@@ -17,7 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity//(name = "RESIDENT_CONDITION")
+@Entity
 @Table(name = "RESIDENT_CONDITION")
 public class ResidentCondition implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;

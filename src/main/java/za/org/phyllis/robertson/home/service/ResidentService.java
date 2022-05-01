@@ -5,19 +5,15 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import za.org.phyllis.robertson.home.entity.Resident;
-import za.org.phyllis.robertson.home.entity.ResidentCondition;
-import za.org.phyllis.robertson.home.entity.ResidentDailyCare;
-import za.org.phyllis.robertson.home.entity.ResidentMeal;
+import za.org.phyllis.robertson.home.entity.*;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.*;
-import za.org.phyllis.robertson.home.repository.ResidentConditionRepository;
-import za.org.phyllis.robertson.home.repository.ResidentDailyCareRepository;
-import za.org.phyllis.robertson.home.repository.ResidentMealRepository;
-import za.org.phyllis.robertson.home.repository.ResidentRepository;
+import za.org.phyllis.robertson.home.repository.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -28,21 +24,25 @@ public class ResidentService {
     ResidentDailyCareRepository careRepository;
     ResidentMealRepository mealRepository;
     ResidentConditionRepository conditionRepository;
+    ResidentPrescriptionRepository prescriptionRepository;
 
     @Autowired
     public ResidentService(ResidentRepository residentRepository,
                            ResidentDailyCareRepository careRepository,
                            ResidentMealRepository mealRepository,
-                           ResidentConditionRepository conditionRepository) {
+                           ResidentConditionRepository conditionRepository,
+                           ResidentPrescriptionRepository prescriptionRepository) {
         this.residentRepository = residentRepository;
         this.careRepository = careRepository;
         this.mealRepository = mealRepository;
         this.conditionRepository = conditionRepository;
+        this.prescriptionRepository = prescriptionRepository;
     }
 
     @Transactional
     public List<ResidentDO> findAllResidents() {
-        return residentRepository.findAll().stream().map(ResidentDO::new).collect(Collectors.toList());
+        List<Resident> residents = residentRepository.findAll();
+        return residents.stream().map(ResidentDO::new).collect(Collectors.toList());
     }
 
     @Transactional
@@ -104,7 +104,7 @@ public class ResidentService {
     }
 
     @Transactional
-    public List<ResidentConditionDO> findResidentConditionsByResidentIdNumber(String idNumber) throws ResourceNotFoundException {
+    public List<ResidentConditionDO> findResidentConditionsByResidentIdNumber(String idNumber) {
         List<ResidentCondition> conditions = conditionRepository.findByResidentIdNumber(idNumber);
         return conditions.stream().map(ResidentConditionDO::new).collect(Collectors.toList());
     }
@@ -123,12 +123,43 @@ public class ResidentService {
     }
 
     @Transactional
-    public List<ResidentConditionDO> deleteResidentCondition(String idNumber, String condition) throws ResourceNotFoundException {
+    public List<ResidentConditionDO> deleteResidentCondition(String idNumber, String condition) {
         List<ResidentCondition> conditions = conditionRepository.findByResidentIdNumber(idNumber);
-        Optional<ResidentCondition> existingCondition = conditions.stream().filter(s -> s.getCondition().equalsIgnoreCase(condition)).findFirst();
-        if (existingCondition.isPresent()) {
-            conditionRepository.delete(existingCondition.get());
+        Optional<ResidentCondition> existing = conditions.stream().filter(s -> s.getCondition().equalsIgnoreCase(condition)).findFirst();
+        if (existing.isPresent()) {
+            conditionRepository.delete(existing.get());
         }
         return conditionRepository.findByResidentIdNumber(idNumber).stream().map(ResidentConditionDO::new).collect(Collectors.toList());
     }
+
+    @Transactional
+    public List<ResidentPrescriptionDO> findResidentPrescriptions(String idNumber) {
+        List<ResidentPrescription> prescriptions = prescriptionRepository.findByResidentIdNumber(idNumber);
+        return prescriptions.stream().map(ResidentPrescriptionDO::new).collect(Collectors.toList());
+
+    }
+
+    @Transactional
+    public List<ResidentPrescriptionDO> addResidentPrescriptions(String idNumber, String prescription) throws ResourceNotFoundException {
+        Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
+        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("ID Number [%s]", idNumber)));
+        List<ResidentPrescription> prescriptions = prescriptionRepository.findByResidentIdNumber(idNumber);
+        Optional<ResidentPrescription> existing = prescriptions.stream().filter(s -> s.getPrescription().equalsIgnoreCase(prescription)).findFirst();
+        if (!existing.isPresent()) {
+            ResidentPrescription condition = ResidentPrescription.builder().resident(resident.get()).prescription(prescription).build();
+            prescriptionRepository.save(condition);
+        }
+        return prescriptionRepository.findByResidentIdNumber(idNumber).stream().map(ResidentPrescriptionDO::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ResidentPrescriptionDO> deleteResidentPrescription(String idNumber, String prescription) {
+        List<ResidentPrescription> prescriptions = prescriptionRepository.findByResidentIdNumber(idNumber);
+        Optional<ResidentPrescription> existing = prescriptions.stream().filter(s -> s.getPrescription().equalsIgnoreCase(prescription)).findFirst();
+        if (existing.isPresent()) {
+            prescriptionRepository.delete(existing.get());
+        }
+        return prescriptionRepository.findByResidentIdNumber(idNumber).stream().map(ResidentPrescriptionDO::new).collect(Collectors.toList());
+    }
+
 }

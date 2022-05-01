@@ -28,7 +28,7 @@
             <column name="ACCOMPANIED_BY" type="VARCHAR(100)"/>
             <column name="TREATMENT" type="VARCHAR(250)"/>
             <column name="COPY_OF_PRESCRIPTION" type="LONGBLOB"/>
-            <column name="NEXT_APPOINTMENT" type="DATE"/>
+            <column name="NEXT_APPOINTMENT_DATE" type="DATE"/>
             <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
             <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
             <column name="BLISTERS_RECEIVED" type="INTEGER"/>
@@ -61,7 +61,7 @@
             <column name="ACCOMPANIED_BY" value="Suster Hester"/>
             <column name="TREATMENT" value="Treated"/>
             <column name="COPY_OF_PRESCRIPTION" value="null"/>
-            <column name="NEXT_APPOINTMENT" value="${now}"/>
+            <column name="NEXT_APPOINTMENT_DATE" value="${now}"/>
             <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>
             <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>
             <column name="BLISTERS_RECEIVED" value="5"/>

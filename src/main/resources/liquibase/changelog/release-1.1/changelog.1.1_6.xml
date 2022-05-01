@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet author="Marius" id="Create Prescription Table">
-        <createTable tableName="PRESCRIPTION">
+        <createTable tableName="RESIDENT_PRESCRIPTION">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="PRESCRIPTION" type="VARCHAR(100)"/>
             <column name="DOSE" type="VARCHAR(100)"/>
@@ -14,11 +14,38 @@
             <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
             <column name="RESIDENT_ID" type="BIGINT"/>
         </createTable>
-        <addPrimaryKey tableName="PRESCRIPTION" columnNames="ID"/>
+        <addPrimaryKey tableName="RESIDENT_PRESCRIPTION" columnNames="ID"/>
     </changeSet>
 
-<!--    <changeSet author="Marius" id="Create PRESCRIPTION_AUD Table">-->
-<!--        <createTable tableName="PRESCRIPTION_AUD">-->
+    <changeSet author="Marius" id="Create PRESCRIPTION Data">
+        <insert tableName="RESIDENT_PRESCRIPTION">
+            <column name="DOSE" value="1x3x#"/>
+            <column name="PRESCRIPTION" value="Rivotril"/>
+            <column name="ITEM_SENT" value="140"/>
+            <column name="QUANTITY_SENT" value="100"/>
+            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+        </insert>
+        <insert tableName="RESIDENT_PRESCRIPTION">
+            <column name="DOSE" value="1x3x#"/>
+            <column name="PRESCRIPTION" value="Lamicton"/>
+            <column name="ITEM_SENT" value="100"/>
+            <column name="QUANTITY_SENT" value="150"/>
+            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+        </insert>
+        <insert tableName="RESIDENT_PRESCRIPTION">
+            <column name="DOSE" value="1x3x#"/>
+            <column name="PRESCRIPTION" value="Convulex"/>
+            <column name="ITEM_SENT" value="100"/>
+            <column name="QUANTITY_SENT" value="250"/>
+            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+        </insert>
+    </changeSet>
+
+    <!--    <changeSet author="Marius" id="Create PRESCRIPTION_AUD Table">-->
+<!--        <createTable tableName="RESIDENT_PRESCRIPTION_AUD">-->
 <!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
 <!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
 <!--            <column name="RESIDENT_ID" type="BIGINT"/>-->
@@ -39,33 +66,5 @@
 <!--        </createTable>-->
 <!--        <addPrimaryKey tableName="PRESCRIPTION_AUD" columnNames="ID, REV"/>-->
 <!--    </changeSet>-->
-
-
-    <changeSet author="Marius" id="Create PRESCRIPTION Data">
-        <insert tableName="PRESCRIPTION">
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
-            <column name="DOSE" value="1x3x#"/>
-            <column name="PRESCRIPTION" value="Rivotril"/>
-            <column name="ITEM_SENT" value="140"/>
-            <column name="QUANTITY_SENT" value="100"/>
-            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
-        </insert>
-        <insert tableName="PRESCRIPTION">
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
-            <column name="DOSE" value="1x3x#"/>
-            <column name="PRESCRIPTION" value="Lamicton"/>
-            <column name="ITEM_SENT" value="100"/>
-            <column name="QUANTITY_SENT" value="150"/>
-            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
-        </insert>
-        <insert tableName="PRESCRIPTION">
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
-            <column name="DOSE" value="1x3x#"/>
-            <column name="PRESCRIPTION" value="Convulex"/>
-            <column name="ITEM_SENT" value="100"/>
-            <column name="QUANTITY_SENT" value="250"/>
-            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
-        </insert>
-    </changeSet>
 
 </databaseChangeLog>
