@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "id",
         "roomNumber",
         "available",
         "houseKeepingDate",
@@ -46,6 +47,9 @@ import java.util.Objects;
 @Builder
 public class RoomDO implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
+
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("roomNumber")
     private String roomNumber;

@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "roomNumber",
+        "id",
         "foodServiceDate",
         "dietType",
         "complaintDate",
@@ -36,35 +36,47 @@ import java.util.Calendar;
 public class ResidentMealDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("roomNumber")
-    private String roomNumber;
-    @JsonProperty("foodServiceDate")
+    @JsonProperty("id")
+    private Long id;
+
+   @JsonProperty("foodServiceDate")
     private Calendar foodServiceDate;
+
     @JsonProperty("dietType")
     private DietType dietType;
+
     @JsonProperty("complaintDate")
     private Calendar complaintDate;
+
     @JsonProperty("complaintDetail")
     private String complaintDetail;
+
     @JsonProperty("plannedAbsenceDate")
     private Calendar plannedAbsenceDate;
+
     @JsonProperty("mealsAbsentDetail")
     private String mealsAbsentDetail;
+
     @JsonProperty("packedLunchRequestDate")
     private Calendar packedLunchRequestDate;
+
     @JsonProperty("keptLunchRequestDate")
     private Calendar keptLunchRequestDate;
+
     @JsonProperty("bedMealRequestDate")
     private Calendar bedMealRequestDate;
+
     @JsonProperty("bedMealRequestType")
     private MealType bedMealRequestType;
+
     @JsonProperty("foodNotEatenDate")
     private Calendar foodNotEatenDate;
+
     @JsonProperty("foodNotEatenDetail")
     private String foodNotEatenDetail;
 
     public ResidentMealDO(ResidentMeal meal) {
-        this.roomNumber = meal.getRoomNumber();
+        this.id = meal.getId();
         this.foodServiceDate = meal.getFoodServiceDate();
         this.dietType = meal.getDietType();
         this.complaintDate = meal.getComplaintDate();

@@ -18,7 +18,7 @@ import java.time.LocalTime;
  */
 @FieldNameConstants
 @Data
-@Audited(withModifiedFlag = true)
+//@Audited(withModifiedFlag = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "RESIDENT_DAILY_CARE")
@@ -27,8 +27,9 @@ public class ResidentDailyCare implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ROOM_NUMBER")
-    private String roomNumber;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "CARE_DATE")
     private LocalDate careDate;

@@ -17,6 +17,7 @@ import za.org.phyllis.robertson.home.repository.ResidentRepository;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -32,25 +33,29 @@ public class ResidentConditionService {
         this.residentRepository = residentRepository;
     }
 
-    public ResidentConditionDO addResidentCondition(String roomNumber, String newCondition) throws ResourceNotFoundException {
-        Optional<Resident> resident = residentRepository.findByRoomNumber(roomNumber);
-        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("ID Number :%s", roomNumber)));
-        Optional<Boolean> conditionAlreadyLogged = resident.get().getConditions().stream().map(condition -> condition.getCondition().equalsIgnoreCase(newCondition)).findFirst();
-        if (conditionAlreadyLogged.isPresent() && conditionAlreadyLogged.get().booleanValue() == true) {
-            throw new ResourceAlreadyExistsException(String.format("Room Number [%s]: Condition [%s]", roomNumber, newCondition));
-        }
-        ResidentCondition condition = ResidentCondition.builder().resident(resident.get()).roomNumber(resident.get().getRoomNumber()).condition(newCondition).build();
-        resident.get().getConditions().add(condition);
-        residentRepository.save(resident.get());
-        conditionRepository.save(condition);
-        return new ResidentConditionDO(condition);
+    @Transactional
+    public ResidentDO addResidentCondition(String roomNumber, String newCondition) throws ResourceNotFoundException {
+//        Optional<Resident> resident = residentRepository.findByRoomNumber(roomNumber);
+//        List<ResidentCondition> conditions = conditionRepository.findByRoomNumber(roomNumber);
+//        if (!conditions.isEmpty()) {
+//            Optional<ResidentCondition> existingCondition = conditions.stream().filter(condition -> condition.equals(newCondition)).findFirst();
+//            if (existingCondition.isPresent()) {
+//                throw new ResourceAlreadyExistsException(String.format("Room Number [%s] Condition [%s]", roomNumber, newCondition));
+//            }
+//        }
+//        ResidentCondition condition = ResidentCondition.builder().resident(resident.get()).condition(newCondition).build();
+//        conditionRepository.save(condition);
+//        return resident.map(ResidentDO::new).get();
+        return null;
     }
 
+    @Transactional
     public List<ResidentConditionDO> findResidentConditions(String roomNumber) throws ResourceNotFoundException {
-        List<ResidentCondition> conditions = conditionRepository.findByRoomNumber(roomNumber);
-        if (Objects.isNull(conditions) || conditions.isEmpty()) {
-            throw new ResourceNotFoundException("Resident", String.format("Room Number [%s]", roomNumber));
-        }
-        return conditions.stream().map(ResidentConditionDO::new).collect(Collectors.toList());
+//        List<ResidentCondition> conditions = conditionRepository.findByRoomNumber(roomNumber);
+//        if (Objects.isNull(conditions) || conditions.isEmpty()) {
+//            throw new ResourceNotFoundException("ResidentCondition", String.format("Room Number [%s]", roomNumber));
+//        }
+//        return conditions.stream().map(ResidentConditionDO::new).collect(Collectors.toList());
+        return null;
     }
 }

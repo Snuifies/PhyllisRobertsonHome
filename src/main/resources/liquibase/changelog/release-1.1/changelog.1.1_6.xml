@@ -7,35 +7,41 @@
     <changeSet author="Marius" id="Create Prescription Table">
         <createTable tableName="PRESCRIPTION">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="RESIDENT_ID" type="BIGINT"/>
             <column name="PRESCRIPTION" type="VARCHAR(100)"/>
             <column name="DOSE" type="VARCHAR(100)"/>
             <column name="ITEM_SENT" type="VARCHAR(100)"/>
             <column name="QUANTITY_SENT" type="NUMBER"/>
             <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
-        </createTable>
-
-        <createTable tableName="PRESCRIPTION_AUD">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="RESIDENT_ID" type="BIGINT"/>
-            <column name="PRESCRIPTION" type="VARCHAR(100)"/>
-            <column name="DOSE" type="VARCHAR(100)"/>
-            <column name="ITEM_SENT" type="VARCHAR(100)"/>
-            <column name="QUANTITY_SENT" type="NUMBER"/>
-            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>
-            <column name="REV" type="BIGINT">
-                <constraints referencedTableName="REVINFO"
-                             foreignKeyName="FK_ROOM_REVINFO"
-                             referencedColumnNames="REV"
-                             nullable="false"/>
-            </column>
-            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
-        <addPrimaryKey tableName="PRESCRIPTION_AUD" columnNames="ID, REV"/>
+        <addPrimaryKey tableName="PRESCRIPTION" columnNames="ID"/>
+    </changeSet>
+
+<!--    <changeSet author="Marius" id="Create PRESCRIPTION_AUD Table">-->
+<!--        <createTable tableName="PRESCRIPTION_AUD">-->
+<!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
+<!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="RESIDENT_ID" type="BIGINT"/>-->
+<!--            <column name="PRESCRIPTION" type="VARCHAR(100)"/>-->
+<!--            <column name="DOSE" type="VARCHAR(100)"/>-->
+<!--            <column name="ITEM_SENT" type="VARCHAR(100)"/>-->
+<!--            <column name="QUANTITY_SENT" type="NUMBER"/>-->
+<!--            <column name="PRESCRIPTION_DUE_FOR_RENEWAL" type="BOOLEAN"/>-->
+<!--            <column name="REV" type="BIGINT">-->
+<!--                <constraints referencedTableName="REVINFO"-->
+<!--                             foreignKeyName="FK_ROOM_REVINFO"-->
+<!--                             referencedColumnNames="REV"-->
+<!--                             nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="REVTYPE" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--        <addPrimaryKey tableName="PRESCRIPTION_AUD" columnNames="ID, REV"/>-->
+<!--    </changeSet>-->
 
 
+    <changeSet author="Marius" id="Create PRESCRIPTION Data">
         <insert tableName="PRESCRIPTION">
             <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
             <column name="DOSE" value="1x3x#"/>
@@ -60,7 +66,6 @@
             <column name="QUANTITY_SENT" value="250"/>
             <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
         </insert>
-
     </changeSet>
 
 </databaseChangeLog>

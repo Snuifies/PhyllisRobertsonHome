@@ -23,14 +23,16 @@ public class ResidentCondition implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ROOM_NUMBER")
-    private String roomNumber;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "CONDITION")
     private String condition;
 
-    @ManyToOne
-    @JoinColumn(name = "RESIDENT_ROOM_NUMBER")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RESIDENT_ID")
     private Resident resident;
+
 
 }

@@ -6,7 +6,7 @@
 
     <changeSet author="Marius" id="Create RESIDENT_MEAL Table">
         <createTable tableName="RESIDENT_MEAL">
-            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="FOOD_SERVICE_DATE" type="DATE"/>
             <column name="DIET_TYPE" type="VARCHAR(250)"/>
             <column name="COMPLAINT_DATE" type="DATE"/>
@@ -19,49 +19,54 @@
             <column name="BED_MEAL_REQUEST_TYPE" type="VARCHAR(250)"/>
             <column name="FOOD_NOT_EATEN_DATE" type="DATE"/>
             <column name="FOOD_NOT_EATEN_DETAIL" type="VARCHAR(250)"/>
+            <column name="RESIDENT_ID" type="BIGINT"/>
         </createTable>
-        <addPrimaryKey tableName="RESIDENT_MEAL" columnNames="ROOM_NUMBER"/>
-
-        <createTable tableName="RESIDENT_MEAL_AUD">
-            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
-            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FOOD_SERVICE_DATE" type="DATE"/>
-            <column name="FOOD_SERVICE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="DIET_TYPE" type="VARCHAR(250)"/>
-            <column name="DIET_TYPE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="COMPLAINT_DATE" type="DATE"/>
-            <column name="COMPLAINT_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="COMPLAINT_DETAIL" type="VARCHAR(250)"/>
-            <column name="COMPLAINT_DETAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="PLANNED_ABSENCE_DATE" type="DATE"/>
-            <column name="PLANNED_ABSENCE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="MEALS_ABSENT_DETAIL" type="VARCHAR(250)"/>
-            <column name="MEALS_ABSENT_DETAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="PACKED_LUNCH_REQUEST_DATE" type="DATE"/>
-            <column name="PACKED_LUNCH_REQUEST_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="KEPT_LUNCH_REQUEST_DATE" type="DATE"/>
-            <column name="KEPT_LUNCH_REQUEST_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="BED_MEAL_REQUEST_DATE" type="DATE"/>
-            <column name="BED_MEAL_REQUEST_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="BED_MEAL_REQUEST_TYPE" type="VARCHAR(250)"/>
-            <column name="BED_MEAL_REQUEST_TYPE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FOOD_NOT_EATEN_DATE" type="DATE"/>
-            <column name="FOOD_NOT_EATEN_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FOOD_NOT_EATEN_DETAIL" type="VARCHAR(250)"/>
-            <column name="FOOD_NOT_EATEN_DETAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="REV" type="BIGINT">
-                <constraints referencedTableName="REVINFO"
-                             foreignKeyName="FK_ROOM_REVINFO"
-                             referencedColumnNames="REV"
-                             nullable="false"/>
-            </column>
-            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <addPrimaryKey tableName="RESIDENT_MEAL_AUD" columnNames="ROOM_NUMBER, REV"/>
+        <addPrimaryKey tableName="RESIDENT_MEAL" columnNames="ID"/>
     </changeSet>
+
+<!--    <changeSet author="Marius" id="Create RESIDENT_MEAL_AUD">-->
+<!--        <createTable tableName="RESIDENT_MEAL_AUD">-->
+<!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
+<!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>-->
+<!--            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FOOD_SERVICE_DATE" type="DATE"/>-->
+<!--            <column name="FOOD_SERVICE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="DIET_TYPE" type="VARCHAR(250)"/>-->
+<!--            <column name="DIET_TYPE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="COMPLAINT_DATE" type="DATE"/>-->
+<!--            <column name="COMPLAINT_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="COMPLAINT_DETAIL" type="VARCHAR(250)"/>-->
+<!--            <column name="COMPLAINT_DETAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="PLANNED_ABSENCE_DATE" type="DATE"/>-->
+<!--            <column name="PLANNED_ABSENCE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEALS_ABSENT_DETAIL" type="VARCHAR(250)"/>-->
+<!--            <column name="MEALS_ABSENT_DETAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="PACKED_LUNCH_REQUEST_DATE" type="DATE"/>-->
+<!--            <column name="PACKED_LUNCH_REQUEST_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="KEPT_LUNCH_REQUEST_DATE" type="DATE"/>-->
+<!--            <column name="KEPT_LUNCH_REQUEST_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="BED_MEAL_REQUEST_DATE" type="DATE"/>-->
+<!--            <column name="BED_MEAL_REQUEST_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="BED_MEAL_REQUEST_TYPE" type="VARCHAR(250)"/>-->
+<!--            <column name="BED_MEAL_REQUEST_TYPE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FOOD_NOT_EATEN_DATE" type="DATE"/>-->
+<!--            <column name="FOOD_NOT_EATEN_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FOOD_NOT_EATEN_DETAIL" type="VARCHAR(250)"/>-->
+<!--            <column name="FOOD_NOT_EATEN_DETAIL_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="REV" type="BIGINT">-->
+<!--                <constraints referencedTableName="REVINFO"-->
+<!--                             foreignKeyName="FK_ROOM_REVINFO"-->
+<!--                             referencedColumnNames="REV"-->
+<!--                             nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="REVTYPE" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--        <addPrimaryKey tableName="RESIDENT_MEAL_AUD" columnNames="ROOM_NUMBER, REV"/>-->
+<!--    </changeSet>-->
 
     <changeSet author="Marius" id="Add 1st ResidentMeals">
         <insert tableName="RESIDENT_MEAL">

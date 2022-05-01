@@ -6,13 +6,17 @@
 
     <changeSet author="Marius" id="Create Condition Table">
         <createTable tableName="RESIDENT_CONDITION">
-            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
-            <column name="RESIDENT_ROOM_NUMBER" type="VARCHAR(50)"/>
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="CONDITION" type="VARCHAR(250)"/>
+            <column name="RESIDENT_ID" type="BIGINT"/>
         </createTable>
-        <addPrimaryKey tableName="RESIDENT_CONDITION" columnNames="ROOM_NUMBER"/>
+        <addPrimaryKey tableName="RESIDENT_CONDITION" columnNames="ID"/>
+    </changeSet>
 
+<!--    <changeSet author="Marius" id="Create RESIDENT_CONDITION_AUD Table">-->
 <!--        <createTable tableName="RESIDENT_CONDITION_AUD">-->
+<!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
+<!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
 <!--            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>-->
 <!--            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
 <!--            <column name="RESIDENT_ROOM_NUMBER" type="VARCHAR(50)"/>-->
@@ -31,19 +35,21 @@
 <!--            </column>-->
 <!--        </createTable>-->
 <!--        <addPrimaryKey tableName="RESIDENT_CONDITION_AUD" columnNames="ROOM_NUMBER, REV"/>-->
+<!--    </changeSet>-->
 
-<!--        <insert tableName="CONDITION">-->
-<!--            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>-->
-<!--            <column name="CONDITION" value="Nausea"/>-->
-<!--        </insert>-->
-<!--        <insert tableName="CONDITION">-->
-<!--            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>-->
-<!--            <column name="CONDITION" value="toe blisters"/>-->
-<!--        </insert>-->
-<!--        <insert tableName="CONDITION">-->
-<!--            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6512205027082')"/>-->
-<!--            <column name="CONDITION" value="Asmatic"/>-->
-<!--        </insert>-->
+    <changeSet author="Marius" id="Add Conditions">
+        <insert tableName="CONDITION">
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
+            <column name="CONDITION" value="Nausea"/>
+        </insert>
+        <insert tableName="CONDITION">
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6212205027084')"/>
+            <column name="CONDITION" value="toe blisters"/>
+        </insert>
+        <insert tableName="CONDITION">
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE ID_NUMBER='6512205027082')"/>
+            <column name="CONDITION" value="Asmatic"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

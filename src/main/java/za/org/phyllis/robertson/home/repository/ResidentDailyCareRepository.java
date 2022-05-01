@@ -13,5 +13,5 @@ import java.util.Optional;
 @Repository
 public interface ResidentDailyCareRepository extends JpaRepository<ResidentDailyCare, Long> {
 
-    public Optional<ResidentDailyCare> findByRoomNumber(String roomNumber);
+//    public Optional<ResidentDailyCare> findByRoomNumber(String roomNumber);
 }

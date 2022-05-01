@@ -15,13 +15,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited(withModifiedFlag = true)
+//@Audited(withModifiedFlag = true)
 @Entity(name = "ROLES")
 @Table(name = "ROLES")
 public class Role implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

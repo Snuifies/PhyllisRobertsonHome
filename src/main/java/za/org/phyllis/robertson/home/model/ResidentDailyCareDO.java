@@ -17,7 +17,7 @@ import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "roomNumber",
+        "id",
         "careDate",
         "careWorkerAssigned",
         "bath",
@@ -46,8 +46,8 @@ import java.util.Date;
 public class ResidentDailyCareDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("roomNumber")
-    private String roomNumber;
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("careDate")
     private LocalDate careDate;
@@ -110,7 +110,7 @@ public class ResidentDailyCareDO implements Serializable {
     private String actionsAdvised;
 
     public ResidentDailyCareDO(ResidentDailyCare residentDailyCare) {
-        this.roomNumber = residentDailyCare.getRoomNumber();
+        this.id = residentDailyCare.getId();
         this.careDate = residentDailyCare.getCareDate();
         this.careWorkerAssigned = residentDailyCare.getCareWorkerAssigned();
         this.bath = residentDailyCare.getBath();

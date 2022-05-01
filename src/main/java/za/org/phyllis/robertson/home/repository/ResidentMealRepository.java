@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ResidentMealRepository extends JpaRepository<ResidentMeal, Long> {
 
-    public Optional<ResidentMeal> findByRoomNumber(String roomNumber);
+//    public Optional<ResidentMeal> findByRoomNumber(String roomNumber);
 }

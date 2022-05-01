@@ -33,7 +33,7 @@ public class RoomService {
     @Transactional
     public RoomDO findByRoomNumber(String roomNumber) throws ResourceNotFoundException {
         Optional<Room> room = roomRepository.findByRoomNumber(roomNumber);
-        room.orElseThrow(() -> new ResourceNotFoundException("Room", String.format("Room :%s", roomNumber)));
+        room.orElseThrow(() -> new ResourceNotFoundException("Room", String.format("Room [%s]", roomNumber)));
         return room.map(RoomDO::new).get();
     }
 
@@ -51,7 +51,7 @@ public class RoomService {
     @Transactional
     public RoomDO updateRoomDescription(String roomNumber, String description) throws ResourceNotFoundException {
         Optional<Room> room = roomRepository.findByRoomNumber(roomNumber);
-        room.orElseThrow(() -> new ResourceNotFoundException("Room", String.format("Room :%s", roomNumber)));
+        room.orElseThrow(() -> new ResourceNotFoundException("Room", String.format("Room [%s]", roomNumber)));
         room.get().setDescription(description);
         roomRepository.save(room.get());
         return room.map(RoomDO::new).get();

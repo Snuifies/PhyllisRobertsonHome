@@ -7,6 +7,7 @@
     <!-- Room Objects -->
     <changeSet author="Marius" id="Create Room Table">
         <createTable tableName="ROOM">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
             <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
             <column name="HOUSE_KEEPING_DATE" type="DATE"/>
@@ -28,64 +29,66 @@
             <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
             <column name="DESCRIPTION" type="VARCHAR(250)"/>
         </createTable>
-        <addPrimaryKey tableName="ROOM" columnNames="ROOM_NUMBER"/>
+        <addPrimaryKey tableName="ROOM" columnNames="ID"/>
     </changeSet>
 
-    <changeSet author="Marius" id="Create Room Audit Table">
-        <createTable tableName="ROOM_AUD">
-           <column name="ROOM_NUMBER" type="VARCHAR(50)"/>
-            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>
-            <column name="AVAILABLE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="HOUSE_KEEPING_DATE" type="DATE"/>
-            <column name="HOUSE_KEEPING_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="WASHING_REMOVED_DATE" type="DATE"/>
-            <column name="WASHING_REMOVED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="WASHING_REMOVED_COMMENT" type="VARCHAR(250)"/>
-            <column name="WASHING_REMOVED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="WASHING_RETURNED_DATE" type="DATE"/>
-            <column name="WASHING_RETURNED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="WASHING_RETURNED_COMMENT" type="VARCHAR(250)"/>
-            <column name="WASHING_RETURNED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="WASHING_ISSUE_DATE" type="DATE"/>
-            <column name="WASHING_ISSUE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="WASHING_ISSUE_COMMENT" type="VARCHAR(250)"/>
-            <column name="WASHING_ISSUE_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="ROOM_CLEANED_DATE" type="DATE"/>
-            <column name="ROOM_CLEANED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="ROOM_CLEANED_COMMENT" type="VARCHAR(250)"/>
-            <column name="ROOM_CLEANED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="CLEANING_ISSUES_DATE" type="DATE"/>
-            <column name="CLEANING_ISSUES_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="CLEANING_ISSUES_COMMENT" type="VARCHAR(250)"/>
-            <column name="CLEANING_ISSUES_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="MONTHLY_DEEP_CLEAN_DATE" type="DATE"/>
-            <column name="MONTHLY_DEEP_CLEAN_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="MONTHLY_DEEP_CLEAN_COMMENT" type="VARCHAR(250)"/>
-            <column name="MONTHLY_DEEP_CLEAN_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FAULT_COMPLAINT_DATE" type="DATE"/>
-            <column name="FAULT_COMPLAINT_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>
-            <column name="FAULT_COMPLAINT_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FAULT_RESOLVED_DATE" type="DATE"/>
-            <column name="FAULT_RESOLVED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
-            <column name="FAULT_RESOLVED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="DESCRIPTION" type="VARCHAR(250)"/>
-            <column name="DESCRIPTION_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>
-            <column name="REV" type="BIGINT">
-                <constraints referencedTableName="REVINFO"
-                             foreignKeyName="FK_ROOM_REVINFO"
-                             referencedColumnNames="REV"
-                             nullable="false"/>
-            </column>
-            <column name="REVTYPE" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <addPrimaryKey tableName="ROOM_AUD" columnNames="ROOM_NUMBER, REV"/>
-    </changeSet>
+<!--    <changeSet author="Marius" id="Create Room Audit Table">-->
+<!--        <createTable tableName="ROOM_AUD">-->
+<!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
+<!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>-->
+<!--            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="AVAILABLE" type="BOOLEAN" defaultValueBoolean="true"/>-->
+<!--            <column name="AVAILABLE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="HOUSE_KEEPING_DATE" type="DATE"/>-->
+<!--            <column name="HOUSE_KEEPING_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_REMOVED_DATE" type="DATE"/>-->
+<!--            <column name="WASHING_REMOVED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_REMOVED_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="WASHING_REMOVED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_RETURNED_DATE" type="DATE"/>-->
+<!--            <column name="WASHING_RETURNED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_RETURNED_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="WASHING_RETURNED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_ISSUE_DATE" type="DATE"/>-->
+<!--            <column name="WASHING_ISSUE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_ISSUE_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="WASHING_ISSUE_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="ROOM_CLEANED_DATE" type="DATE"/>-->
+<!--            <column name="ROOM_CLEANED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="ROOM_CLEANED_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="ROOM_CLEANED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CLEANING_ISSUES_DATE" type="DATE"/>-->
+<!--            <column name="CLEANING_ISSUES_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CLEANING_ISSUES_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="CLEANING_ISSUES_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MONTHLY_DEEP_CLEAN_DATE" type="DATE"/>-->
+<!--            <column name="MONTHLY_DEEP_CLEAN_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MONTHLY_DEEP_CLEAN_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="MONTHLY_DEEP_CLEAN_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FAULT_COMPLAINT_DATE" type="DATE"/>-->
+<!--            <column name="FAULT_COMPLAINT_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FAULT_COMPLAINT_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="FAULT_COMPLAINT_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FAULT_RESOLVED_DATE" type="DATE"/>-->
+<!--            <column name="FAULT_RESOLVED_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>-->
+<!--            <column name="FAULT_RESOLVED_COMMENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="DESCRIPTION" type="VARCHAR(250)"/>-->
+<!--            <column name="DESCRIPTION_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="REV" type="BIGINT">-->
+<!--                <constraints referencedTableName="REVINFO"-->
+<!--                             foreignKeyName="FK_ROOM_REVINFO"-->
+<!--                             referencedColumnNames="REV"-->
+<!--                             nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="REVTYPE" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--        <addPrimaryKey tableName="ROOM_AUD" columnNames="ID, REV"/>-->
+<!--    </changeSet>-->
 
     <changeSet author="Marius" id="Add 1st Room">
         <insert tableName="ROOM">
@@ -111,6 +114,7 @@
             <column name="DESCRIPTION" value="Room With A View"/>
         </insert>
     </changeSet>
+
     <changeSet author="Marius" id="Add 2nd Room">
         <insert tableName="ROOM">
             <column name="ROOM_NUMBER" value="1G2"/>

@@ -18,13 +18,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited(withModifiedFlag = true)
+//@Audited(withModifiedFlag = true)
 @Entity(name = "ROOM")
 @Table(name = "ROOM")
 public class Room implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "ROOM_NUMBER")
     private String roomNumber;
 
@@ -85,7 +89,6 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     @OneToOne(mappedBy = "room")
     private Resident resident;
 

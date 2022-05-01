@@ -20,14 +20,14 @@ import za.org.phyllis.robertson.home.entity.ResidentCondition;
 @Builder
 public class ResidentConditionDO {
 
-    @JsonProperty("roomNumber")
-    private String roomNumber;
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("condition")
     private String condition;
 
     public ResidentConditionDO(ResidentCondition condition) {
-        this.roomNumber = condition.getRoomNumber();
+        this.id = condition.getId();
         this.condition = condition.getCondition();
     }
 }

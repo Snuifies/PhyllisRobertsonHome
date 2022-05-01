@@ -1,6 +1,8 @@
 package za.org.phyllis.robertson.home.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import za.org.phyllis.robertson.home.entity.Resident;
 
@@ -16,5 +18,6 @@ public interface ResidentRepository extends JpaRepository<Resident, Long> {
 
     public Optional<Resident> findByNickName(String nickName);
 
-    Optional<Resident> findByRoomNumber(String roomNumber);
+//    @Query(value = "SELECT T FROM RESIDENT T WHERE T.roomNumber = :roomNumber")
+//    Optional<Resident> findByRoomNumber(@Param("roomNumber") String roomNumber);
 }

@@ -24,12 +24,12 @@ public class ResidentConditionResource {
     }
 
     @PatchMapping("/{roomNumber}/{newCondition}")
-    public ResidentConditionResponse addResidentCondition(@PathVariable("roomNumber") String roomNumber,
+    public ResidentResponse addResidentCondition(@PathVariable("roomNumber") String roomNumber,
                                                  @PathVariable("newCondition") String newCondition) {
         try {
-            return ResidentConditionResponse.builder().condition(conditionService.addResidentCondition(roomNumber, newCondition)).build();
+            return ResidentResponse.builder().resident(conditionService.addResidentCondition(roomNumber, newCondition)).build();
         } catch (Exception e) {
-            return ResidentConditionResponse.builder().message(e.getMessage()).build();
+            return ResidentResponse.builder().message(e.getMessage()).build();
         }
     }
 

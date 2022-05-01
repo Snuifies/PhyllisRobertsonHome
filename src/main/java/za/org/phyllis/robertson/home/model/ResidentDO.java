@@ -63,62 +63,91 @@ public class ResidentDO implements Serializable {
 
     @JsonProperty("idNumber")
     private String idNumber;
+
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("nickName")
     private String nickName;
+
     @JsonProperty("dateOfBirth")
     private Calendar dateOfBirth;
+
     @JsonProperty("residenceType")
     private ResidenceType residenceType;
+
     @JsonProperty("medicalAidName")
     private String medicalAidName;
+
     @JsonProperty("medicalAidPlan")
     private String medicalAidPlan;
+
     @JsonProperty("medicalAidNumber")
     private String medicalAidNumber;
+
     @JsonProperty("medicalAidPhoneNumber")
     private String medicalAidPhoneNumber;
+
     @JsonProperty("preferredHospital")
     private String preferredHospital;
+
     @JsonProperty("houseDoctor")
     private String houseDoctor;
+
     @JsonProperty("houseDoctorPhoneNumber")
     private String houseDoctorPhoneNumber;
+
     @JsonProperty("ambulanceService")
     private String ambulanceService;
+
     @JsonProperty("parentGuardianName")
     private String parentGuardianName;
+
     @JsonProperty("parentGuardianPhoneNumber")
     private String parentGuardianPhoneNumber;
+
     @JsonProperty("parentGuardianEmail")
     private String parentGuardianEmail;
+
     @JsonProperty("room")
     private RoomDO room;
+
     @JsonProperty("residentDailyCare")
     private ResidentDailyCareDO residentDailyCare;
+
     @JsonProperty("residentMeal")
     private ResidentMealDO residentMeal;
+
     @JsonProperty("doctorVisitDate")
     private Calendar doctorVisitDate;
+
     @JsonProperty("attendingDoctor")
     private String attendingDoctor;
+
     @JsonProperty("accompaniedBy")
     private String accompaniedBy;
+
     @JsonProperty("treatment")
     private String treatment;
+
     @JsonProperty("copyOfPrescription")
     private byte[] copyOfPrescription;
+
     @JsonProperty("nextAppointment")
     private Calendar nextAppointment;
+
     @JsonProperty("medicationToPharmacyDate")
     private Calendar medicationToPharmacyDate;
+
     @JsonProperty("blistersReceivedDate")
     private Calendar blistersReceivedDate;
+
     @Column(name = "blistersReceived")
     private int blistersReceived;
+
     @Column(name = "conditions")
     private Set<ResidentConditionDO> conditions = new HashSet<>();
+
     @Column(name = "prescriptions")
     private Set<PrescriptionDO> prescriptions = new HashSet<>();
 
@@ -152,16 +181,16 @@ public class ResidentDO implements Serializable {
         if (!Objects.isNull(resident.getRoom())) {
             this.room = new RoomDO(resident.getRoom());
         }
-        if (!Objects.isNull(resident.getResidentDailyCare())) {
-            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
-        }
-        if (!Objects.isNull(resident.getResidentMeal())) {
-            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
-        }
-        if (!Objects.isNull(resident.getConditions())) {
-            conditions.addAll(
-                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));
-        }
+//        if (!Objects.isNull(resident.getResidentDailyCare())) {
+//            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
+//        }
+//        if (!Objects.isNull(resident.getResidentMeal())) {
+//            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
+//        }
+//        if (!Objects.isNull(resident.getConditions())) {
+//            conditions.addAll(
+//                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));
+//        }
 //        if (!Objects.isNull(resident.getPrescriptions())) {
 //            prescriptions.addAll(
 //                    resident.getPrescriptions().stream().map(PrescriptionDO::new).collect(Collectors.toSet()));

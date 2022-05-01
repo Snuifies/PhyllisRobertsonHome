@@ -3,6 +3,7 @@ package za.org.phyllis.robertson.home.service;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import za.org.phyllis.robertson.home.entity.ResidentDailyCare;
 import za.org.phyllis.robertson.home.entity.ResidentMeal;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
@@ -26,16 +27,19 @@ public class ResidentMealService {
     }
 
     public ResidentMealDO findResidentMealByRoomNumber(String roomNumber) throws ResourceNotFoundException {
-        Optional<ResidentMeal> residentMeal = repository.findByRoomNumber(roomNumber);
-        residentMeal.orElseThrow(() -> new ResourceNotFoundException("ResidentMeal", String.format("Resident Meal Record Not found for Room :%s", roomNumber)));
-        return residentMeal.map(ResidentMealDO::new).get();
+//        Optional<ResidentMeal> residentMeal = repository.findByRoomNumber(roomNumber);
+//        residentMeal.orElseThrow(() -> new ResourceNotFoundException("ResidentMeal", String.format("Resident Meal Record Not found for Room [%s]", roomNumber)));
+//        return residentMeal.map(ResidentMealDO::new).get();
+        return null;
     }
 
+    @Transactional
     public ResidentMealDO updateResidentMealDietType(String roomNumber, DietType dietType) throws ResourceNotFoundException {
-        Optional<ResidentMeal> residentMeal = repository.findByRoomNumber(roomNumber);
-        residentMeal.orElseThrow(() -> new ResourceNotFoundException("ResidentMeal", String.format("Resident Meal Record Not found for Room :%s", roomNumber)));
-        residentMeal.get().setDietType(dietType);
-        repository.save(residentMeal.get());
-        return residentMeal.map(ResidentMealDO::new).get();
+//        Optional<ResidentMeal> residentMeal = repository.findByRoomNumber(roomNumber);
+//        residentMeal.orElseThrow(() -> new ResourceNotFoundException("ResidentMeal", String.format("Resident Meal Record Not found for Room [%s]", roomNumber)));
+//        residentMeal.get().setDietType(dietType);
+//        repository.save(residentMeal.get());
+//        return residentMeal.map(ResidentMealDO::new).get();
+        return null;
     }
 }

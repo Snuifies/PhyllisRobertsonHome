@@ -22,7 +22,7 @@ import java.util.Calendar;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Audited(withModifiedFlag = true)
+//@Audited(withModifiedFlag = true)
 @Entity(name = "RESIDENT_MEAL")
 @Table(name = "RESIDENT_MEAL")
 public class ResidentMeal implements Serializable {
@@ -30,8 +30,9 @@ public class ResidentMeal implements Serializable {
     private static final long serialVersionUID = -5172178857306870614L;
 
     @Id
-    @Column(name = "ROOM_NUMBER")
-    private String roomNumber;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "FOOD_SERVICE_DATE")
     @Temporal(TemporalType.DATE)

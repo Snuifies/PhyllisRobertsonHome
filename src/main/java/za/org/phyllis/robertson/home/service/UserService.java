@@ -31,7 +31,7 @@ public class UserService {
     @Transactional
     public UserDO findByUsername(String username) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
-        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User :%s", username)));
+        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User [%s]", username)));
         return user.map(UserDO::new).get();
     }
 
@@ -50,7 +50,7 @@ public class UserService {
     @Transactional
     public UserDO updateUserEmailAddress(String username, String newEmail) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
-        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User :%s", username)));
+        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User [%s]", username)));
         user.get().setEmail(newEmail);
         userRepository.save(user.get());
         return user.map(UserDO::new).get();
@@ -59,7 +59,7 @@ public class UserService {
     @Transactional
     public UserDO deleteUserRole(String username, String role) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
-        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User :%s", username)));
+        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User [%s]", username)));
         Role entity = user.get().getRoles().stream().filter((r) -> r.getRole().equalsIgnoreCase(role)).findFirst().get();
         user.get().getRoles().remove(entity);
         userRepository.save(user.get());
@@ -70,9 +70,9 @@ public class UserService {
     @Transactional
     public UserDO addUserRole(String username, String newRole) throws ResourceNotFoundException {
         Optional<User> userEntity = userRepository.findByUsername(username);
-        userEntity.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User :%s", username)));
+        userEntity.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User [%s]", username)));
         Optional<Role> roleEntity = roleRepository.findByRole(newRole);
-        roleEntity.orElseThrow(() -> new ResourceNotFoundException("Role", String.format("Role :%s", newRole)));
+        roleEntity.orElseThrow(() -> new ResourceNotFoundException("Role", String.format("Role [%s]", newRole)));
         userEntity.get().getRoles().add(roleEntity.get());
         userRepository.save(userEntity.get());
         userEntity = userRepository.findByUsername(username);
@@ -83,9 +83,9 @@ public class UserService {
     @Transactional
     public UserDO changeUserRole(String username, String newRole) throws ResourceNotFoundException {
         Optional<User> userEntity = userRepository.findByUsername(username);
-        userEntity.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User :%s", username)));
+        userEntity.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User [%s]", username)));
         Optional<Role> roleEntity = roleRepository.findByRole(newRole);
-        roleEntity.orElseThrow(() -> new ResourceNotFoundException("Role", String.format("Role :%s", newRole)));
+        roleEntity.orElseThrow(() -> new ResourceNotFoundException("Role", String.format("Role [%s]", newRole)));
         userEntity.get().getRoles().clear();
         userRepository.save(userEntity.get());
         userEntity.get().getRoles().add(roleEntity.get());
