@@ -7,12 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import za.org.phyllis.robertson.home.entity.Resident;
 import za.org.phyllis.robertson.home.entity.ResidentCondition;
 import za.org.phyllis.robertson.home.entity.ResidentDailyCare;
+import za.org.phyllis.robertson.home.entity.ResidentMeal;
 import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
-import za.org.phyllis.robertson.home.model.BathType;
-import za.org.phyllis.robertson.home.model.ResidentDO;
-import za.org.phyllis.robertson.home.model.ResidentDailyCareDO;
+import za.org.phyllis.robertson.home.model.*;
 import za.org.phyllis.robertson.home.repository.ResidentDailyCareRepository;
+import za.org.phyllis.robertson.home.repository.ResidentMealRepository;
 import za.org.phyllis.robertson.home.repository.ResidentRepository;
 
 import java.util.List;
@@ -26,11 +26,15 @@ public class ResidentService {
 
     ResidentRepository residentRepository;
     ResidentDailyCareRepository careRepository;
+    ResidentMealRepository mealRepository;
+
     @Autowired
     public ResidentService(ResidentRepository residentRepository,
-                           ResidentDailyCareRepository careRepository) {
+                           ResidentDailyCareRepository careRepository,
+                           ResidentMealRepository mealRepository) {
         this.residentRepository = residentRepository;
         this.careRepository = careRepository;
+        this.mealRepository = mealRepository;
     }
 
     @Transactional
@@ -78,4 +82,21 @@ public class ResidentService {
         return new ResidentDailyCareDO(dailyCare);
     }
 
+    @Transactional
+    public ResidentMealDO findResidentMealByResidentIdNumber(String idNumber) throws ResourceNotFoundException {
+        Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
+        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("ID Number [%s]", idNumber)));
+        ResidentMeal residentMeal = resident.get().getResidentMeal();
+        return new ResidentMealDO(residentMeal);
+    }
+
+    @Transactional
+    public ResidentMealDO updateResidentMealDietType(String idNumber, DietType dietType) throws ResourceNotFoundException{
+        Optional<Resident> resident = residentRepository.findByIdNumber(idNumber);
+        resident.orElseThrow(() -> new ResourceNotFoundException("Resident", String.format("ID Number [%s]", idNumber)));
+        ResidentMeal residentMeal = resident.get().getResidentMeal();
+        residentMeal.setDietType(dietType);
+        mealRepository.save(residentMeal);
+        return new ResidentMealDO(residentMeal);
+    }
 }

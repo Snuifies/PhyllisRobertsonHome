@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "id",
         "idNumber",
         "name",
         "nickName",
@@ -60,6 +61,9 @@ import java.util.stream.Collectors;
 public class ResidentDO implements Serializable {
 
     private static final long serialVersionUID = -5172178857306870614L;
+
+    @JsonProperty("id")
+    private Long id;
 
     @JsonProperty("idNumber")
     private String idNumber;
@@ -181,12 +185,12 @@ public class ResidentDO implements Serializable {
         if (!Objects.isNull(resident.getRoom())) {
             this.room = new RoomDO(resident.getRoom());
         }
-//        if (!Objects.isNull(resident.getResidentDailyCare())) {
-//            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
-//        }
-//        if (!Objects.isNull(resident.getResidentMeal())) {
-//            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
-//        }
+        if (!Objects.isNull(resident.getResidentDailyCare())) {
+            this.residentDailyCare = new ResidentDailyCareDO(resident.getResidentDailyCare());
+        }
+        if (!Objects.isNull(resident.getResidentMeal())) {
+            this.residentMeal = new ResidentMealDO(resident.getResidentMeal());
+        }
 //        if (!Objects.isNull(resident.getConditions())) {
 //            conditions.addAll(
 //                    resident.getConditions().stream().map(ResidentConditionDO::new).collect(Collectors.toSet()));

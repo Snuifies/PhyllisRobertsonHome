@@ -24,7 +24,26 @@
         <addPrimaryKey tableName="RESIDENT_MEAL" columnNames="ID"/>
     </changeSet>
 
-<!--    <changeSet author="Marius" id="Create RESIDENT_MEAL_AUD">-->
+    <changeSet author="Marius" id="Add 1st ResidentMeals">
+        <insert tableName="RESIDENT_MEAL">
+            <column name="FOOD_SERVICE_DATE" value="${NOW}"/>
+            <column name="DIET_TYPE" value="HYPERTENSION"/>
+            <column name="COMPLAINT_DATE" value="${NOW}"/>
+            <column name="COMPLAINT_DETAIL" value="DIET COMPLAINT"/>
+            <column name="PLANNED_ABSENCE_DATE" value="${NOW}"/>
+            <column name="MEALS_ABSENT_DETAIL" value="DIET ABSENCE"/>
+            <column name="PACKED_LUNCH_REQUEST_DATE" value="${NOW}"/>
+            <column name="KEPT_LUNCH_REQUEST_DATE" value="${NOW}"/>
+            <column name="BED_MEAL_REQUEST_DATE" value="${NOW}"/>
+            <column name="BED_MEAL_REQUEST_TYPE" value="SUPPER"/>
+            <column name="FOOD_NOT_EATEN_DATE" value="${NOW}"/>
+            <column name="FOOD_NOT_EATEN_DETAIL" value="Food Not Eaten"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+        </insert>
+    </changeSet>
+
+
+    <!--    <changeSet author="Marius" id="Create RESIDENT_MEAL_AUD">-->
 <!--        <createTable tableName="RESIDENT_MEAL_AUD">-->
 <!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
 <!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
@@ -68,23 +87,6 @@
 <!--        <addPrimaryKey tableName="RESIDENT_MEAL_AUD" columnNames="ROOM_NUMBER, REV"/>-->
 <!--    </changeSet>-->
 
-    <changeSet author="Marius" id="Add 1st ResidentMeals">
-        <insert tableName="RESIDENT_MEAL">
-            <column name="ROOM_NUMBER" value="1G1"/>
-            <column name="FOOD_SERVICE_DATE" value="${NOW}"/>
-            <column name="DIET_TYPE" value="HYPERTENSION"/>
-            <column name="COMPLAINT_DATE" value="${NOW}"/>
-            <column name="COMPLAINT_DETAIL" value="DIET COMPLAINT"/>
-            <column name="PLANNED_ABSENCE_DATE" value="${NOW}"/>
-            <column name="MEALS_ABSENT_DETAIL" value="DIET ABSENCE"/>
-            <column name="PACKED_LUNCH_REQUEST_DATE" value="${NOW}"/>
-            <column name="KEPT_LUNCH_REQUEST_DATE" value="${NOW}"/>
-            <column name="BED_MEAL_REQUEST_DATE" value="${NOW}"/>
-            <column name="BED_MEAL_REQUEST_TYPE" value="SUPPER"/>
-            <column name="FOOD_NOT_EATEN_DATE" value="${NOW}"/>
-            <column name="FOOD_NOT_EATEN_DETAIL" value="Food Not Eaten"/>
-        </insert>
-    </changeSet>
 
 
 </databaseChangeLog>

@@ -79,7 +79,8 @@ public class ResidentMeal implements Serializable {
     @Column(name = "FOOD_NOT_EATEN_DETAIL")
     private String foodNotEatenDetail;
 
-    @OneToOne(mappedBy = "room")
-    private Resident resident;
+    @OneToOne
+    @JoinColumn(name = "RESIDENT_ID")
+   private Resident resident;
 
 }

@@ -126,10 +126,9 @@ public class Resident implements Serializable {
     @OneToOne(mappedBy = "resident")
     private ResidentDailyCare residentDailyCare;
 
-//    @OneToOne
-//    @JoinColumn(name = "RESIDENT_ID")
-//    private ResidentMeal residentMeal;
-//
+    @OneToOne(mappedBy = "resident")
+    private ResidentMeal residentMeal;
+
 //    @NotAudited
 ////    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 //    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
