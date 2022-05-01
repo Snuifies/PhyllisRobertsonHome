@@ -122,11 +122,10 @@ public class Resident implements Serializable {
     @OneToOne
     @JoinColumn(name = "ROOM_ID")
     private Room room;
-//
-//    @OneToOne
-//    @JoinColumn(name = "RESIDENT_ID")
-//    private ResidentDailyCare residentDailyCare;
-//
+
+    @OneToOne(mappedBy = "resident")
+    private ResidentDailyCare residentDailyCare;
+
 //    @OneToOne
 //    @JoinColumn(name = "RESIDENT_ID")
 //    private ResidentMeal residentMeal;

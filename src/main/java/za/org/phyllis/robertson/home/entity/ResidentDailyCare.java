@@ -92,7 +92,8 @@ public class ResidentDailyCare implements Serializable {
     @Column(name = "ACTIONS_ADVISED")
     private String actionsAdvised;
 
-    @OneToOne(mappedBy = "room")
-   private Resident resident;
+    @OneToOne
+    @JoinColumn(name = "RESIDENT_ID")
+    private Resident resident;
 
 }

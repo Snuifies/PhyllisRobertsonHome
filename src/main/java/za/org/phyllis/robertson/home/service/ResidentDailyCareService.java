@@ -54,4 +54,10 @@ public class ResidentDailyCareService {
 //        return dailyCare.map(ResidentDailyCareDO::new).get();
         return null;
     }
+//
+//    public ResidentDailyCareDO findDailyCareByResidentIdNumber(String idNumber) throws ResourceNotFoundException {
+//        Optional<ResidentDailyCare> dailyCare = repository.findByResidentIdNumber(idNumber);
+//        dailyCare.orElseThrow(() -> new ResourceNotFoundException("ResidentDailyCare", String.format("Id Number [%s]", idNumber)));
+//        return dailyCare.map(ResidentDailyCareDO::new).get();
+//    }
 }
