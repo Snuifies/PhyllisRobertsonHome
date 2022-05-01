@@ -28,6 +28,7 @@
             <column name="FAULT_RESOLVED_DATE" type="DATE"/>
             <column name="FAULT_RESOLVED_COMMENT" type="VARCHAR(250)"/>
             <column name="DESCRIPTION" type="VARCHAR(250)"/>
+            <column name="RESIDENT_ID" type="BIGINT"/>
         </createTable>
         <addPrimaryKey tableName="ROOM" columnNames="ID"/>
     </changeSet>
@@ -137,7 +138,7 @@
             <column name="FAULT_RESOLVED_DATE" value="${now}"/>
             <column name="FAULT_RESOLVED_COMMENT" value="COMPLAINT RESOLVED"/>
             <column name="DESCRIPTION" value="Another Room With A View"/>
-        </insert>
+       </insert>
     </changeSet>
 
 </databaseChangeLog>

@@ -55,7 +55,7 @@
             <column name="MEDICATION_ACUTE_ITEM" value="none"/>
             <column name="COMPLAINT" value="no complaint"/>
             <column name="ACTIONS_ADVISED" value="No Actions taken"/>
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
         </insert>
     </changeSet>
 <!--    -->

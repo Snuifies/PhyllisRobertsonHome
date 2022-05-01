@@ -8,6 +8,7 @@ import za.org.phyllis.robertson.home.entity.Room;
 import za.org.phyllis.robertson.home.exception.ResourceAlreadyExistsException;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.RoomDO;
+import za.org.phyllis.robertson.home.repository.ResidentRepository;
 import za.org.phyllis.robertson.home.repository.RoomRepository;
 
 import java.util.List;
@@ -19,15 +20,18 @@ import java.util.stream.Collectors;
 public class RoomService {
 
     RoomRepository roomRepository;
+    ResidentRepository residentRepository;
 
     @Autowired
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(RoomRepository roomRepository, ResidentRepository residentRepository) {
+        this.residentRepository = residentRepository;
         this.roomRepository = roomRepository;
     }
 
     @Transactional
     public List<RoomDO> findAllRooms() {
-        return roomRepository.findAll().stream().map(RoomDO::new).collect(Collectors.toList());
+        List<Room> rooms = roomRepository.findAll();
+        return rooms.stream().map(RoomDO::new).collect(Collectors.toList());
     }
 
     @Transactional

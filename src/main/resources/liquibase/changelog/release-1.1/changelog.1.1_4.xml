@@ -38,7 +38,7 @@
             <column name="BED_MEAL_REQUEST_TYPE" value="SUPPER"/>
             <column name="FOOD_NOT_EATEN_DATE" value="${NOW}"/>
             <column name="FOOD_NOT_EATEN_DETAIL" value="Food Not Eaten"/>
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
         </insert>
     </changeSet>
 

@@ -32,8 +32,7 @@
             <column name="MEDICATION_TO_PHARMACY_DATE" type="DATE"/>
             <column name="BLISTERS_RECEIVED_DATE" type="DATE"/>
             <column name="BLISTERS_RECEIVED" type="INTEGER"/>
-            <column name="ROOM_ID" type="BIGINT"/>
-        </createTable>
+       </createTable>
         <addPrimaryKey tableName="RESIDENT" columnNames="ID"/>
     </changeSet>
 
@@ -65,9 +64,10 @@
             <column name="MEDICATION_TO_PHARMACY_DATE" value="${now}"/>
             <column name="BLISTERS_RECEIVED_DATE" value="${now}"/>
             <column name="BLISTERS_RECEIVED" value="5"/>
-            <column name="ROOM_ID" valueComputed="(SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1')"/>
         </insert>
         <sql>UPDATE ROOM SET AVAILABLE = false WHERE ROOM_NUMBER = '1G1';</sql>
+        <sql>UPDATE ROOM SET RESIDENT_ID = (SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084');</sql>
+
     </changeSet>
 <!--    <changeSet author="Marius" id="Create Resident Audit Table">-->
 <!--        <createTable tableName="RESIDENT_AUD">-->

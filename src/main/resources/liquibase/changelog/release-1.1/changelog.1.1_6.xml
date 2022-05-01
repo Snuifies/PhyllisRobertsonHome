@@ -24,7 +24,7 @@
             <column name="ITEM_SENT" value="140"/>
             <column name="QUANTITY_SENT" value="100"/>
             <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
         </insert>
         <insert tableName="RESIDENT_PRESCRIPTION">
             <column name="DOSE" value="1x3x#"/>
@@ -32,7 +32,7 @@
             <column name="ITEM_SENT" value="100"/>
             <column name="QUANTITY_SENT" value="150"/>
             <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
         </insert>
         <insert tableName="RESIDENT_PRESCRIPTION">
             <column name="DOSE" value="1x3x#"/>
@@ -40,7 +40,7 @@
             <column name="ITEM_SENT" value="100"/>
             <column name="QUANTITY_SENT" value="250"/>
             <column name="PRESCRIPTION_DUE_FOR_RENEWAL" value="true"/>
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
         </insert>
     </changeSet>
 

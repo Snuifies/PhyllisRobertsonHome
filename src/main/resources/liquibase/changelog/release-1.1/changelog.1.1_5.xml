@@ -39,15 +39,15 @@
 
     <changeSet author="Marius" id="Add Conditions">
         <insert tableName="RESIDENT_CONDITION">
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
             <column name="CONDITION" value="Nausea"/>
         </insert>
         <insert tableName="RESIDENT_CONDITION">
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
             <column name="CONDITION" value="toe blisters"/>
         </insert>
         <insert tableName="RESIDENT_CONDITION">
-            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ROOM_ID = (SELECT ID FROM ROOM WHERE ROOM_NUMBER = '1G1'))"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
             <column name="CONDITION" value="Asmatic"/>
         </insert>
     </changeSet>

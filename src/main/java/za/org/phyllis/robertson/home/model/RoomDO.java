@@ -38,8 +38,7 @@ import java.util.Objects;
         "faultComplaintComment",
         "faultResolvedDate",
         "faultResolvedComment",
-        "description",
-        "resident"
+        "description"
 })
 @NoArgsConstructor
 @AllArgsConstructor
@@ -111,10 +110,7 @@ public class RoomDO implements Serializable {
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("resident")
-    private String resident;
-
-    public RoomDO(Room room) {
+     public RoomDO(Room room) {
         this.roomNumber = room.getRoomNumber();
         this.available = room.isAvailable();
         this.houseKeepingDate = room.getHouseKeepingDate();
@@ -135,8 +131,5 @@ public class RoomDO implements Serializable {
         this.faultResolvedDate = room.getFaultResolvedDate();
         this.faultResolvedComment = room.getFaultResolvedComment();
         this.description = room.getDescription();
-        if (!Objects.isNull(room.getResident())){
-            this.resident = room.getResident().getName();
-        }
-    }
+     }
 }

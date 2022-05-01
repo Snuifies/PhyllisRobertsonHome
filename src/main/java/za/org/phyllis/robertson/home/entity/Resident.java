@@ -115,9 +115,8 @@ public class Resident implements Serializable {
     @Column(name = "BLISTERS_RECEIVED")
     private int blistersReceived;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ROOM_ID")
-    private Room room;
+    @OneToOne(mappedBy = "resident", fetch = FetchType.EAGER)
+   private Room room;
 
     @OneToOne(mappedBy = "resident", fetch = FetchType.EAGER)
     private ResidentDailyCare residentDailyCare;

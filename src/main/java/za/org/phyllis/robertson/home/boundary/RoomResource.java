@@ -27,7 +27,7 @@ public class RoomResource {
         }
     }
 
-    @PutMapping("/{description}")
+    @PutMapping("/{roomNumber}/{description}")
     public RoomResponse addRoom(@PathVariable("roomNumber") String roomNumber, @PathVariable("description") String description) {
         try {
             return RoomResponse.builder().room(roomService.addRoom(roomNumber, description)).build();

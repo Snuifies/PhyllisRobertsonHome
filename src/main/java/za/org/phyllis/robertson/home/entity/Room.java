@@ -89,7 +89,8 @@ public class Room implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToOne(mappedBy = "room", fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RESIDENT_ID")
     private Resident resident;
 
 }
