@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import za.org.phyllis.robertson.home.service.RoomService;
 
 @RestController
-@RequestMapping("/rooms")
+@RequestMapping("/rest/rooms")
 public class RoomResource {
 
     @Autowired

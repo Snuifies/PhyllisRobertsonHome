@@ -8,7 +8,7 @@ import za.org.phyllis.robertson.home.model.DietType;
 import za.org.phyllis.robertson.home.service.ResidentService;
 
 @RestController
-@RequestMapping("/residents")
+@RequestMapping("/rest/residents")
 public class ResidentResource {
 
     @Autowired

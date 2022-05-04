@@ -3,7 +3,7 @@ package za.org.phyllis.robertson.home.boundary;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController("/rest")
 public class HomeResource {
 
     @GetMapping("/")

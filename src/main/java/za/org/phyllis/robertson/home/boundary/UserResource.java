@@ -7,7 +7,7 @@ import za.org.phyllis.robertson.home.service.UserService;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/rest/users")
 public class UserResource {
 
     @Autowired
