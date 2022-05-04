@@ -1,14 +1,11 @@
 package za.org.phyllis.robertson.home.boundary;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.BathType;
 import za.org.phyllis.robertson.home.model.DietType;
 import za.org.phyllis.robertson.home.service.ResidentService;
-
-import java.time.LocalTime;
 
 @RestController
 @RequestMapping("/residents")

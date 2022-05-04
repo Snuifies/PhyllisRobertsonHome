@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.envers.Audited;
 import za.org.phyllis.robertson.home.model.DietType;
 import za.org.phyllis.robertson.home.model.MealType;
 

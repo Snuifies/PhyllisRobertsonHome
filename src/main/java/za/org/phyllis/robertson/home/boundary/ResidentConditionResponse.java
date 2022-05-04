@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import za.org.phyllis.robertson.home.model.ResidentConditionDO;
-import za.org.phyllis.robertson.home.model.ResidentDailyCareDO;
 
 import java.io.Serializable;
 import java.util.List;

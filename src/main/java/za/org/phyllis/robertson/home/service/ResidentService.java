@@ -1,6 +1,5 @@
 package za.org.phyllis.robertson.home.service;
 
-import ch.qos.logback.core.boolex.EvaluationException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +9,8 @@ import za.org.phyllis.robertson.home.exception.ResourceNotFoundException;
 import za.org.phyllis.robertson.home.model.*;
 import za.org.phyllis.robertson.home.repository.*;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Log4j2

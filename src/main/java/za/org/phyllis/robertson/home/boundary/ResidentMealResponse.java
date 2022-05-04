@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import za.org.phyllis.robertson.home.model.ResidentDailyCareDO;
 import za.org.phyllis.robertson.home.model.ResidentMealDO;
 
 import java.io.Serializable;

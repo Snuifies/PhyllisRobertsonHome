@@ -11,9 +11,6 @@ import za.org.phyllis.robertson.home.entity.ResidentDailyCare;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

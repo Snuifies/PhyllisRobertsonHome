@@ -11,7 +11,6 @@ import za.org.phyllis.robertson.home.entity.Room;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * @author snuif
