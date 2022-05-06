@@ -104,14 +104,8 @@
             <artifactId>primefaces</artifactId>
             <version>8.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.primefaces.themes/themes-project -->
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>sunny</artifactId>
-            <version>1.0.10</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
+
+         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>all-themes</artifactId>
             <version>1.0.10</version>
