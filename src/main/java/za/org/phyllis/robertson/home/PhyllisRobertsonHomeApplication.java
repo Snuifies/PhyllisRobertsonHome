@@ -25,6 +25,8 @@ public class PhyllisRobertsonHomeApplication {
         ServletRegistrationBean registration = new ServletRegistrationBean<>(new FacesServlet(), "*.xhtml");
         registration.setLoadOnStartup(1);
         registration.addUrlMappings("*.jsf");
+        registration.addInitParameter("loginUsername", "admin");
+        registration.addInitParameter("loginPassword", "snuifies");
         return registration;
     }
 
