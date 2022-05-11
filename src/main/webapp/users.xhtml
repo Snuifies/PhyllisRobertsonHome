@@ -1,0 +1,30 @@
+<ui:composition template="/template/template3.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+>
+    <ui:define name="content">
+        <h:form id="form">
+        <p:growl id="msgs" showDetail="true"/>
+
+        <h2 class="first">Residents</h2>
+        <p:dataTable var="user" value="#{userView.users}" tableStyleClass="ui-table-columntoggle">
+
+             <p:column headerText="username" priority="1">
+                <h:outputText value="#{user.username}"/>
+            </p:column>
+
+            <p:column headerText="email" priority="2">
+                <h:outputText value="#{user.email}"/>
+            </p:column>
+
+            <p:column headerText="roles" priority="2">
+                <h:outputText value="#{user.roles}"/>
+            </p:column>
+
+        </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

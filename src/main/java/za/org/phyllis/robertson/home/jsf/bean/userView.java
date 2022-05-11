@@ -7,32 +7,32 @@ package za.org.phyllis.robertson.home.jsf.bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import za.org.phyllis.robertson.home.model.RoomDO;
-import za.org.phyllis.robertson.home.service.RoomService;
+import za.org.phyllis.robertson.home.model.ResidentDO;
+import za.org.phyllis.robertson.home.model.UserDO;
+import za.org.phyllis.robertson.home.service.ResidentService;
+import za.org.phyllis.robertson.home.service.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author snuifies
- */
-@Component(value = "roomView")
+
+@Component(value = "userView")
 @RequestScoped
-public class RoomView implements Serializable {
+public class userView implements Serializable {
 
     @Autowired
-    RoomService service;
+    UserService service;
 
-    private List<RoomDO> rooms;
+    private List<UserDO> users;
 
     @PostConstruct
     public void init() {
-        rooms = service.findAllRooms();
+        users = service.findAll();
     }
 
-    public List<RoomDO> getRooms() {
-        return rooms;
+    public List<UserDO> getUsers() {
+        return users;
     }
 }
