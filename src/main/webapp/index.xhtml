@@ -1,11 +1,17 @@
-<ui:composition template="/template/template3.xhtml"
+<ui:composition template="/template/template.xhtml"
      xmlns="http://www.w3.org/1999/xhtml"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:p="http://primefaces.org/ui"
 >
-     <ui:define name="content">
-         <p>Here goes your view-specific content.</p>
-     </ui:define>
-</ui:composition>
+    <ui:define name="menubar">
+        <h:form>
+            <p:menubar id="menu">
+                <p:menuitem value="Rooms" url="#"/>
+                <p:menuitem value="Residents" url="#"/>
+                <p:menuitem value="Users" url="#"/>
+            </p:menubar>
+        </h:form>
+    </ui:define>
+ </ui:composition>

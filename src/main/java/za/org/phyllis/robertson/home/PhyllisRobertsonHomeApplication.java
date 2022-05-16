@@ -34,7 +34,7 @@ public class PhyllisRobertsonHomeApplication {
     public ServletContextInitializer servletContextInitializer() {
         return servletContext -> {
             servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
-            servletContext.setInitParameter("primefaces.THEME", "afterdark");
+            servletContext.setInitParameter("primefaces.THEME", "sunny");
         };
     }
 
