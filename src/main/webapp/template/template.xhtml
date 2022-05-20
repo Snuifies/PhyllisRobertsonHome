@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:p="http://primefaces.org/ui"
-	  >
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
     <h:head>
         <title>Phylis Robbertson Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style type="text/css">
-				.ui-layout-north {
-					z-index:20 !important;
-					overflow:visible !important;
-				}
+            .ui-layout-north {
+                z-index:20 !important;
+                overflow:visible !important;
+            }
 
-				.ui-layout-north .ui-layout-unit-content {
-					overflow:visible !important;
-				}
-				#menu{
-					position: absolute;
-					left:0;
-					right:0;
-					bottom:0;
-					width:auto;
-					height:45px;
-					overflow: visible !important;
-					z-index: 100 !important;
-				}
-			</style>
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+            #menu{
+                position: absolute;
+                left:0;
+                right:0;
+                bottom:0;
+                width:auto;
+                height:45px;
+                overflow: visible !important;
+                z-index: 100 !important;
+            }
+        </style>
     </h:head>
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="100" header="Top" resizable="true" collapsible="true" effect="drop">
-                <ui:insert name="menubar"/>
+        <h:form>
+            <p:menubar id="menu" rendered="#{userManager.isLoggedIn()}">
+                <p:menuitem value="Rooms" url="#"/>
+                <p:menuitem value="Residents" url="#"/>
+                <p:menuitem value="Users" url="#"/>
+            </p:menubar>
+        </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" collapsible="true" effect="drop">
-				<ui:insert name="footer"/>
+            <p:layoutUnit position="center">
+                <ui:insert name="content"/>
             </p:layoutUnit>
 
             <p:layoutUnit position="west" size="200" header="Left" resizable="true" collapsible="true" effect="drop">
@@ -52,9 +58,11 @@
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center">
-                <ui:insert name="content"/>
+            <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" collapsible="true" effect="drop">
+                <ui:include src="links.xhtml"/>
             </p:layoutUnit>
+
+
         </p:layout>
     </h:body>
 </html>

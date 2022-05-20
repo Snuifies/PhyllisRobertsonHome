@@ -27,7 +27,13 @@ public class UserService {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
-
+    
+    @Transactional
+    public UserDO findByUsernameAndPassword(String username, String password) throws ResourceNotFoundException {
+        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+        user.orElseThrow(() -> new ResourceNotFoundException("User", String.format("User [%s]", username)));
+        return user.map(UserDO::new).get();
+    }
     @Transactional
     public UserDO findByUsername(String username) throws ResourceNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);

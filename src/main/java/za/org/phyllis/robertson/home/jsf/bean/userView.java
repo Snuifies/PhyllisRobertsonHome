@@ -7,9 +7,7 @@ package za.org.phyllis.robertson.home.jsf.bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import za.org.phyllis.robertson.home.model.ResidentDO;
 import za.org.phyllis.robertson.home.model.UserDO;
-import za.org.phyllis.robertson.home.service.ResidentService;
 import za.org.phyllis.robertson.home.service.UserService;
 
 import javax.annotation.PostConstruct;
