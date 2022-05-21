@@ -27,9 +27,11 @@ public class UserManager implements Serializable {
             = LoggerFactory.getLogger(UserManager.class);
 
     public static final String HOME_PAGE_REDIRECT
-            = "secured/home.jsf";
+            = "/secured/home.jsf";
     public static final String LOGOUT_PAGE_REDIRECT
-            = "logout.xhtml?faces-redirect=true";
+            = "/logout.xhtml";
+    public static final String LOGIN_PAGE_REDIRECT
+            = "/login.xhtmle";
 
     private String userId;
     private String userPassword;
@@ -54,14 +56,13 @@ public class UserManager implements Serializable {
     public String logout() {
         String identifier = userId;
 
-        currentUser = 
         // invalidate the session
         LOGGER.debug("invalidating session for '{}'", identifier);
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
-
+        currentUser = null;
         LOGGER.info("logout successful for '{}'", identifier);
-        return HOME_PAGE_REDIRECT;
+        return LOGIN_PAGE_REDIRECT;
     }
 
     public boolean isLoggedIn() {

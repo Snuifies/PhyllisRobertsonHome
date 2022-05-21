@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-    <title>Unsecured</title>
-</h:head>
+    <h:head>
+        <title>Unsecured</title>
+        <style type="text/css">
+            html {
+                background: url("#{request.contextPath}/images/background.jpg") no-repeat center center fixed;
+                background-size: cover;
+                height: 100%;
+                overflow: hidden;
+                opacity: 0.9;
+            }
+        </style>
+    </h:head>
 
-<h:body>
+    <h:body>
+        <p:panel id="unsecured-message" header="Unsecured">
+            <p>This page is not secured and can be used to display
+                information to users that do not have login credentials.</p>
+        </p:panel>
 
-    <p:panel id="unsecured-message" header="Unsecured">
-        <p>This page is not secured and can be used to display
-            information to users that do not have login credentials.</p>
-    </p:panel>
+        <ui:include src="/template/links.xhtml"/>
 
-    <ui:include src="/template/links.xhtml"/>
-
-</h:body>
+    </h:body>
 </html>
