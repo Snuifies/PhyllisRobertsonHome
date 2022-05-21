@@ -24,16 +24,18 @@
 
 
     <h:body>
-        <p:growl id="growl" life="5000" autoUpdate="true" showDetail="true" escape="false"/>
         <h:form>    
+            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
             <p:dialog id="dialog" header="Login" footer="..." width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
-                <p:panelGrid columns="2" style="margin: 0 auto">
-                    <h:outputText value="username:"/>            
-                    <h:inputText value="#{userManager.userId}" id="username"/>            
-                    <h:outputText value="password:"/>            
-                    <h:inputSecret value="#{userManager.userPassword}" id="password"/>            
-                </p:panelGrid>
-                <p:commandButton  id="button" value="Login" action="#{userManager.login()}" style="float:right"/>            
+                <h:panelGrid columns="2" style="margin: 0 auto" cellpadding="5">
+                    <h:outputLabel value="username:"/>            
+                    <p:inputText value="#{userManager.userId}" id="username" required="true" label="username"/>            
+                    <h:outputLabel value="password:"/>            
+                    <p:password value="#{userManager.userPassword}" id="password" required="true" label="password"/>            
+                </h:panelGrid>
+                <f:facet name="footer">
+                    <p:commandButton value="Login" update="growl" action="#{userManager.login()}" style="float:center"/>
+                </f:facet>  
             </p:dialog>
         </h:form>   
     </h:body>

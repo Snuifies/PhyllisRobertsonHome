@@ -18,13 +18,34 @@
                 overflow: hidden;
                 opacity: 0.9;
             }
+            .logoutHeader{
+                border: none;
+                text-align: end;
+                font-size: 12px;
+                padding-right: 10px;
+            }
+            .footer{
+                border: none;
+                text-align: end;
+                font-size: 12px;
+                padding-right: 10px;
+                padding-top: 10px;
+
+            }
         </style>
     </h:head>
     <h:body>
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="100" header="Top" resizable="true" collapsible="true" effect="drop">
+            <p:layoutUnit position="north" size="120" resizable="true" collapsible="true" effect="drop" rendered="#{userManager.isLoggedIn()}">
                 <h:form>
-                    <p:menubar id="menu" rendered="#{userManager.isLoggedIn()}">
+                    <div class="logoutHeader">
+                        <h:outputLabel value="Welcome #{userManager.userId}  "/>
+                        <h:commandLink value="Logout" action="#{userManager.logout()}"/>
+                    </div>
+                </h:form>
+                <center><font size="6px">Phyllis Robertson Home</font></center>
+                <h:form>
+                    <p:menubar id="menu" style="height: 25px;" >
                         <p:menuitem value="Rooms" url="#"/>
                         <p:menuitem value="Residents" url="#"/>
                         <p:menuitem value="Users" url="#"/>
@@ -36,20 +57,22 @@
                 <ui:insert name="content"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="west" size="200" header="Left" resizable="true" collapsible="true" effect="drop">
+            <p:layoutUnit position="west" size="200" resizable="true" collapsible="true" effect="drop">
                 <h:form>
                     <ui:insert name="west" />
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="east" size="200" header="Left" resizable="true" collapsible="true" effect="drop">
+            <p:layoutUnit position="east" size="200" resizable="true" collapsible="true" effect="drop">
                 <h:form>
                     <ui:insert name="east" />
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" collapsible="true" effect="drop">
-                <ui:include src="links.xhtml"/>
+            <p:layoutUnit position="south" size="100" resizable="true" collapsible="true" effect="drop">
+                <div class="footer">
+                    <h:outputLabel value="Copyright 2022, This Web Site is the property of Phyllis Robertson Home"/>
+                </div>
             </p:layoutUnit>
 
 
