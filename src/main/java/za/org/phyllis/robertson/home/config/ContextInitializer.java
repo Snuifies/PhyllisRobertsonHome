@@ -1,5 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package za.org.phyllis.robertson.home.config;
-
 import com.sun.faces.config.ConfigureListener;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.faces.webapp.FacesServlet;
 
-@Configuration
-@RequiredArgsConstructor
+/**
+ *
+ * @author snuif
+ */
 public class ContextInitializer {
-
-//    private final Config config;
-
-    @Bean
+    
+        @Bean
     public ServletRegistrationBean facesServletRegistration() {
         ServletRegistrationBean registration = new ServletRegistrationBean<>(new FacesServlet(), "*.xhtml");
         registration.setLoadOnStartup(1);
@@ -37,13 +40,5 @@ public class ContextInitializer {
     public ServletListenerRegistrationBean<ConfigureListener> jsfConfigureListener() {
         return new ServletListenerRegistrationBean<>(new ConfigureListener());
     }
-
-    @Bean
-    public FilterRegistrationBean loginFilter() {
-        FilterRegistrationBean registration =
-                new FilterRegistrationBean();
-        registration.setFilter(new LoginFilter());
-        registration.addUrlPatterns("/secured/*");
-        return registration;
-    }
+    
 }

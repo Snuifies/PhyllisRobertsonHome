@@ -5,14 +5,11 @@
         </encoder>
     </appender>
 
-    <logger name="com.example.jsfprimefacesxample" level="INFO" />
+    <logger name="za.org.phyllis.robertson.home" level="INFO" />
     <logger name="org.springframework" level="WARN" />
-    <!-- turn HtmlUnit warnings off -->
     <logger name="com.gargoylesoftware.htmlunit" level="ERROR" />
-    <!-- turn tomcat scan warnings off -->
     <logger name="org.apache.tomcat.util.scan" level="ERROR" />
-
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
