@@ -1,0 +1,35 @@
+    
+@EnableWebSecurity
+public class LssSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+               .antMatchers("/delete/**").hasAnyAuthority("ADMIN","ADMIN2")
+                 .authorizeRequests().anyRequest().authenticated()
+                .and().formLogin()
+                .and().httpBasic();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.
+                inMemoryAuthentication().passwordEncoder(passwordEncoder()).
+                withUser("user").password(passwordEncoder().encode("pass")).
+                roles("USER");
+    }
+}
+
+
+
+Important NOTE:
+----------------------
+ the more specific .antMatchers("") 
+should precede the general anyRequest() 
+the more specific first, the more general last.
+

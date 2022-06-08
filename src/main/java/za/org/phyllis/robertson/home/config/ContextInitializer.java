@@ -4,15 +4,11 @@
  */
 package za.org.phyllis.robertson.home.config;
 import com.sun.faces.config.ConfigureListener;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import javax.faces.webapp.FacesServlet;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import javax.faces.webapp.FacesServlet;
 
 /**
  *
