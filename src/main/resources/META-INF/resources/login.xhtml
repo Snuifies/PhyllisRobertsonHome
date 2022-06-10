@@ -28,13 +28,13 @@
             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
             <p:dialog id="dialog" header="Login" width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
                 <h:panelGrid columns="2" style="margin: 0 auto" cellpadding="5">
-                    <h:outputLabel value="username:"/>            
-                    <p:inputText value="#{userManager.userId}" id="username" required="true" label="username"/>            
-                    <h:outputLabel value="password:"/>            
-                    <p:password value="#{userManager.userPassword}" id="password" required="true" label="password"/>            
+                    <outputText value="username:" required="true" label="password"/>            
+                    <p:inputText id="username" />          
+                    <outputText value="password:"/>            
+                    <p:password id="password" required="true" label="password"/>            
                 </h:panelGrid>
                 <f:facet name="footer">
-                    <p:commandButton value="Login" update="growl" action="#{userManager.login()}" style="float:center"/>
+                    <p:commandButton id="submit" value="Login" ajax="false"/>
                 </f:facet>  
             </p:dialog>
         </h:form>   

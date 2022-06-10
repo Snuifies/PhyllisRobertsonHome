@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -21,11 +22,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return bCryptPasswordEncoder;
     }
 
+    @Bean
+    public static AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new AuthenticationSuccessHandlerImpl();
+    }
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,11 +45,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+            .antMatchers("/").permitAll()
             .antMatchers("/rest/all").permitAll()
             .antMatchers("/rest/version").permitAll()
             .antMatchers("/rest/user").hasAnyAuthority(ADMIN, USER)
             .antMatchers("/rest/residence").hasAnyAuthority(ADMIN, USER)
             .antMatchers("/rest/admin").hasAuthority(ADMIN)
-            .and().formLogin();
+            .and().csrf().disable();
+
+        http.formLogin()
+            .loginPage("/login.jsf")
+            .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/residence/home.jsf", true)
+            .successHandler(authenticationSuccessHandler)
+            .failureUrl("/login.jsf?error=true");
     }
 }
