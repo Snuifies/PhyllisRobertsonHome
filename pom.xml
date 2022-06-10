@@ -18,7 +18,24 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
+        <joinfaces.version>4.7.0</joinfaces.version>
+        <selenium-htmlunit-driver.version>3.62.0</selenium-htmlunit-driver.version>
+        <selenium-java.version>4.2.1</selenium-java.version>
     </properties>
+    
+        <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.joinfaces</groupId>
+                <artifactId>joinfaces-dependencies</artifactId>
+                <version>${joinfaces.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+   
+   
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,9 +84,50 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
         </dependency>
+        
+        <!-- -->
+        <!-- Initially Comment out the  Security to Test a simple HelloWorld -->
+        <!--Add security-spring-boot-starter from org.joinfaces to enable Spring Security Functionality -->
+        <!-- -->        
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>security-spring-boot-starter</artifactId>
+        </dependency>
+        
+        
+        <!-- -->
+        <!--Add primefaces-spring-boot-starter to enable PrimeFaces Functionality -->
+        <!-- -->
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>primefaces-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>
+                <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.joinfaces</groupId>
+                    <artifactId>joinfaces-maven-plugin</artifactId>
+                    <version>${joinfaces.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>classpath-scan</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
