@@ -1,0 +1,30 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+>
+    <ui:define name="content">
+        <h:form id="form">
+        <p:growl id="msgs" showDetail="true"/>
+
+        <h2 class="first">Residents</h2>
+        <p:dataTable var="resident" value="#{residentView.residents}" tableStyleClass="ui-table-columntoggle">
+
+             <p:column headerText="Name">
+                <h:outputText value="#{resident.name}"/>
+            </p:column>
+
+            <p:column headerText="Nick Name">
+                <h:outputText value="#{resident.nickName}"/>
+            </p:column>
+
+            <p:column headerText="Room Number">
+                <h:outputText value="#{resident.room.roomNumber}"/>
+            </p:column>
+
+        </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
