@@ -10,7 +10,7 @@ import za.org.phyllis.robertson.home.config.ApplicationConfig;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "/rest")
+@RequestMapping
 public class EndpointController {
 
     @Autowired
