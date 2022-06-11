@@ -24,21 +24,20 @@
 
 
     <h:body>
-        <p:dialog id="dialog" header="Login" width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
-            <div class="container">
-                <form class="form-signin" method="post" action="/login">
-                    <h2 class="form-signin-heading">Please sign in</h2>
-                    <div class="alert alert-danger" role="alert" style="color: red">${SPRING_SECURITY_LAST_EXCEPTION.message}</div><p>
-                        <label for="username" class="sr-only">Username</label>
-                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="true" autofocus="true"></input>
-                    </p>
-                    <p>
-                        <label for="password" class="sr-only">Password</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true"></input>
-                    </p>
+
+        <form class="form-signin" method="post" action="/login">
+            <p:dialog id="dialog" header="Login" footer="..." width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
+                <div class="alert alert-danger" role="alert" style="color:red">${SPRING_SECURITY_LAST_EXCEPTION.message}</div>
+                <h:panelGrid columns="2" style="margin: 0 auto" cellpadding="5">
+                    <h:outputLabel value="username:"/>            
+                    <input id="username" required="true" label="username" name="username"/>            
+                    <h:outputLabel value="password:"/>            
+                    <input type="password" id="password" required="true" label="password" name="password"/>            
+                </h:panelGrid>
+                <f:facet name="footer">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                </form>
-            </div>
-        </p:dialog>
+                </f:facet>  
+            </p:dialog>
+        </form>
     </h:body>
 </html>
