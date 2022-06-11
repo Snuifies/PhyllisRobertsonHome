@@ -18,7 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN = "ADMIN";
     private static final String USER = "USER";
-    private static final String DEFAULT_HOME_URL = "/residence/home.jsf";
+//    private static final String DEFAULT_HOME_URL = "/residence/home.jsf";
+//    private static final String LOGIN_ENDPOINT = "/login";
 
     @Resource(name = "userDetailsService")
     private UserDetailsService userDetailsService;
@@ -39,10 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 //    @Bean("authenticationSuccessHandler")
-//    public AuthenticationSuccessHandlerImpl authenticationSuccessHandler() {
-//        return new AuthenticationSuccessHandlerImpl();
+//    public CustomAuthenticationSuccessHandler authenticationSuccessHandler() {
+//        return new CustomAuthenticationSuccessHandler();
 //    }
-
     @Override
     @DependsOn("authenticationProvider")
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -50,19 +50,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    @DependsOn("authenticationSuccessHandler")
+//    @DependsOn("authenticationSuccessHandler")
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers("/").permitAll()
-//            .antMatchers("/rest/all").permitAll()
-//            .antMatchers("/rest/version").permitAll()
-//            .antMatchers("/rest/user").hasAnyAuthority(ADMIN, USER)
-//            .antMatchers("/rest/admin").hasAuthority(ADMIN)
+            //            .antMatchers("/rest/all").permitAll()
+            //            .antMatchers("/rest/version").permitAll()
+            //            .antMatchers("/rest/user").hasAnyAuthority(ADMIN, USER)
+            //            .antMatchers("/rest/admin").hasAuthority(ADMIN)
+            .antMatchers("/javax.faces.resource/**").permitAll()
             .antMatchers("/residence/**").hasAnyAuthority(ADMIN, USER)
-            .antMatchers("/admin/**").hasAuthority(ADMIN)
-            .and().csrf().disable()
+            .antMatchers("/admin/**").hasAuthority(ADMIN).and()
             .formLogin()
-//            .successHandler(authenticationSuccessHandler())
-            .defaultSuccessUrl(DEFAULT_HOME_URL, true);
+            .loginPage("/login.jsf")
+            .usernameParameter("app_username")
+            .passwordParameter("app_password")
+            .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/residence/home.jsf", true)
+            .failureUrl("/login.xhtml?error=true")
+            //            .failureHandler(authenticationFailureHandler())
+            .and()
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/login?logout=true")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID");
+//            .logoutSuccessHandler(logoutSuccessHandler())
+        http.csrf().disable();
     }
 }
