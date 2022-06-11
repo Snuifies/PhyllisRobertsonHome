@@ -25,32 +25,20 @@
 
     <h:body>
         <p:dialog id="dialog" header="Login" width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
-            <font color="red">
-                <h:outputLabel value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
-            </font>
-            <form action="${request.contextPath}/login" method="POST">
-                <h:outputLabel value="Enter UserName:" />
-                <input type="text" name="app_username"/><br/><br/>
-                <h:outputLabel value="Enter Password:" />
-                <input type="password" name="app_password"/> <br/><br/>			
-                <input type="submit" value="Login"/>
-            </form>
+            <div class="container">
+                <form class="form-signin" method="post" action="/login">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    <div class="alert alert-danger" role="alert" style="color: red">${SPRING_SECURITY_LAST_EXCEPTION.message}</div><p>
+                        <label for="username" class="sr-only">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="true" autofocus="true"></input>
+                    </p>
+                    <p>
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true"></input>
+                    </p>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
         </p:dialog>
     </h:body>
-    <!--    <h:body>
-            <h:form prependId="false">    
-                <p:dialog id="dialog" header="Login" width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
-                    <p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder">
-                        <h2>Please login</h2>
-                        <p:outputLabel value="Login failed!" styleClass="red"
-                                       rendered="${!empty param['error']}" />
-    
-                        <p:inputText id="username" placeholder="User name" />
-                        <p:password id="password" placeholder="Password" />
-    
-                        <p:commandButton value="Login" ajax="false" />
-                    </p:panelGrid>
-                </p:dialog>
-            </h:form>   
-        </h:body>-->
 </html>
