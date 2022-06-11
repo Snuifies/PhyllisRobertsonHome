@@ -26,7 +26,7 @@
     <h:body>
 
         <form class="form-signin" method="post" action="/login">
-            <p:dialog id="dialog" header="Login" footer="..." width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
+            <p:dialog id="dialog" header="Login" width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
                 <div class="alert alert-danger" role="alert" style="color:red">${SPRING_SECURITY_LAST_EXCEPTION.message}</div>
                 <h:panelGrid columns="2" style="margin: 0 auto" cellpadding="5">
                     <h:outputLabel value="username:"/>            

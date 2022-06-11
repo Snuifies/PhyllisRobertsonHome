@@ -6,6 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:sec="http://www.springframework.org/security/tags"
       >
     <h:head>
         <title>Phyllis Robertson Home</title>
@@ -20,10 +21,11 @@
                 opacity: 0.9;
             }
             .logoutHeader{
-                border: none;
-                text-align: end;
+                display: flex;
+                align-items: center;
                 font-size: 12px;
                 padding-right: 10px;
+                float: right;
             }
             .footer{
                 border: none;
@@ -37,11 +39,12 @@
     </h:head>
     <h:body>
         <pe:layout fullPage="true">
-            <pe:layoutPane position="north" size="120" resizable="true"  rendered="#{userManager.isLoggedIn()}">
+            <!--<sec:authorize access="hasRole('USER')">-->
+            <pe:layoutPane position="north" size="120" resizable="true">
                 <h:form>
                     <div class="logoutHeader">
-                        <h:outputLabel value="Welcome #{userManager.userId}  "/>
-                        <h:commandButton value="Logout" action="#{userManager.logout()}" image="images/logout.jpg"/>
+                        <h:outputLabel value="Welcome ${request.remoteUser}"/>
+                        <h:commandButton value="Logout" action="/logout" image="#{request.contextPath}/images/exit.png" label="Exit" title="Exit"/>
                     </div>
                 </h:form>
                 <center><font size="6px">Phyllis Robertson Home</font></center>
@@ -53,6 +56,7 @@
                     </p:menubar>
                 </h:form>
             </pe:layoutPane>
+            <!--</sec:authorize>-->
 
             <pe:layoutPane position="center">
                 <ui:insert name="content"/>
