@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -63,8 +64,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/admin/**").hasAuthority(ADMIN).and()
             .formLogin()
             .loginPage("/login.xhtml")
-            //            .usernameParameter("app_username")
-            //            .passwordParameter("app_password")
             .loginProcessingUrl("/login")
             .defaultSuccessUrl("/residence/home.jsf", true)
             .failureUrl("/login.xhtml?error=true")
@@ -72,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .logout()
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/login?logout=true")
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID");
 //            .logoutSuccessHandler(logoutSuccessHandler())

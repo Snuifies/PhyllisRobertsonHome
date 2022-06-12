@@ -33,9 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserDetails user = User.withUsername(appUser.get().getUserName())
             .password(appUser.get().getPassword())
             .authorities(userRoles.stream()
-            .map(role -> new SimpleGrantedAuthority(role))
-            .collect(Collectors.toList())).build();
+                .map(role -> new SimpleGrantedAuthority(role))
+                .collect(Collectors.toList())).build();
         return user;
-//        return new UserDetailsImpl(appUser.get(), userRoles);
     }
 }

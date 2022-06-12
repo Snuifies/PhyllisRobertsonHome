@@ -6,21 +6,16 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * This class automates configurations for the Web App
  *
+ * @author snuif
  */
 @Configuration
 public class WelcomePageRedirect implements WebMvcConfigurer {
 
-    /**
-     * Provides default redirection
-     * Example; if the user only enters http://localhost:8080 the user is by default redirected to http://localhost:8080/login.xhtml
-     * @param registry
-     */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/")
-                .setViewName("forward:/welcome.jsf");
+        registry.addViewController("/").setViewName("forward:/welcome.jsf");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
+
 }

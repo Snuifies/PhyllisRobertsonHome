@@ -35,4 +35,12 @@ public class EndpointController {
     public String all() {
         return "<h2>Hello Everyone!</h2>";
     }
+    
+    
+
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
+    
 }

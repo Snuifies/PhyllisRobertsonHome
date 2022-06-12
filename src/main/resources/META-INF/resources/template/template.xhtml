@@ -6,7 +6,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pe="http://primefaces.org/ui/extensions"
-      xmlns:sec="http://www.springframework.org/security/tags"
       >
     <h:head>
         <title>Phyllis Robertson Home</title>
@@ -39,24 +38,22 @@
     </h:head>
     <h:body>
         <pe:layout fullPage="true">
-            <!--<sec:authorize access="hasRole('USER')">-->
             <pe:layoutPane position="north" size="120" resizable="true">
-                <h:form>
-                    <div class="logoutHeader">
-                        <h:outputLabel value="Welcome ${request.remoteUser}"/>
-                        <h:commandButton value="Logout" action="/logout" image="#{request.contextPath}/images/exit.png" label="Exit" title="Exit"/>
-                    </div>
-                </h:form>
+                <div class="logoutHeader">
+                    <h:outputLabel value="Welcome ${request.remoteUser}"/>
+                    <form method="post" action="/logout">
+                        <h:commandButton image="#{request.contextPath}/images/exit.png" label="Logout" title="Logout"/>
+                    </form>
+                </div>
                 <center><font size="6px">Phyllis Robertson Home</font></center>
                 <h:form>
                     <p:menubar id="menu" style="height: 25px;" >
                         <p:menuitem value="Rooms" url="#"/>
                         <p:menuitem value="Residents" url="#"/>
-                        <p:menuitem value="Users" url="#"/>
+                        <p:menuitem value="Users" url="#" rendered="#{authorizationUtils.isUserInRole('ADMIN')}"/>
                     </p:menubar>
                 </h:form>
             </pe:layoutPane>
-            <!--</sec:authorize>-->
 
             <pe:layoutPane position="center">
                 <ui:insert name="content"/>
