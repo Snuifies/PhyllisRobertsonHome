@@ -1,4 +1,4 @@
-package spring.security.service;
+package za.org.phyllis.robertson.home.security.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import spring.security.entity.AppUser;
-import spring.security.repository.AppRoleRepository;
-import spring.security.repository.AppUserRepository;
+import za.org.phyllis.robertson.home.security.entity.AppUser;
+import za.org.phyllis.robertson.home.security.repository.AppRoleRepository;
+import za.org.phyllis.robertson.home.security.repository.AppUserRepository;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {

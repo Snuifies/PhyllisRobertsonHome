@@ -1,4 +1,4 @@
-package spring.security.exception;
+package za.org.phyllis.robertson.home.exception;
 
 /**
  * @author snuif

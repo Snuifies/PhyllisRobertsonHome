@@ -1,4 +1,4 @@
-package spring.security.config;
+package za.org.phyllis.robertson.home.security.config;
 
 import javax.annotation.Resource;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN = "ADMIN";
     private static final String USER = "USER";
-//    private static final String DEFAULT_HOME_URL = "/residence/home.jsf";
-//    private static final String LOGIN_ENDPOINT = "/login";
 
     @Resource(name = "userDetailsService")
     private UserDetailsService userDetailsService;
@@ -61,20 +59,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/rest/admin").hasAuthority(ADMIN)
             .antMatchers("/javax.faces.resource/**").permitAll()
             .antMatchers("/residence/**").hasAnyAuthority(ADMIN, USER)
-            .antMatchers("/admin/**").hasAuthority(ADMIN).and()
-            .formLogin()
+            .antMatchers("/admin/**").hasAuthority(ADMIN)
+            .and().formLogin()
             .loginPage("/login.xhtml")
             .loginProcessingUrl("/login")
             .defaultSuccessUrl("/residence/home.jsf", true)
+//            .authenticationDetailsSource(authenticationDetailsSource)
             .failureUrl("/login.xhtml?error=true")
-            //            .failureHandler(authenticationFailureHandler())
-            .and()
-            .logout()
+//            .failureHandler(authenticationFailureHandler())
+            .and().logout()
             .logoutUrl("/logout")
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID");
+            .deleteCookies("JSESSIONID")
 //            .logoutSuccessHandler(logoutSuccessHandler())
-        http.csrf().disable();
+            .and().csrf().disable();
     }
 }

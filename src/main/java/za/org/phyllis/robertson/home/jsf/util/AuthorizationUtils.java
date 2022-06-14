@@ -1,5 +1,5 @@
 
-package za.org.phyllis.robertson.home.util;
+package za.org.phyllis.robertson.home.jsf.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package spring.security.controller;
+package za.org.phyllis.robertson.home.security.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

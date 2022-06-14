@@ -50,7 +50,7 @@
                     <p:menubar id="menu" style="height: 25px;" >
                         <p:menuitem value="Rooms" url="#"/>
                         <p:menuitem value="Residents" url="#"/>
-                        <p:menuitem value="Users" url="#" rendered="#{authorizationUtils.isUserInRole('ADMIN')}"/>
+                        <p:menuitem value="Users" url="#{request.contextPath}/admin/home.jsf" rendered="#{authorizationUtils.isUserInRole('ADMIN')}" ajax="false"/>
                     </p:menubar>
                 </h:form>
             </pe:layoutPane>

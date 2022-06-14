@@ -1,4 +1,4 @@
-package za.org.phyllis.robertson.home.config;
+package za.org.phyllis.robertson.home.jsf.util;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

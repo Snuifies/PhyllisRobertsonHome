@@ -100,20 +100,18 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <!--<version>3.12.0</version>-->
-            <type>jar</type>
         </dependency>
         
-               <dependency>
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <!--<version>${com.google.code.gson}</version>-->
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>    

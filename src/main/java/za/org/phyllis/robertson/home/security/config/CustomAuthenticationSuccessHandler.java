@@ -1,4 +1,4 @@
-package spring.security.config;
+package za.org.phyllis.robertson.home.security.config;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

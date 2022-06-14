@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package spring.security.util;
+package za.org.phyllis.robertson.home.jsf.util;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
