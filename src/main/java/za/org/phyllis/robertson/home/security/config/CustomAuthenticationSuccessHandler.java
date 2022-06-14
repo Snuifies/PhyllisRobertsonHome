@@ -25,9 +25,9 @@ import java.io.IOException;
  * Typically it can be used to manage URLS redirection, save sessions, etc...
  * @author snuif
  */
-public class OldCustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(OldCustomAuthenticationSuccessHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomAuthenticationSuccessHandler.class);
     private final GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ADMIN");
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
