@@ -47,10 +47,10 @@
                 </div>
                 <center><font size="6px">Phyllis Robertson Home</font></center>
                 <h:form>
-                    <p:menubar id="menu" style="height: 25px;" >
+                    <p:menubar id="menu" >
                         <p:menuitem value="Rooms" url="#"/>
                         <p:menuitem value="Residents" url="#"/>
-                        <p:menuitem value="Users" url="#{request.contextPath}/admin/home.jsf" rendered="#{authorizationUtils.isUserInRole('ADMIN')}"/>
+                        <p:menuitem value="Users" url="#{request.contextPath}/admin/home.jsf"/>
                     </p:menubar>
                 </h:form>
             </pe:layoutPane>

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
  *
  * @author snuif
  */
-@Component("menu")
+@Component
 @ViewScoped
-public class MenuBean implements Serializable{
-    
+public class MenuBean implements Serializable {
+
 //   private MenuModel model;
 //   
 //   
@@ -31,5 +31,4 @@ public class MenuBean implements Serializable{
 //        includedPage = "test.xhtml";
 //    }
 //}   
-    
 }

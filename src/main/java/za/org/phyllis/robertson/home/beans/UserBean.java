@@ -7,38 +7,41 @@ package za.org.phyllis.robertson.home.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
 import za.org.phyllis.robertson.home.service.AppUserService;
 
 /**
  *
  * @author snuif
  */
-//@Component(value = "userManager")
-//@SessionScope
-@Named(value = "userManager")
-@ViewScoped
-@Log4j2
-public class UserManagementBean implements Serializable {
 
-    private List<UserDetails> userDetails = new ArrayList<>();
-    
+@Component("userBean")
+@ViewScoped
+public class UserBean implements Serializable {
+
+    List<UserDetails> userDetails;
+
     private UserDetails selectedUser;
 
-    @Autowired
     AppUserService appUserService;
+
+    @Autowired
+    public UserBean(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
     
 
 //    @PostConstruct
 //    public void init() {
-//        userDetails = new LazyDataModel<UserDetails>() {
+//        userDetails = new DataModel<UserDetails>() {
 //            @Override
 //            public int count(Map<String, FilterMeta> filterBy) {
 //                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -56,7 +59,6 @@ public class UserManagementBean implements Serializable {
 //            }
 //        };
 //    }
-
 //    public boolean deleteUser(String username) {
 //        return true;
 //    }
@@ -69,7 +71,6 @@ public class UserManagementBean implements Serializable {
 //        return true;
 //    }
 //
-
     public UserDetails getSelectedUser() {
         return selectedUser;
     }
@@ -79,8 +80,8 @@ public class UserManagementBean implements Serializable {
     }
 
     public List<UserDetails> getUserDetails() {
-        if (userDetails == null){
-            userDetails =  appUserService.findAll();
+        if (userDetails == null) {
+            userDetails = appUserService.findAll();
         }
         return userDetails;
     }
@@ -88,7 +89,5 @@ public class UserManagementBean implements Serializable {
     public void setUserDetails(List<UserDetails> userDetails) {
         this.userDetails = userDetails;
     }
-    
-    
 
 }
