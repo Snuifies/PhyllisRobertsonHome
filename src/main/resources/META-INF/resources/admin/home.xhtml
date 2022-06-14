@@ -8,36 +8,39 @@
 
     <ui:define name="content">
 
-        <p:dataTable id="tblSismos"
-                     var="user" value="#{userManager.userDetails}"
+        <p:dataTable id="tblUsers"
+                     var="sismo" value="#{userManager.userDetails}"
                      rowIndexVar="indice"
                      paginator="true" rows="10" selectionMode="single"
-                     lazy="true" rowKey="#{user.username}"
+                     lazy="true" rowKey="#{sismo.username}"
                      rowsPerPageTemplate="5,10,15,20,25,30,40,50,100"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                     style="width: 100%; font-size: 14px;"
-                     selection="{userManager.selectedUser}">
+                     style="width: 100%; font-size: 14px;">
+
+            <p:column headerText="#" width="5%" style="text-align: center;">
+                <h:outputText value="#{indice + 1}" />
+            </p:column>
 
 
 
             <p:column headerText="username" width="13%" style="text-align: center;">
-                <h:outputText value="#{user.username}"/>
+                <h:outputText value="#{sismo.username}"/>
             </p:column>
 
             <p:column headerText="accountNonExpired" width="13%" style="text-align: center;">
-                <h:outputText value="#{user.accountNonExpired}" />
+                <h:outputText value="#{sismo.accountNonExpired}" />
             </p:column>
 
             <p:column headerText=">" width="50%">
-                <h:outputText value="#{user.accountNonLocked}" />
+                <h:outputText value="#{sismo.accountNonLocked}" />
             </p:column>
 
             <p:column headerText="credentialsNonExpired">
-                <h:outputText value="#{user.credentialsNonExpired}"/>
+                <h:outputText value="#{sismo.credentialsNonExpired}"/>
             </p:column>
 
             <p:column headerText="authorities">
-                <h:outputText value="#{user.authorities}"/>
+                <h:outputText value="#{sismo.authorities}"/>
             </p:column>
 
         </p:dataTable>

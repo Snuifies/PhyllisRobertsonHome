@@ -1,12 +1,9 @@
 package za.org.phyllis.robertson.home.security.config;
 
 import javax.annotation.Resource;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,13 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import za.org.phyllis.robertson.home.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN = "ADMIN";
     private static final String USER = "USER";
@@ -49,34 +44,34 @@ public class SecurityConfiguration {
         return authProvider;
     }
 
-    @Bean("securityFilterChain")
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
-        try {
-            http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/rest/all").permitAll()
-                .antMatchers("/rest/version").permitAll()
-                .antMatchers("/rest/user").hasAnyAuthority(ADMIN, USER)
-                .antMatchers("/rest/admin").hasAuthority(ADMIN)
-                .antMatchers("/javax.faces.resource/**").permitAll()
-                .antMatchers("/residence/**").hasAnyAuthority(ADMIN, USER)
-                .antMatchers("/admin/**").hasAuthority(ADMIN)
-                .and().formLogin()
-                .loginPage("/login.jsf")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/residence/home.jsf", true)
-                .failureUrl("/login.jsf?error=true")
-                .and().logout()
-                .logoutSuccessUrl("/login.jsf")
-                .deleteCookies("JSESSIONID")
-                .and().csrf().disable()
-                .authenticationProvider(authenticationProvider()) 
-//                                .authenticationManager(authenticationManager);
-                ;
-            return http.build();
-        } catch (Exception ex) {
-            throw new BeanCreationException("Wrong spring security configuration", ex);
-        }
+    @Override
+    @DependsOn("authenticationProvider")
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.authenticationProvider(authenticationProvider());
     }
 
+    @Override
+//    @DependsOn("authenticationSuccessHandler")
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+            .antMatchers("/").permitAll()
+            .antMatchers("/rest/all").permitAll()
+            .antMatchers("/rest/version").permitAll()
+            .antMatchers("/rest/user").hasAnyAuthority(ADMIN, USER)
+            .antMatchers("/rest/admin").hasAuthority(ADMIN)
+            .antMatchers("/javax.faces.resource/**").permitAll()
+            .antMatchers("/residence/**").hasAnyAuthority(ADMIN, USER)
+            .antMatchers("/admin/**").hasAuthority(ADMIN)
+            .and().formLogin()
+            .loginPage("/login.xhtml")
+            .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/residence/home.jsf", true)
+            .failureUrl("/login.jsf?error=true")
+            .and().logout()
+            .logoutUrl("/logout")
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID");
+        http.csrf().disable();
+    }
 }
