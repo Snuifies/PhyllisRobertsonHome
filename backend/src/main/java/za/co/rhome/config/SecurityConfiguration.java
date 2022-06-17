@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -54,22 +53,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //    @DependsOn("authenticationSuccessHandler")
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.antMatchers("/rest/all").permitAll()
-			.antMatchers("/rest/version").permitAll()
-			.antMatchers("/rest/user").hasAnyAuthority(ADMIN, USER)
-			.antMatchers("/rest/admin").hasAuthority(ADMIN)
-			.antMatchers("/javax.faces.resource/**").permitAll()
+			.antMatchers("/", "/all", "/version").permitAll()
+			.antMatchers("/products").permitAll()
+			.antMatchers("/user").hasAnyAuthority(ADMIN, USER)
+			.antMatchers("/admin").hasAuthority(ADMIN)
 			.antMatchers("/residence/**").hasAnyAuthority(ADMIN, USER)
 			.antMatchers("/admin/**").hasAuthority(ADMIN)
 			.and().formLogin()
-			.loginPage("/login.xhtml")
-			.loginProcessingUrl("/login")
-			.defaultSuccessUrl("/residence/home.jsf", true)
-			.failureUrl("/login.jsf?error=true")
-			.and().logout()
-			.logoutUrl("/logout")
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.permitAll()
+			.and()
+			.logout()
+			.permitAll()
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID");
 		http.csrf().disable();

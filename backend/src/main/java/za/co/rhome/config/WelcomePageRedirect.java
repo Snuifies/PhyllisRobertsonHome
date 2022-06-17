@@ -14,7 +14,7 @@ public class WelcomePageRedirect implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("forward:/welcome.jsf");
+		registry.addViewController("/").setViewName("forward:/home");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 

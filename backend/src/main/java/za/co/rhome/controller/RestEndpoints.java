@@ -2,29 +2,52 @@ package za.co.rhome.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import za.co.rhome.config.ApplicationConfig;
 
-@RestController
-// we allow localhost:4200 for testing purposes
+@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
-public class Home {
+@RestController
+public class RestEndpoints {
 
-	@GetMapping("/")
-	public String home() {
-		return "<h1>Welcome Y'all</h1>";
-	}
+	@Autowired
+	private final ApplicationConfig config;
 
-	@GetMapping("/home")
-	public String user() {
-		return "<h1>Welcome Homeys</h1>";
+	@GetMapping(path = "/version")
+	public @ResponseBody
+	String getAppVersion() {
+		return config.getVersion();
 	}
 
 	@GetMapping("/admin")
 	public String admin() {
-		return "<h1>Welcome Admin</h1>";
+		return "<h2>Welcome Admin!</h2>";
+	}
+
+	@GetMapping("/user")
+	public String user() {
+		return "<h2>Welcome User!</h2>";
+	}
+
+	@GetMapping("/all")
+	public String all() {
+		return "<h2>Hello One And All!</h2>";
+	}
+
+	@GetMapping("/home")
+	public String home() {
+		return "<h1>Welcome To the Jungle</h1>";
+	}
+
+	@GetMapping("/residence")
+	public String residence() {
+		return "<h1>Welcome To the Residence</h1>";
 	}
 
 	@GetMapping("/moderator")
@@ -38,5 +61,4 @@ public class Home {
 		products.add(Products.builder().price(2.0).quantity(5).name("Prod1").description("Product of Type 1").link("https://source.unsplash.com/1600x900/?product").build());
 		return products;
 	}
-
 }
