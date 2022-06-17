@@ -33,10 +33,10 @@ public class Home {
 	}
 
 	@GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Products[] getProducts() {
+	public List<Products> getProducts() {
 		List<Products> products = new ArrayList<>();
 		products.add(Products.builder().price(2.0).quantity(5).name("Prod1").description("Product of Type 1").link("https://source.unsplash.com/1600x900/?product").build());
-		return (Products[]) products.toArray();
+		return products;
 	}
 
 }
