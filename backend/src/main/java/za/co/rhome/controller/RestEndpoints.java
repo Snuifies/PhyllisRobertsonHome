@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.rhome.config.ApplicationConfig;
+import za.co.rhome.entity.AppUser;
+import za.co.rhome.model.AppUserModel;
 import za.co.rhome.service.AppUserService;
 
 @RequiredArgsConstructor
@@ -36,8 +38,8 @@ public class RestEndpoints {
 	}
 
 	@GetMapping(value = "/user/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<UserDetails> user() {
-		return userService.findAll();
+	public List<AppUserModel> user() {
+		return userService.findAllUsers();
 	}
 
 	@GetMapping("/all")

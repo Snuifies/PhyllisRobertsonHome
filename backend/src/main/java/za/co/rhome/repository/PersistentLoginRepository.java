@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package za.co.rhome.repository;
 
 import java.util.Optional;
@@ -11,15 +7,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import za.co.rhome.entity.AppUser;
+import za.co.rhome.entity.PersistentLogin;
 
 /**
+ *
  * @author snuif
  */
 @Repository
 @Transactional
-public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+public interface PersistentLoginRepository extends JpaRepository<PersistentLogin, String> {
 
-	@Query("SELECT AU FROM AppUser AU WHERE AU.username = :username")
-	Optional<AppUser> findByUsername(@Param("username") String username);
+	@Query("SELECT AU FROM PersistentLogin AU WHERE AU.username = :username")
+	Optional<PersistentLogin> findByUsername(@Param("username") String username);
 
 }

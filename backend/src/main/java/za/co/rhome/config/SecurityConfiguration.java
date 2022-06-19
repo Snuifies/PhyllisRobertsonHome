@@ -50,20 +50,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-//    @DependsOn("authenticationSuccessHandler")
+	@DependsOn("userDetailsService")
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/", "/all", "/version").permitAll()
 			.antMatchers("/products").permitAll()
-			.antMatchers("/user/**").hasAnyAuthority(ADMIN, USER)
+			.antMatchers("/user/**").permitAll()//.hasAnyAuthority(ADMIN, USER)
 			.antMatchers("/admin").hasAuthority(ADMIN)
 			.antMatchers("/residence/**").hasAnyAuthority(ADMIN, USER)
 			.antMatchers("/admin/**").hasAuthority(ADMIN)
-			.and().formLogin()
-			.permitAll()
-			.and()
-			.logout()
-			.permitAll()
+			.and().rememberMe().userDetailsService(userDetailsService)
+			.and().formLogin().permitAll()
+			.and().logout().permitAll()
 			.invalidateHttpSession(true)
 			.deleteCookies("JSESSIONID");
 		http.csrf().disable();

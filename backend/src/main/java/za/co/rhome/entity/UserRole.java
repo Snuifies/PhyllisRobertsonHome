@@ -4,6 +4,7 @@
  */
 package za.co.rhome.entity;
 
+import java.io.Serializable;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import lombok.ToString;
 @Table(name = "USER_ROLE",
 	uniqueConstraints = {
 		@UniqueConstraint(name = "USER_ROLE_UK", columnNames = {"USER_ID", "ROLE_ID"})})
-public class UserRole {
+public class UserRole implements Serializable {
 
 	@Id
 	@GeneratedValue

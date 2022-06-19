@@ -1,21 +1,10 @@
-<div style="padding: 13px;">
-    <mat-spinner *ngIf="products.length === 0"></mat-spinner>
-    <mat-card *ngFor="let product of products" style="margin-top:10px;">
-        <mat-card-header>
-            <mat-card-title>{{product.name}}</mat-card-title>
-            <mat-card-subtitle>{{product.price}} $/ {{product.quantity}}
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>
-                {{product.description}}
-            </p>
-            <img style="height:100%; width: 100%;" src="{{ product.imageUrl }}" />
-        </mat-card-content>
-        <mat-card-actions>
-            A book by https://techiediaries.com
-            Learn Angular 8 in 15 Easy Steps 17
-            <button mat-button> Buy product</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+<h1>Users</h1>
+<mat-table [dataSource]="userData" class="mat-elevation-z8">
+    <ng-container [matColumnDef]="column" *ngFor="let column of columnNames">
+        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+        <td mat-cell *matCellDef="let emp">{{ emp[column] }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnNames"></tr>
+    <tr mat-row *matRowDef="let emprow; columns: columnNames"></tr>
+</mat-table>

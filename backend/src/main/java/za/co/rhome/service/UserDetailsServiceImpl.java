@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		List<String> userRoles = appRoleRepository.findByUserId(appUser.get().getUserId());
 		System.out.println(appUser.get().toString().concat(userRoles.toString()));
 
-		UserDetails user = User.withUsername(appUser.get().getUserName())
+		UserDetails user = User.withUsername(appUser.get().getUsername())
 			.password(appUser.get().getPassword())
 			.authorities(userRoles.stream()
 				.map(role -> new SimpleGrantedAuthority(role))
