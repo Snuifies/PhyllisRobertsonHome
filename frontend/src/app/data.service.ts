@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DataService {
 
-  private REST_API_SERVER = "http://localhost:8080/products";
+  private REST_API_SERVER = "http://localhost:8080/user/all";
   constructor(private httpClient: HttpClient) {
 
   }

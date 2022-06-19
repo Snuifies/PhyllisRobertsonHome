@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +17,12 @@ import za.co.rhome.repository.AppUserRepository;
 
 @Service
 @Log4j2
-@RequiredArgsConstructor
 public class AppUserService {
 
+	@Autowired
 	AppUserRepository userRepository;
 
+	@Autowired
 	AppRoleRepository roleRepository;
 
 	@Transactional

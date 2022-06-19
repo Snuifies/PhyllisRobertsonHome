@@ -5,11 +5,13 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.rhome.config.ApplicationConfig;
+import za.co.rhome.service.AppUserService;
 
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,6 +20,9 @@ public class RestEndpoints {
 
 	@Autowired
 	private final ApplicationConfig config;
+
+	@Autowired
+	private final AppUserService userService;
 
 	@GetMapping(path = "/version")
 	public @ResponseBody
@@ -30,9 +35,9 @@ public class RestEndpoints {
 		return "<h2>Welcome Admin!</h2>";
 	}
 
-	@GetMapping("/user")
-	public String user() {
-		return "<h2>Welcome User!</h2>";
+	@GetMapping(value = "/user/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<UserDetails> user() {
+		return userService.findAll();
 	}
 
 	@GetMapping("/all")
@@ -61,4 +66,5 @@ public class RestEndpoints {
 		products.add(Products.builder().price(2.0).quantity(5).name("Prod1").description("Product of Type 1").link("https://source.unsplash.com/1600x900/?product").build());
 		return products;
 	}
+
 }
