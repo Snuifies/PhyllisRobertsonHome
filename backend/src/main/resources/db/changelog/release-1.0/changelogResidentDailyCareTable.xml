@@ -1,0 +1,122 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="Marius" id="Create ResidentDailyCare Table">
+        <createTable tableName="RESIDENT_DAILY_CARE">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="CARE_DATE" type="DATE"/>
+            <column name="CARE_WORKER_ASSIGNED" type="VARCHAR(250)"/>
+            <column name="BATH" type="VARCHAR(250)"/>
+            <column name="SHAVED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="NAILS_CUT" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="HEELS_TREATED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="BED_MADE" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="CLEAN_LINEN" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="WASHING_REMOVED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="CUPBOARD_PACKED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="WHEELCHAIR_CLEANED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="MEDICATION_MORNING" type="VARCHAR(250)"/>
+            <column name="MEDICATION_BREAKFAST" type="VARCHAR(250)"/>
+            <column name="MEDICATION_LUNCH" type="VARCHAR(250)"/>
+            <column name="MEDICATION_SUPPER" type="VARCHAR(250)"/>
+            <column name="MEDICATION_EVENING" type="VARCHAR(250)"/>
+            <column name="MEDICATION_ACUTE_TIME" type="VARCHAR(6)"/>
+            <column name="MEDICATION_ACUTE_ITEM" type="VARCHAR(250)"/>
+            <column name="COMPLAINT" type="VARCHAR(250)"/>
+            <column name="ACTIONS_ADVISED" type="VARCHAR(250)"/>
+            <column name="RESIDENT_ID" type="BIGINT"/>
+        </createTable>
+        <addPrimaryKey tableName="RESIDENT_DAILY_CARE" columnNames="ID"/>
+    </changeSet>
+
+
+    <changeSet author="Marius" id="Add 1st Resident">
+        <insert tableName="RESIDENT_DAILY_CARE">
+            <column name="CARE_DATE" value="${now}"/>
+            <column name="CARE_WORKER_ASSIGNED" value=""/>
+            <column name="BATH" value="SHOWER"/>
+            <column name="SHAVED" value="true"/>
+            <column name="NAILS_CUT" value="true"/>
+            <column name="HEELS_TREATED" value="true"/>
+            <column name="BED_MADE" value="true"/>
+            <column name="CLEAN_LINEN" value="true"/>
+            <column name="WASHING_REMOVED" value="true"/>
+            <column name="CUPBOARD_PACKED" value="true"/>
+            <column name="WHEELCHAIR_CLEANED" type="true"/>
+            <column name="MEDICATION_MORNING" value="RIVOTRIL"/>
+            <column name="MEDICATION_BREAKFAST" value="Lamicton"/>
+            <column name="MEDICATION_LUNCH" value="12 hour"/>
+            <column name="MEDICATION_SUPPER" value="bread"/>
+            <column name="MEDICATION_EVENING" value="none"/>
+            <column name="MEDICATION_ACUTE_TIME" value="00:06"/>
+            <column name="MEDICATION_ACUTE_ITEM" value="none"/>
+            <column name="COMPLAINT" value="no complaint"/>
+            <column name="ACTIONS_ADVISED" value="No Actions taken"/>
+            <column name="RESIDENT_ID" valueComputed="(SELECT ID FROM RESIDENT WHERE RESIDENT.ID_NUMBER='6212205027084')"/>
+        </insert>
+    </changeSet>
+<!--    -->
+<!--    <changeSet author="Marius" id="Create RESIDENT_DAILY_CARE_AUD">-->
+<!--        <createTable tableName="RESIDENT_DAILY_CARE_AUD">-->
+<!--            <column name="ID" type="BIGINT" autoIncrement="true"/>-->
+<!--            <column name="ID_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="ROOM_NUMBER" type="VARCHAR(50)"/>-->
+<!--            <column name="ROOM_NUMBER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CARE_DATE" type="DATE"/>-->
+<!--            <column name="CARE_DATE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CARE_WORKER_ASSIGNED" type="VARCHAR(250)"/>-->
+<!--            <column name="CARE_WORKER_ASSIGNED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="BATH" type="VARCHAR(250)"/>-->
+<!--            <column name="BATH_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="SHAVED" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="SHAVED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="NAILS_CUT" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="NAILS_CUT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="HEELS_TREATED" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="HEELS_TREATED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="BED_MADE" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="BED_MADE_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CLEAN_LINEN" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CLEAN_LINEN_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_REMOVED" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WASHING_REMOVED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CUPBOARD_PACKED" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="CUPBOARD_PACKED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WHEELCHAIR_CLEANED" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="WHEELCHAIR_CLEANED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_MORNING" type="VARCHAR(250)"/>-->
+<!--            <column name="MEDICATION_MORNING_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_BREAKFAST" type="VARCHAR(250)"/>-->
+<!--            <column name="MEDICATION_BREAKFAST_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_LUNCH" type="VARCHAR(250)"/>-->
+<!--            <column name="MEDICATION_LUNCH_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_SUPPER" type="VARCHAR(250)"/>-->
+<!--            <column name="MEDICATION_SUPPER_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_EVENING" type="VARCHAR(250)"/>-->
+<!--            <column name="MEDICATION_EVENING_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_ACUTE_TIME" type="VARCHAR(6)"/>-->
+<!--            <column name="MEDICATION_ACUTE_TIME_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="MEDICATION_ACUTE_ITEM" type="VARCHAR(250)"/>-->
+<!--            <column name="MEDICATION_ACUTE_ITEM_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="COMPLAINT" type="VARCHAR(250)"/>-->
+<!--            <column name="COMPLAINT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="ACTIONS_ADVISED" type="VARCHAR(250)"/>-->
+<!--            <column name="ACTIONS_ADVISED_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="RESIDENT_MOD" type="BOOLEAN" defaultValueBoolean="false"/>-->
+<!--            <column name="REV" type="BIGINT">-->
+<!--                <constraints referencedTableName="REVINFO"-->
+<!--                             foreignKeyName="FK_ROOM_REVINFO"-->
+<!--                             referencedColumnNames="REV"-->
+<!--                             nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="REVTYPE" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--        <addPrimaryKey tableName="RESIDENT_DAILY_CARE_AUD" columnNames="ROOM_NUMBER, REV"/>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>

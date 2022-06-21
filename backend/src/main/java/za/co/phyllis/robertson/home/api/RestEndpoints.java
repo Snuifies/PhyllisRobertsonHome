@@ -1,4 +1,4 @@
-package za.co.phyllis.robertson.home.controller;
+package za.co.phyllis.robertson.home.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.phyllis.robertson.home.config.ApplicationConfig;
 import za.co.phyllis.robertson.home.model.AppUserModel;
+import za.co.phyllis.robertson.home.model.Products;
 import za.co.phyllis.robertson.home.service.AppUserService;
 
 @RequiredArgsConstructor
