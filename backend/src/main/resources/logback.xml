@@ -5,6 +5,7 @@
         </encoder>
     </appender>
 
+    <logger name="spring.jsf" level="INFO" />
     <logger name="spring.security" level="INFO" />
     <logger name="za.org.phyllis.robertson.home" level="INFO" />
     <logger name="org.springframework" level="WARN" />
