@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
+			<!--<version>3.12.0</version>-->
 			<type>jar</type>
 		</dependency>
 	</dependencies>
@@ -110,7 +110,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<skip>false</skip>
-					<mainClass>za.co.rhome.BackendApplication</mainClass>
+					<mainClass>za.co.phyllis.robertson.home.BackendApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

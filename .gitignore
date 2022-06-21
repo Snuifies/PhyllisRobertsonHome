@@ -37,3 +37,7 @@ backend/target/classes/db/changelog/changelog-master.xml
 backend/target/classes/application.properties
 frontend/node/npm
 frontend/node/npm
+backend/target/surefire-reports/TEST-za.co.phyllis.robertson.home.FeatureControllerMockMvcTest.xml
+backend/target/surefire-reports/TEST-za.co.phyllis.robertson.home.HelloControllerMockMvcTest.xml
+backend/target/surefire-reports/za.co.phyllis.robertson.home.FeatureControllerMockMvcTest.txt
+backend/target/surefire-reports/za.co.phyllis.robertson.home.HelloControllerMockMvcTest.txt
