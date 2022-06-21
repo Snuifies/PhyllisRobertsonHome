@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.phyllis.robertson.home.config.ApplicationConfig;
+import za.co.phyllis.robertson.home.model.AppUserModel;
+import za.co.phyllis.robertson.home.service.AppUserService;
 
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${app.dev.frontend.local}")
 @RestController
 public class RestEndpoints {
 
 	@Autowired
 	private final ApplicationConfig config;
+
+	@Autowired
+	private final AppUserService userService;
 
 	@GetMapping(path = "/version")
 	public @ResponseBody
@@ -55,6 +60,11 @@ public class RestEndpoints {
 		List<Products> products = new ArrayList<>();
 		products.add(Products.builder().price(2.0).quantity(5).name("Prod1").description("Product of Type 1").link("https://source.unsplash.com/1600x900/?product").build());
 		return products;
+	}
+
+	@GetMapping(value = "/user/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AppUserModel> user() {
+		return userService.findAllUsers();
 	}
 
 }
