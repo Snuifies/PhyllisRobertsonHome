@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@DependsOn("userDetailsService")
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/index.html", "/all", "/version").permitAll()
+			.antMatchers("/", "/all", "/version").permitAll()
 			.antMatchers("/products").permitAll()
 			.antMatchers("/user/**").permitAll()//.hasAnyAuthority(ADMIN, USER)
 			.antMatchers("/admin").hasAuthority(ADMIN)
