@@ -7,3 +7,8 @@ backend/target/*
 frontend/node/*
 backend/target/*
 frontend/.vscode/*
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/vcs.xml
